@@ -4,15 +4,18 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
-import Rooms from './pages/Rooms';
-import RoomDetail from './pages/RoomDetail';
+import About from './pages/About';
+import Coffee from './pages/Coffee';
+import CoffeeShop from './pages/CoffeeShop';
+import ProductDetail from './pages/ProductDetail';
+import LuuTru from './pages/LuuTru';
 import Restaurant from './pages/Restaurant';
-import Spa from './pages/Spa';
+import SUP from './pages/SUP';
+import RoseGarden from './pages/RoseGarden';
 import Activities from './pages/Activities';
 import Blog from './pages/Blog';
 import BlogDetail from './pages/BlogDetail';
 import Contact from './pages/Contact';
-import Offers from './pages/Offers';
 
 export default function App() {
   return (
@@ -21,15 +24,18 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/phong-farmstay" element={<Rooms />} />
-        <Route path="/phong-farmstay/:slug" element={<RoomDetail />} />
-        <Route path="/nha-hang-bar" element={<Restaurant />} />
-        <Route path="/herbal-spa" element={<Spa />} />
+        <Route path="/gioi-thieu" element={<About />} />
+        <Route path="/ca-phe" element={<Coffee />} />
+        <Route path="/ca-phe/shop" element={<CoffeeShop />} />
+        <Route path="/ca-phe/shop/:slug" element={<ProductDetail />} />
+        <Route path="/luu-tru" element={<LuuTru />} />
+        <Route path="/nha-hang" element={<Restaurant />} />
+        <Route path="/cheo-sup" element={<SUP />} />
+        <Route path="/vuon-hoa-hong" element={<RoseGarden />} />
         <Route path="/hoat-dong" element={<Activities />} />
         <Route path="/tin-tuc" element={<Blog />} />
         <Route path="/tin-tuc/:slug" element={<BlogDetail />} />
         <Route path="/lien-he" element={<Contact />} />
-        <Route path="/uu-dai" element={<Offers />} />
       </Routes>
       <Footer />
     </BrowserRouter>

@@ -41,7 +41,7 @@ export default function Contact() {
             {/* Info */}
             <div className="lg:col-span-2">
               <span className="section-subtitle">Thông Tin</span>
-              <h2 className="font-serif text-2xl text-forest-900 mb-6">Chúng Tôi Luôn<br />Sẵn Sàng Hỗ Trợ</h2>
+              <h2 className="font-serif text-2xl text-forest-900 mb-6">Trosie Garden<br />Luôn Sẵn Sàng Chào Đón</h2>
               <div className="w-10 h-0.5 bg-gold mb-8" />
 
               <div className="space-y-6">
@@ -54,7 +54,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <div className="text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-1">Địa Chỉ</div>
-                    <p className="text-sm text-gray-700 leading-relaxed">Thôn Chày Lập, xã Phong Nha,<br />huyện Bố Trạch, tỉnh Quảng Bình</p>
+                    <p className="text-sm text-gray-700 leading-relaxed">Trosie Garden, Km Số 2, đường HCM,<br />Khe Sanh, Hướng Hoá, Quảng Trị</p>
                   </div>
                 </div>
 
@@ -65,9 +65,9 @@ export default function Contact() {
                     </svg>
                   </div>
                   <div>
-                    <div className="text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-1">Điện Thoại</div>
-                    <a href="tel:+842899955168" className="block text-sm text-gray-700 hover:text-gold">+84 28 999 55168</a>
-                    <a href="tel:+84932488839" className="block text-sm text-gray-700 hover:text-gold">+84 932 488 839</a>
+                    <div className="text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-1">Hotline / Zalo</div>
+                    <a href="tel:0345424342" className="block text-sm text-gray-700 hover:text-gold">0345 424 342</a>
+                    <a href="tel:0961393370" className="block text-sm text-gray-700 hover:text-gold">0961 393 370</a>
                   </div>
                 </div>
 
@@ -79,32 +79,33 @@ export default function Contact() {
                   </div>
                   <div>
                     <div className="text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-1">Email</div>
-                    <a href="mailto:sales@phongnhaholiday.com" className="text-sm text-gray-700 hover:text-gold">sales@phongnhaholiday.com</a>
+                    <a href="mailto:trosiegardenks@gmail.com" className="text-sm text-gray-700 hover:text-gold">trosiegardenks@gmail.com</a>
                   </div>
                 </div>
 
                 <div className="flex gap-4">
                   <div className="w-10 h-10 bg-forest-100 flex items-center justify-center shrink-0">
                     <svg className="w-5 h-5 text-forest-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"/>
                     </svg>
                   </div>
                   <div>
-                    <div className="text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-1">Giờ Làm Việc</div>
-                    <p className="text-sm text-gray-700">Hàng ngày: 7:00 – 22:00<br />Lễ tân 24/7</p>
+                    <div className="text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-1">Mạng Xã Hội</div>
+                    <a href="https://www.facebook.com/trosiegardenks" target="_blank" rel="noreferrer" className="block text-sm text-gray-700 hover:text-gold">Facebook: Trosie Garden KS</a>
+                    <a href="https://www.instagram.com/trosiegarden.khesanh/" target="_blank" rel="noreferrer" className="block text-sm text-gray-700 hover:text-gold">Instagram: @trosiegarden.khesanh</a>
+                    <a href="https://www.tiktok.com/@trosiegardenkhesanh" target="_blank" rel="noreferrer" className="block text-sm text-gray-700 hover:text-gold">TikTok: @trosiegardenkhesanh</a>
                   </div>
                 </div>
               </div>
 
-              {/* Map placeholder */}
-              <div className="mt-8 bg-gray-100 h-52 flex items-center justify-center text-gray-400 text-sm">
-                <div className="text-center">
-                  <svg className="w-8 h-8 mx-auto mb-2 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/>
-                  </svg>
-                  <p>Thôn Chày Lập, Phong Nha</p>
-                  <p className="text-xs text-gray-300">Quảng Bình, Việt Nam</p>
-                </div>
+              {/* Map */}
+              <div className="mt-8">
+                <a href="https://maps.app.goo.gl/ZUgWJvEWemr2TMnh7" target="_blank" rel="noreferrer"
+                  className="block bg-forest-50 border border-forest-200 hover:border-gold transition-colors p-4 text-center">
+                  <div className="text-2xl mb-2">📍</div>
+                  <p className="text-sm font-semibold text-forest-900 mb-1">Xem bản đồ Google Maps</p>
+                  <p className="text-xs text-gray-500">Trosie Garden, Khe Sanh, Quảng Trị</p>
+                </a>
               </div>
             </div>
 
@@ -121,46 +122,52 @@ export default function Contact() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h3 className="font-serif text-xl text-forest-900 mb-2">Tin Nhắn Đã Được Gửi!</h3>
-                  <p className="text-gray-500 text-sm">Cảm ơn bạn đã liên hệ. Chúng tôi sẽ phản hồi trong vòng 24 giờ.</p>
+                  <h3 className="font-serif text-xl text-forest-900 mb-2">Đã Gửi Thành Công!</h3>
+                  <p className="text-gray-500 text-sm">Cảm ơn bạn đã liên hệ. Trosie sẽ phản hồi sớm qua điện thoại hoặc email.</p>
                   <button onClick={() => setSuccess(false)} className="btn-outline mt-6">Gửi Thêm</button>
                 </div>
               ) : (
                 <form onSubmit={submit} className="space-y-5">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    {[['Họ và tên *','full_name','text','Nguyễn Văn A'],['Email *','email','email','email@example.com'],['Số điện thoại','phone','tel','0912 345 678']].map(([l,n,t,ph]) => (
-                      <div key={n} className={n === 'full_name' ? 'md:col-span-2' : ''}>
-                        <label className="block text-[11px] font-semibold tracking-widest uppercase text-gray-500 mb-1.5">{l}</label>
-                        <input type={t} name={n} value={form[n]} onChange={set}
-                          required={n !== 'phone'} placeholder={ph}
-                          className="w-full border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-forest-600" />
-                      </div>
-                    ))}
+                    <div className="md:col-span-2">
+                      <label className="block text-[11px] font-semibold tracking-widest uppercase text-gray-500 mb-1.5">Họ và tên *</label>
+                      <input type="text" name="full_name" value={form.full_name} onChange={set} required placeholder="Nguyễn Văn A"
+                        className="w-full border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-forest-600" />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-semibold tracking-widest uppercase text-gray-500 mb-1.5">Số điện thoại *</label>
+                      <input type="tel" name="phone" value={form.phone} onChange={set} required placeholder="0912 345 678"
+                        className="w-full border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-forest-600" />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-semibold tracking-widest uppercase text-gray-500 mb-1.5">Email</label>
+                      <input type="email" name="email" value={form.email} onChange={set} placeholder="email@example.com"
+                        className="w-full border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-forest-600" />
+                    </div>
                     <div className="md:col-span-2">
                       <label className="block text-[11px] font-semibold tracking-widest uppercase text-gray-500 mb-1.5">Chủ đề</label>
                       <select name="subject" value={form.subject} onChange={set}
                         className="w-full border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-forest-600">
                         <option value="">-- Chọn chủ đề --</option>
-                        <option>Đặt phòng / Hỏi về phòng</option>
-                        <option>Herbal Spa</option>
-                        <option>Nhà hàng & Bar</option>
-                        <option>Hoạt động & Tour</option>
-                        <option>Teambuilding</option>
-                        <option>Ưu đãi đặc biệt</option>
+                        <option>Đặt lịch tham quan / lưu trú</option>
+                        <option>Mua cà phê Trosie</option>
+                        <option>Chèo SUP</option>
+                        <option>Vườn hoa hồng</option>
+                        <option>Nhà hàng & ẩm thực</option>
+                        <option>Hoạt động & Team building</option>
                         <option>Khác</option>
                       </select>
                     </div>
                     <div className="md:col-span-2">
                       <label className="block text-[11px] font-semibold tracking-widest uppercase text-gray-500 mb-1.5">Nội dung *</label>
-                      <textarea name="message" value={form.message} onChange={set} required rows={6}
-                        placeholder="Nhập nội dung tin nhắn của bạn..."
+                      <textarea name="message" value={form.message} onChange={set} required rows={5}
+                        placeholder="Nhập nội dung tin nhắn..."
                         className="w-full border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-forest-600 resize-none" />
                     </div>
                   </div>
                   {error && <p className="text-red-500 text-sm">{error}</p>}
-                  <button type="submit" disabled={loading}
-                    className="btn-primary disabled:opacity-50">
-                    {loading ? 'Đang gửi...' : 'Gửi Tin Nhắn'}
+                  <button type="submit" disabled={loading} className="btn-primary disabled:opacity-50">
+                    {loading ? 'Đang gửi...' : 'Gửi Yêu Cầu'}
                   </button>
                 </form>
               )}
@@ -169,24 +176,12 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* How to get there */}
-      <section className="py-14 bg-cream">
-        <div className="max-w-7xl mx-auto px-4 lg:px-8">
-          <h2 className="font-serif text-2xl text-forest-900 text-center mb-10">Cách Di Chuyển Đến Chày Lập</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { icon: '✈️', title: 'Từ Sân Bay', desc: 'Sân bay Đồng Hới (HUI) cách farmstay 45km. Có dịch vụ đón sân bay (đặt trước). Thời gian khoảng 45-60 phút.' },
-              { icon: '🚂', title: 'Từ Ga Tàu', desc: 'Ga Đồng Hới cách farmstay 42km. Taxi hoặc xe ôm công nghệ có thể đặt từ ga về farmstay.' },
-              { icon: '🚗', title: 'Từ Đường Bộ', desc: 'Từ TP. Đồng Hới đi theo QL12 về hướng Phong Nha. Farmstay nằm tại thôn Chày Lập, xã Phong Nha.' },
-            ].map(item => (
-              <div key={item.title} className="bg-white p-6 text-center">
-                <div className="text-3xl mb-4">{item.icon}</div>
-                <h3 className="font-serif text-lg text-forest-900 mb-3">{item.title}</h3>
-                <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+      {/* Hotline CTA */}
+      <section className="py-12 bg-forest-900 text-center">
+        <p className="text-gray-300 mb-3 text-sm">Hoặc liên hệ trực tiếp qua Hotline / Zalo</p>
+        <a href="tel:0961393370" className="font-serif text-3xl text-gold hover:text-white transition-colors">
+          0961 393 370
+        </a>
       </section>
     </div>
   );

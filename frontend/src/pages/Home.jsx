@@ -1,236 +1,193 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import BookingModal from '../components/BookingModal';
 
-const HERO = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80';
-const ABOUT = 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=900&q=80';
-const REST = 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200&q=80';
-const SPA = 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=900&q=80';
-const CTA = 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&q=80';
+const HERO = 'https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?w=1920&q=80';
+const CTA_BG = 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1920&q=80';
 
-const ACTIVITIES = [
-  { title: 'Đạp Xe Khám Phá', desc: 'Len lỏi qua những con đường làng quê yên bình, khám phá cuộc sống địa phương trên xe đạp.', img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80' },
-  { title: 'Kayak & Bơi Thuyền', desc: 'Chèo thuyền kayak trên dòng sông Chày trong xanh, ngắm nhìn cảnh đẹp từ mặt nước.', img: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600&q=80' },
-  { title: 'Trải Nghiệm Nông Nghiệp', desc: 'Trở thành nông dân thực thụ, thu hoạch rau vườn và tìm hiểu canh tác hữu cơ bền vững.', img: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80' },
-  { title: 'Trekking Phong Nha', desc: 'Khám phá hang động và rừng nguyên sinh Phong Nha - Kẻ Bàng cùng hướng dẫn viên địa phương.', img: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&q=80' },
+const SERVICES = [
+  { icon: '☕', label: 'Cà Phê Đặc Sản', desc: 'Cà phê organic trồng tại Khe Sanh, rang xay tại chỗ, những thức uống mát lành giữa rừng.', href: '/ca-phe', img: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&q=80' },
+  { icon: '🏕', label: 'Lưu Trú & Cắm Trại', desc: 'Ngủ giữa thiên nhiên, sáng thức dậy trong sương và tiếng chim rừng.', href: '/luu-tru', img: 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?w=600&q=80' },
+  { icon: '🍽', label: 'Nhà Hàng', desc: 'Ẩm thực địa phương – đậm vị – mộc mạc. Nguyên liệu tươi từ vườn và núi rừng Khe Sanh.', href: '/nha-hang', img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80' },
+  { icon: '🛶', label: 'Chèo SUP', desc: 'Trải nghiệm nhẹ nhàng trên mặt nước yên bình, ngắm thiên nhiên xung quanh.', href: '/cheo-sup', img: 'https://images.unsplash.com/photo-1503516459261-40c66117780a?w=600&q=80' },
+  { icon: '🌹', label: 'Vườn Hoa Hồng Cổ', desc: 'Không gian check-in đầy cảm xúc – nơi hoa hồng cổ nở theo mùa giữa núi đồi Khe Sanh.', href: '/vuon-hoa-hong', img: 'https://images.unsplash.com/photo-1490750967868-88df5691cc8e?w=600&q=80' },
+  { icon: '🌿', label: 'Hoạt Động Trải Nghiệm', desc: 'STEM, team building, trải nghiệm nông nghiệp – dành cho gia đình, học sinh, doanh nghiệp.', href: '/hoat-dong', img: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&q=80' },
+];
+
+const TIMELINE = [
+  { time: 'Sáng', icon: '☕', text: 'Uống cà phê dưới rừng thông, view hồ rộng lớn' },
+  { time: 'Trưa', icon: '🍽', text: 'Thưởng thức món địa phương đậm đà bản sắc' },
+  { time: 'Chiều', icon: '🛶', text: 'Chèo SUP trên mặt nước yên bình' },
+  { time: 'Tối', icon: '🔥', text: 'Ăn BBQ, đốt lửa trại, ngắm sao' },
+];
+
+const REVIEWS = [
+  { text: 'Không ồn ào, không xô bồ, đúng kiểu mình cần. Cảm giác như được reset lại hoàn toàn.', name: 'Minh Anh', from: 'Hà Nội' },
+  { text: 'Cà phê ngon thật, không giống chỗ khác. Uống một lần là nhớ mãi hương vị vùng đất Quảng Trị.', name: 'Thanh Hương', from: 'Đà Nẵng' },
+  { text: 'Đi một lần là muốn quay lại. Nhân viên thân thiện, không gian yên tĩnh, thiên nhiên tuyệt đẹp.', name: 'Văn Khoa', from: 'TP.HCM' },
 ];
 
 export default function Home() {
-  const [rooms, setRooms] = useState([]);
   const [posts, setPosts] = useState([]);
-  const [showBooking, setShowBooking] = useState(false);
-  const [bform, setBform] = useState({ check_in: '', check_out: '', guests: 2 });
 
   useEffect(() => {
-    axios.get('/api/rooms').then(r => setRooms(r.data)).catch(() => {});
     axios.get('/api/blog?limit=3').then(r => setPosts(r.data)).catch(() => {});
   }, []);
-
-  const today = new Date().toISOString().split('T')[0];
 
   return (
     <div>
 
       {/* ── Hero ── */}
-      <section className="relative h-screen flex items-end justify-center pb-20 overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${HERO})` }} />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/20 to-black/65" />
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center scale-105"
+          style={{ backgroundImage: `url(${HERO})` }} />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70" />
         <div className="relative z-10 text-center text-white px-4 w-full max-w-4xl mx-auto">
-          <p className="text-[11px] tracking-widest uppercase text-gold font-semibold mb-4">Phong Nha — Quảng Bình, Việt Nam</p>
-          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl leading-tight mb-5">
-            Kết nối thiên nhiên,<br /><em>kết nối con người</em>
-          </h1>
-          <p className="text-white/75 text-base md:text-lg mb-10 font-light max-w-xl mx-auto">
-            Farmstay giữa vùng lõi Phong Nha - Kẻ Bàng — nơi bạn thực sự được nghỉ ngơi
+          <p className="text-[11px] tracking-widest uppercase text-gold font-semibold mb-4">
+            Khe Sanh — Hướng Hoá — Quảng Trị
           </p>
-          {/* Booking bar */}
-          <div className="bg-white/10 backdrop-blur-md border border-white/20 p-4 md:p-5 flex flex-col sm:flex-row gap-3 items-end">
-            <div className="flex-1 flex flex-col text-left">
-              <label className="text-[10px] text-white/70 uppercase tracking-widest mb-1.5">Ngày đến</label>
-              <input type="date" value={bform.check_in} min={today}
-                onChange={e => setBform(p => ({ ...p, check_in: e.target.value }))}
-                className="bg-white/10 border-b border-white/40 text-white px-2 py-1.5 text-sm focus:outline-none focus:border-gold w-full" />
-            </div>
-            <div className="flex-1 flex flex-col text-left">
-              <label className="text-[10px] text-white/70 uppercase tracking-widest mb-1.5">Ngày đi</label>
-              <input type="date" value={bform.check_out} min={bform.check_in || today}
-                onChange={e => setBform(p => ({ ...p, check_out: e.target.value }))}
-                className="bg-white/10 border-b border-white/40 text-white px-2 py-1.5 text-sm focus:outline-none focus:border-gold w-full" />
-            </div>
-            <div className="flex flex-col text-left">
-              <label className="text-[10px] text-white/70 uppercase tracking-widest mb-1.5">Số khách</label>
-              <select value={bform.guests} onChange={e => setBform(p => ({ ...p, guests: +e.target.value }))}
-                className="bg-white/10 border-b border-white/40 text-white px-2 py-1.5 text-sm focus:outline-none min-w-28">
-                {[1,2,3,4,5,6].map(n => <option key={n} value={n} className="text-gray-800">{n} khách</option>)}
-              </select>
-            </div>
-            <button onClick={() => setShowBooking(true)}
-              className="bg-gold hover:bg-gold-dark text-white text-[11px] font-bold tracking-widest uppercase px-8 py-3.5 transition-colors whitespace-nowrap shrink-0">
-              Kiểm Tra Chỗ Trống
-            </button>
+          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl leading-tight mb-6">
+            Trosie Garden<br /><em>Khe Sanh</em>
+          </h1>
+          <p className="text-white/80 text-lg md:text-xl mb-4 font-light italic">
+            Chạm vào thiên nhiên – Sống chậm lại một chút
+          </p>
+          <div className="text-white/70 text-sm mb-10 space-y-1.5">
+            <p>Ngồi giữa rừng, uống cà phê sạch</p>
+            <p>Thức dậy trong sương</p>
+            <p>Và trải nghiệm những điều rất thật</p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/lien-he" className="btn-gold text-center">Đặt Lịch Trải Nghiệm</Link>
+            <Link to="/gioi-thieu" className="btn-outline !border-white/60 !text-white hover:!bg-white/10 hover:!text-white text-center">
+              Khám Phá Trosie
+            </Link>
           </div>
         </div>
-        {/* scroll hint */}
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 animate-bounce">
-          <span className="text-white/50 text-[10px] tracking-widest uppercase">Cuộn xuống</span>
-          <svg className="w-4 h-4 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
           </svg>
         </div>
       </section>
 
-      {/* ── Stats ── */}
-      <section className="bg-forest-900 py-10">
-        <div className="max-w-4xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          {[['2018','Năm thành lập'],['3','Loại phòng độc đáo'],['100%','Nguyên liệu hữu cơ'],['5★','Đánh giá TripAdvisor']].map(([n,l]) => (
-            <div key={l}>
-              <div className="font-serif text-3xl text-gold mb-1">{n}</div>
-              <div className="text-[10px] uppercase tracking-widest text-gray-400">{l}</div>
-            </div>
-          ))}
+      {/* ── Intro ── */}
+      <section className="py-16 bg-cream">
+        <div className="max-w-3xl mx-auto px-4 text-center">
+          <span className="section-subtitle">Về Chúng Tôi</span>
+          <h2 className="section-title mb-4">Không Phải Một Khu Du Lịch<br /><em>Ồn Ào</em></h2>
+          <div className="w-12 h-0.5 bg-gold mx-auto mb-6" />
+          <p className="text-gray-600 leading-relaxed text-base">
+            Trosie Garden nằm tại Khe Sanh – Quảng Trị, nơi khí hậu mát mẻ quanh năm và thiên nhiên vẫn còn nguyên bản.
+            Là điểm đến trải nghiệm độc đáo kết hợp giữa homestay, cà phê đặc sản, nhà hàng BBQ và các hoạt động ngoài trời.
+            Chúng tôi mong muốn mang đến cho bạn không chỉ dịch vụ lưu trú và ẩm thực, mà còn cả những kỷ niệm gắn liền với thiên nhiên và con người vùng đất lửa.
+          </p>
         </div>
       </section>
 
-      {/* ── About ── */}
-      <section id="ve-chung-toi" className="py-20 bg-cream">
-        <div className="max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <div className="img-zoom">
-              <img src={ABOUT} alt="Chay Lap Farmstay" className="w-full h-[500px] object-cover" />
-            </div>
-            <div>
-              <span className="section-subtitle">Câu Chuyện Của Chúng Tôi</span>
-              <h2 className="section-title mb-2">Thư Giãn Giữa<br /><em>Không Gian Làng Quê</em></h2>
-              <div className="w-12 h-0.5 bg-gold mb-6" />
-              <p className="text-gray-600 leading-relaxed mb-4">
-                Chày Lập Farmstay nằm ẩn mình trong một thung lũng xanh mát tại thôn Chày Lập, xã Phong Nha, huyện Bố Trạch, tỉnh Quảng Bình — cách Vườn Quốc gia Phong Nha - Kẻ Bàng chỉ vài phút đi xe.
-              </p>
-              <p className="text-gray-600 leading-relaxed mb-4">
-                Được xây dựng từ năm 2018 với tầm nhìn tạo ra không gian giao thoa giữa thiên nhiên và con người, Chày Lập là nơi để bạn rũ bỏ mọi lo toan, hòa mình vào nhịp sống chậm của miền quê yên bình.
-              </p>
-              <p className="text-gray-600 leading-relaxed mb-8">
-                Mỗi phòng nghỉ được thiết kế riêng biệt, sử dụng vật liệu tự nhiên địa phương, tôn trọng môi trường và mang đến trải nghiệm sống gần gũi với thiên nhiên nhất có thể.
-              </p>
-              <Link to="/phong-farmstay" className="btn-outline">Khám Phá Các Phòng</Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Rooms ── */}
+      {/* ── Services ── */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="section-subtitle">Chỗ Nghỉ</span>
-            <h2 className="section-title">Phòng & Không Gian Nghỉ</h2>
+          <div className="text-center mb-14">
+            <span className="section-subtitle">Dịch Vụ</span>
+            <h2 className="section-title">Trải Nghiệm Tại Trosie</h2>
             <div className="w-12 h-0.5 bg-gold mx-auto mt-4" />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {rooms.map(room => (
-              <Link key={room.id} to={`/phong-farmstay/${room.slug}`} className="group block">
-                <div className="img-zoom mb-4">
-                  <img src={room.images?.[0]} alt={room.name} className="w-full h-64 object-cover" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {SERVICES.map(s => (
+              <Link key={s.label} to={s.href} className="group block">
+                <div className="img-zoom mb-4 aspect-[4/3] overflow-hidden">
+                  <img src={s.img} alt={s.label} className="w-full h-full object-cover" />
                 </div>
-                <div className="flex items-start justify-between mb-2">
-                  <h3 className="font-serif text-xl text-forest-900 group-hover:text-gold transition-colors">{room.name}</h3>
-                  <div className="text-right">
-                    <span className="text-gold font-semibold text-sm">{room.price?.toLocaleString('vi-VN')}đ</span>
-                    <span className="text-gray-400 text-xs block">/đêm</span>
-                  </div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-xl">{s.icon}</span>
+                  <h3 className="font-serif text-lg text-forest-900 group-hover:text-gold transition-colors">{s.label}</h3>
                 </div>
-                <p className="text-gray-500 text-sm leading-relaxed mb-3 line-clamp-2">{room.short_desc}</p>
-                <div className="flex items-center gap-4 text-xs text-gray-400 mb-4">
-                  <span>Tối đa {room.max_guests} khách</span>
-                  <span>·</span>
-                  <span>{room.size}m²</span>
-                </div>
-                <span className="text-[11px] font-semibold tracking-widest uppercase text-forest-700 group-hover:text-gold border-b border-current pb-0.5 transition-colors">
-                  Xem Chi Tiết →
+                <p className="text-sm text-gray-500 leading-relaxed mb-3">{s.desc}</p>
+                <span className="text-[11px] font-semibold tracking-widest uppercase text-gold border-b border-gold pb-0.5">
+                  Xem Thêm →
                 </span>
               </Link>
             ))}
           </div>
-          <div className="text-center mt-12">
-            <Link to="/phong-farmstay" className="btn-outline">Xem Tất Cả Phòng</Link>
-          </div>
         </div>
       </section>
 
-      {/* ── Restaurant ── */}
-      <section className="relative py-28 overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${REST})` }} />
-        <div className="absolute inset-0 bg-forest-900/78" />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="max-w-lg">
-            <span className="section-subtitle">Ẩm Thực</span>
-            <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">Nhà Hàng & Bar</h2>
-            <div className="w-12 h-0.5 bg-gold mb-6" />
-            <p className="text-gray-300 leading-relaxed mb-4">
-              Nhà hàng Chày Lập phục vụ ẩm thực Việt Nam - châu Á - châu Âu với nguyên liệu tươi sạch từ vườn rau hữu cơ và các trang trại địa phương. Thực đơn thay đổi theo mùa.
-            </p>
-            <p className="text-gray-300 leading-relaxed mb-8">
-              Bar Chày Lập phục vụ cocktail handcrafted, rượu vang tuyển chọn và đặc biệt là trà thảo mộc địa phương — hoàn hảo để thưởng thức khi ngắm hoàng hôn trên sông Chày.
-            </p>
-            <Link to="/nha-hang-bar" className="btn-gold">Xem Thực Đơn</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Herbal Spa ── */}
-      <section className="py-20 bg-cream">
-        <div className="max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            <div className="order-2 lg:order-1">
-              <span className="section-subtitle">Thư Giãn & Phục Hồi</span>
-              <h2 className="section-title mb-2">Herbal Spa</h2>
-              <div className="w-12 h-0.5 bg-gold mb-6" />
-              <p className="text-gray-600 leading-relaxed mb-4">
-                Herbal Spa mang đến trải nghiệm chăm sóc sức khỏe toàn diện từ thiên nhiên, kết hợp kỹ thuật massage cổ truyền Việt Nam và liệu pháp thảo mộc từ vùng núi Phong Nha.
-              </p>
-              <p className="text-gray-600 leading-relaxed mb-6">
-                Không gian spa được thiết kế trong kiến trúc nhà sàn truyền thống, tạo bầu không khí yên tĩnh — nơi lý tưởng để tâm và thân hòa làm một.
-              </p>
-              <ul className="space-y-2 mb-8">
-                {['Massage thư giãn toàn thân','Tắm thảo mộc địa phương','Chăm sóc da mặt tự nhiên','Liệu pháp đá nóng','Yoga & thiền định buổi sáng'].map(s => (
-                  <li key={s} className="flex items-center gap-2.5 text-sm text-gray-600">
-                    <svg className="w-4 h-4 text-gold shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                    </svg>
-                    {s}
-                  </li>
-                ))}
-              </ul>
-              <Link to="/herbal-spa" className="btn-outline">Đặt Lịch Spa</Link>
-            </div>
-            <div className="order-1 lg:order-2 img-zoom">
-              <img src={SPA} alt="Herbal Spa" className="w-full h-[500px] object-cover" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Activities ── */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="section-subtitle">Trải Nghiệm</span>
-            <h2 className="section-title">Hoạt Động & Khám Phá</h2>
-            <div className="w-12 h-0.5 bg-gold mx-auto mt-4" />
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {ACTIVITIES.map(a => (
-              <div key={a.title} className="group">
-                <div className="img-zoom mb-4">
-                  <img src={a.img} alt={a.title} className="w-full h-52 object-cover" />
+      {/* ── Một ngày ở Trosie ── */}
+      <section className="py-20 bg-forest-900">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <span className="section-subtitle">Trải Nghiệm Nổi Bật</span>
+          <h2 className="font-serif text-3xl md:text-4xl text-white mb-3">Một Ngày Ở Trosie</h2>
+          <p className="text-gray-400 mb-2 italic">Có thể rất đơn giản...</p>
+          <div className="w-12 h-0.5 bg-gold mx-auto mb-12" />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {TIMELINE.map((t, i) => (
+              <div key={i} className="relative">
+                {i < TIMELINE.length - 1 && (
+                  <div className="hidden md:block absolute top-8 left-1/2 w-full h-0.5 bg-forest-700" />
+                )}
+                <div className="relative bg-forest-800 p-5 text-center">
+                  <div className="text-3xl mb-2">{t.icon}</div>
+                  <div className="text-gold text-[10px] font-bold tracking-widest uppercase mb-1">{t.time}</div>
+                  <p className="text-gray-300 text-sm leading-relaxed">{t.text}</p>
                 </div>
-                <h3 className="font-serif text-lg text-forest-900 group-hover:text-gold transition-colors mb-2">{a.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">{a.desc}</p>
               </div>
             ))}
           </div>
-          <div className="text-center mt-10">
-            <Link to="/hoat-dong" className="btn-outline">Tất Cả Hoạt Động</Link>
+          <p className="text-gray-400 mt-10 text-sm italic max-w-xl mx-auto">
+            Nhưng chính những điều đơn giản đó lại khiến người ta nhớ rất lâu.
+          </p>
+        </div>
+      </section>
+
+      {/* ── Coffee highlight ── */}
+      <section className="py-20 bg-cream">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div className="img-zoom">
+              <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=900&q=80"
+                alt="Trosie Coffee" className="w-full h-[450px] object-cover" />
+            </div>
+            <div>
+              <span className="section-subtitle">Cà Phê Đặc Sản</span>
+              <h2 className="section-title mb-2">From the Land of Fire<br /><em>Quảng Trị Specialty Coffee</em></h2>
+              <div className="w-12 h-0.5 bg-gold mb-6" />
+              <p className="text-gray-600 leading-relaxed mb-4">
+                Trosie Coffee – Cà phê organic từ Khe Sanh, Quảng Trị. Mang hương vị thuần khiết từ đất trời và con người vùng đất lửa.
+              </p>
+              <p className="text-gray-600 leading-relaxed mb-6">
+                Mỗi hạt cà phê được chăm sóc kỹ lưỡng, rang mộc và mang đến hương vị nguyên bản – để bạn không chỉ thưởng thức cà phê, mà còn thưởng thức cả một vùng đất.
+              </p>
+              <div className="flex gap-3 flex-wrap">
+                <Link to="/ca-phe" className="btn-outline">Tìm Hiểu Thêm</Link>
+                <Link to="/ca-phe/shop" className="btn-gold">Mua Cà Phê</Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Reviews ── */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="section-subtitle">Khách Hàng Nói Gì</span>
+            <h2 className="section-title">Cảm Nhận Thật</h2>
+            <div className="w-12 h-0.5 bg-gold mx-auto mt-4" />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {REVIEWS.map((r, i) => (
+              <div key={i} className="bg-cream p-8 relative">
+                <svg className="w-8 h-8 text-gold/30 absolute top-6 right-6" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+                <p className="text-gray-600 leading-relaxed mb-6 italic">"{r.text}"</p>
+                <div>
+                  <div className="font-semibold text-forest-900 text-sm">{r.name}</div>
+                  <div className="text-xs text-gray-400">{r.from}</div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -240,8 +197,8 @@ export default function Home() {
         <section className="py-20 bg-cream">
           <div className="max-w-7xl mx-auto px-4 lg:px-8">
             <div className="text-center mb-12">
-              <span className="section-subtitle">Cảm Hứng Du Lịch</span>
-              <h2 className="section-title">Tin Tức & Bài Viết</h2>
+              <span className="section-subtitle">Blog</span>
+              <h2 className="section-title">Chia Sẻ Từ Trosie</h2>
               <div className="w-12 h-0.5 bg-gold mx-auto mt-4" />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -267,25 +224,25 @@ export default function Home() {
       )}
 
       {/* ── CTA ── */}
-      <section className="relative py-28 text-center"
-        style={{ backgroundImage: `url(${CTA})`, backgroundAttachment: 'fixed', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-        <div className="absolute inset-0 bg-forest-900/72" />
+      <section className="relative py-28 text-center overflow-hidden"
+        style={{ backgroundImage: `url(${CTA_BG})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        <div className="absolute inset-0 bg-forest-900/80" />
         <div className="relative z-10 max-w-2xl mx-auto px-4">
-          <span className="section-subtitle">Đặt Phòng Ngay</span>
+          <span className="section-subtitle">Đặt Lịch Ngay</span>
           <h2 className="font-serif text-3xl md:text-4xl text-white mb-4">
-            Bắt Đầu Hành Trình<br /><em>Kết Nối Thiên Nhiên</em>
+            Hãy Để Trosie<br /><em>Chào Đón Bạn</em>
           </h2>
           <p className="text-gray-300 text-sm mb-8 leading-relaxed">
-            Liên hệ trực tiếp để được tư vấn và nhận ưu đãi tốt nhất cho kỳ nghỉ của bạn.
+            Liên hệ qua Hotline / Zalo để được tư vấn và đặt lịch trải nghiệm.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button onClick={() => setShowBooking(true)} className="btn-gold">Đặt Phòng Ngay</button>
-            <Link to="/lien-he" className="btn-outline !border-white !text-white hover:!bg-white hover:!text-forest-900">Liên Hệ Tư Vấn</Link>
+            <a href="tel:0961393370" className="btn-gold">Gọi: 0961 393 370</a>
+            <Link to="/lien-he" className="btn-outline !border-white/60 !text-white hover:!bg-white/10 hover:!text-white">
+              Liên Hệ Tư Vấn
+            </Link>
           </div>
         </div>
       </section>
-
-      {showBooking && <BookingModal initialForm={bform} onClose={() => setShowBooking(false)} />}
     </div>
   );
 }

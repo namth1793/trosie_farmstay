@@ -74,6 +74,23 @@ export function initDB() {
       message TEXT,
       created_at TEXT DEFAULT (datetime('now'))
     );
+
+    CREATE TABLE IF NOT EXISTS products (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL,
+      slug TEXT UNIQUE NOT NULL,
+      category TEXT NOT NULL,
+      price INTEGER NOT NULL,
+      weight TEXT,
+      short_desc TEXT,
+      description TEXT,
+      usage_guide TEXT,
+      processing TEXT,
+      roast TEXT,
+      tags TEXT DEFAULT '[]',
+      image TEXT,
+      badge TEXT
+    );
   `);
 
   const roomCount = db.prepare('SELECT COUNT(*) as c FROM rooms').get();
@@ -81,6 +98,9 @@ export function initDB() {
 
   const blogCount = db.prepare('SELECT COUNT(*) as c FROM blog_posts').get();
   if (blogCount.c === 0) seedBlog(db);
+
+  const prodCount = db.prepare('SELECT COUNT(*) as c FROM products').get();
+  if (prodCount.c === 0) seedProducts(db);
 
   console.log('Database ready');
 }
@@ -192,5 +212,92 @@ function seedBlog(db) {
     '<p>Trong nhip song hoi ha cua thoi dai so, xu huong slow travel - du lich cham dang ngay cang duoc nhieu nguoi tim den. Va Farmstay chinh la mot trong nhung hinh thuc nghi duong phu hop nhat.</p><p>Tai Chay Lap Farmstay, chung toi mang den cho du khach khong gian de: Thu gian that su, Trai nghiem nong nghiep, Am thuc tuoi ngon tu vuon nha, va Ket noi cong dong.</p><p>Day chinh la ly do tai sao ngay cang nhieu du khach trong va ngoai nuoc chon Chay Lap la diem den cho nhung ky nghi y nghia.</p>',
     'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
     'Lifestyle', '2026-02-01 08:00:00'
+  );
+}
+
+function seedProducts(db) {
+  const ins = db.prepare(`
+    INSERT INTO products (name,slug,category,price,weight,short_desc,description,usage_guide,processing,roast,tags,image,badge)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
+  `);
+
+  ins.run(
+    'Cà Phê Bột Blend Trosie', 'ca-phe-bot-blend', 'bot', 275000, 'Túi 500g',
+    'Phối trộn 30% Arabica và 70% Robusta, 100% quả chín đỏ từ Hướng Phùng, Quảng Trị. Hương vị đậm đà, hậu ngọt tự nhiên.',
+    'Cà phê bột Blend Trosie được phối trộn hài hòa giữa 30% Arabica đặc sản Quảng Trị và 70% Robusta, sử dụng 100% quả chín đỏ từ vùng trồng xã Hướng Phùng, tỉnh Quảng Trị. Chế biến Natural phơi nắng – nơi có khí hậu và thổ nhưỡng đặc trưng, tạo nên hương vị đậm đà và cân bằng.\n\n• Khối lượng tịnh: 500g\n• Thành phần: 30% Arabica – 70% Robusta\n• Hạn sử dụng: 6 tháng sau khi mở bao bì\n• Đơn vị sản xuất: Công ty TNHH Pun Coffee',
+    'Phù hợp để pha phin truyền thống hoặc pour-over (V60), thích hợp uống đen hoặc kèm sữa đá.',
+    'Natural', 'Medium',
+    JSON.stringify(['Phin', 'Pour-over', 'Arabica 30%', 'Robusta 70%']),
+    'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&q=80', null
+  );
+
+  ins.run(
+    'Cà Phê Hạt Blend Trosie', 'ca-phe-hat-blend', 'hat', 270000, 'Túi 500g',
+    'Phối trộn 30% Arabica và 70% Robusta, 100% quả chín đỏ từ Hướng Phùng, Quảng Trị. Hương thơm thanh thoát, vị đậm đà.',
+    'Cà phê hạt Blend Trosie là sự hòa quyện tinh tế giữa 30% Arabica và 70% Robusta, được thu hái từ 100% quả chín đỏ tại vùng trồng xã Hướng Phùng, tỉnh Quảng Trị – vùng đất có khí hậu mát mẻ quanh năm, độ cao lý tưởng và thổ nhưỡng đặc trưng.\n\n• Khối lượng tịnh: 500g\n• Thành phần: 30% Arabica – 70% Robusta\n• Hạn sử dụng: 12 tháng kể từ ngày sản xuất\n• Đơn vị sản xuất: Công ty TNHH Pun Coffee',
+    'Xay mịn để pha phin truyền thống. Xay vừa để pha máy Espresso hoặc pour-over (V60). Phù hợp uống đen nguyên chất hoặc kèm sữa đá.',
+    'Natural', 'Medium',
+    JSON.stringify(['Phin', 'Espresso', 'Pour-over', 'Arabica 30%', 'Robusta 70%']),
+    'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&q=80', null
+  );
+
+  ins.run(
+    'Arabica Natural Trosie', 'arabica-natural', 'dac-san', 234000, 'Túi 180g',
+    'Hạt Arabica rang light, chế biến natural. Hương mứt gừng, trái cây chín (dứa mật, chanh leo vàng, xoài). Vị chua phức tạp, êm dịu.',
+    'Cà phê hạt Arabica Trosie được tuyển chọn từ vùng nguyên liệu Hướng Phùng, Quảng Trị – nơi có độ cao, khí hậu mát mẻ và đất đỏ bazan đặc trưng. Đây là dòng cà phê từng nhiều lần được vinh danh Top 1 Arabica Việt Nam các năm 2025, 2024, 2023, 2021.\n\nHương vị:\n• Mứt gừng, trái cây chín (dứa mật, chanh leo vàng, xoài)\n• Hương spice: Bạc hà tươi mát, gừng se nhẹ\n• Vị: Chua phức tạp, êm dịu, hậu ngọt thanh\n\n• Khối lượng tịnh: 180g\n• Phương pháp chế biến: Natural\n• Mức rang: Light roast\n• Hạn sử dụng: 12 tháng\n• Đơn vị sản xuất: Công ty TNHH Pun Coffee',
+    'Pour-over (V60, Kalita), Cold brew, Drip coffee, Aeropress.',
+    'Natural', 'Light',
+    JSON.stringify(['Pour-over', 'Cold brew', 'Top 1 VN 2025', '100% Arabica']),
+    'https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=600&q=80', 'Top 1 VN 2025'
+  );
+
+  ins.run(
+    'Arabica Honey Trosie', 'arabica-honey', 'dac-san', 220000, 'Túi 180g',
+    'Hạt Arabica rang medium, chế biến honey. Hương mật ong, caramel, trái cây nhiệt đới. Vị chua dịu, hậu ngọt dài.',
+    'Cà phê hạt Arabica Honey Trosie được lựa chọn từ vườn cà phê Hướng Phùng, Quảng Trị. Đạt Top 3 Arabica Việt Nam các năm 2022, 2023, 2024.\n\nHương vị:\n• Mật ong, caramel, trái cây nhiệt đới (cam, dứa, chuối chín)\n• Điểm xuyến hạnh nhân rang\n• Vị: Chua nhẹ nhàng, cân bằng, hậu ngọt dài và êm dịu\n\n• Khối lượng tịnh: 180g\n• Phương pháp chế biến: Honey process\n• Mức rang: Medium roast\n• Hạn sử dụng: 12 tháng\n• Đơn vị sản xuất: Công ty TNHH Pun Coffee',
+    'Phin truyền thống, Pour-over (V60, Kalita), Drip coffee, Espresso máy.',
+    'Honey', 'Medium',
+    JSON.stringify(['Phin', 'Pour-over', 'Espresso', 'Top 3 VN 2022-2024']),
+    'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=600&q=80', 'Top 3 VN 2022-2024'
+  );
+
+  ins.run(
+    'Liberica Natural Trosie', 'liberica-natural', 'dac-san', 215000, 'Túi 180g',
+    'Specialty coffee, hạt rang vừa, chế biến natural. Hương trái cây vàng (tầm bóp, cam ngọt, mít vàng). Vị ngọt thanh, hậu vị tươi sáng.',
+    'Cà phê hạt Liberica Natural Trosie được thu hoạch thủ công từ vườn cà phê đặc sản Hướng Phùng – Quảng Trị. Sử dụng phương pháp chế biến Natural truyền thống, giữ trọn vẹn sự phong phú của hạt Liberica – giống cà phê quý hiếm và độc đáo.\n\nHương vị:\n• Trái cây vàng bản địa (tầm bóp, cam ngọt, mít vàng)\n• Mùi thơm dày dặn và khác biệt\n• Vị: Ngọt thanh, chua nhẹ tự nhiên, hậu vị tươi mát và kéo dài\n\n• Khối lượng tịnh: 180g\n• Phương pháp chế biến: Natural\n• Mức rang: Medium roast\n• Hạn sử dụng: 12 tháng\n• Đơn vị sản xuất: Công ty TNHH Pun Coffee',
+    'Phin truyền thống, Pour-over (V60), Cold brew, Drip coffee.',
+    'Natural', 'Medium',
+    JSON.stringify(['Phin', 'Pour-over', 'Cold brew', 'Specialty', '100% Liberica']),
+    'https://images.unsplash.com/photo-1501492673258-2bc9e83bf38d?w=600&q=80', 'Specialty'
+  );
+
+  ins.run(
+    'Túi Nhúng Arabica Origin Trosie', 'tui-nhung-arabica', 'tui-nhung', 170000, 'Hộp 10 túi x 12g',
+    'Specialty drip bag coffee. Hương cam quýt, quả mọng, vị chua thanh nhẹ nhàng. Rang vừa, tiện lợi mọi lúc mọi nơi.',
+    'Cà phê túi nhúng Arabica Origin Trosie được tuyển chọn từ 100% hạt Arabica chín đỏ tại Hướng Phùng, Quảng Trị. Rang medium để cân bằng giữa vị chua thanh và hậu ngọt tự nhiên.\n\nHương vị:\n• Cam quýt, quả mọng, thoang thoảng vị ngọt dịu sau cùng\n• Vị: Chua thanh nhẹ nhàng, cân bằng và dễ uống\n\n• Khối lượng: 10 túi x 12g\n• Rang: Medium roast\n• Chế biến: Natural\n• Hạn sử dụng: 12 tháng\n• Đơn vị sản xuất: Công ty TNHH Pun Coffee',
+    '1. Cho 1 túi lọc vào cốc.\n2. Rót khoảng 150ml nước nóng dưới 92°C.\n3. Nhúng túi 3–4 lần để chiết xuất hương vị.\n4. Thưởng thức nóng hoặc thêm đá tùy khẩu vị.',
+    'Natural', 'Medium',
+    JSON.stringify(['Drip bag', 'Tiện lợi', '100% Arabica', 'Văn phòng']),
+    'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80', null
+  );
+
+  ins.run(
+    'Túi Nhúng Blend Arabica + Robusta Trosie', 'tui-nhung-blend', 'tui-nhung', 170000, 'Hộp 10 túi x 12g',
+    'Drip bag coffee Blend. Hương trái cây nhiệt đới (chanh leo, xoài), vị chua dịu hòa quyện cùng hậu vị chocolate ngọt.',
+    'Dòng Blend Arabica + Robusta được phối trộn hài hòa, vừa giữ được sự thanh thoát trái cây của Arabica, vừa có độ đậm đà và hậu vị chocolate ngọt của Robusta. Dễ uống, phù hợp cho cả người mới thưởng thức cà phê đặc sản.\n\nHương vị:\n• Trái cây nhiệt đới (chanh leo, xoài)\n• Vị chocolate ngọt hậu\n• Vị: Chua nhẹ nhàng, cân bằng, ngọt dịu sau cùng\n\n• Khối lượng: 10 túi x 12g\n• Rang: Medium roast\n• Hạn sử dụng: 12 tháng\n• Đơn vị sản xuất: Công ty TNHH Pun Coffee',
+    '1. Cho túi lọc vào cốc.\n2. Rót 150ml nước nóng dưới 92°C.\n3. Nhúng túi 3–4 lần.\n4. Thưởng thức nóng hoặc thêm đá.',
+    'Natural', 'Medium',
+    JSON.stringify(['Drip bag', 'Tiện lợi', 'Arabica + Robusta']),
+    'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80', null
+  );
+
+  ins.run(
+    'Trà Vỏ Cà Phê Thảo Dược Trosie', 'tra-vo-ca-phe', 'tra', 185000, 'Hộp',
+    'Vỏ cà phê hái chọn từ vùng canh tác hữu cơ Hướng Phùng – Quảng Trị. Hương vị thanh ngọt nhẹ nhàng, giúp thư giãn và cải thiện tâm trạng.',
+    'Trà Vỏ Cà Phê Thảo Dược Trosie được làm từ vỏ cà phê hái chọn từ vùng nguyên liệu an toàn, canh tác hữu cơ tại Hướng Phùng – Hướng Hóa – Quảng Trị.\n\n• Hương vị: Thanh ngọt nhẹ nhàng, tự nhiên\n• Công dụng: Giúp thư giãn, cải thiện tâm trạng, hỗ trợ sức khỏe\n• Canh tác: Hữu cơ, an toàn\n• Đơn vị sản xuất: Công ty TNHH Pun Coffee',
+    'Trà nóng: Cho 1 túi lọc vào cốc, rót 200–250ml nước nóng, ngâm 5 phút.\nTrà lạnh: Cho túi vào bình thủy tinh, châm 100ml nước nóng, thêm 300ml nước nguội, ngăn mát 24h.',
+    'Hữu cơ', null,
+    JSON.stringify(['Herbal', 'Hữu cơ', 'Thư giãn', 'Không caffeine']),
+    'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=600&q=80', null
   );
 }
