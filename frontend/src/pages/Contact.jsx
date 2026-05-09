@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
-const HERO = 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&q=80';
+import { useLang } from '../context/LangContext';
 
 export default function Contact() {
+  const { t } = useLang();
   const [form, setForm] = useState({ full_name: '', email: '', phone: '', subject: '', message: '' });
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
 
+  const subjects = t('contact.subjects');
   const set = e => setForm(p => ({ ...p, [e.target.name]: e.target.value }));
 
   const submit = async e => {
@@ -19,18 +20,18 @@ export default function Contact() {
       setSuccess(true);
       setForm({ full_name: '', email: '', phone: '', subject: '', message: '' });
     } catch {
-      setError('Có lỗi xảy ra. Vui lòng thử lại hoặc gọi trực tiếp.');
+      setError(t('contact.errorMsg'));
     } finally { setLoading(false); }
   };
 
   return (
     <div>
       <div className="page-hero">
-        <div className="page-hero-bg" style={{ backgroundImage: `url(${HERO})` }} />
+        <div className="page-hero-bg" style={{ backgroundImage: 'url(/images/home/overview/z6673900773383_7faf7162fc65ba99a780e7c23365085e.jpg)' }} />
         <div className="page-hero-overlay" />
         <div className="relative z-10 text-center">
-          <span className="section-subtitle">Kết Nối</span>
-          <h1 className="font-serif text-3xl md:text-5xl text-white">Liên Hệ</h1>
+          <span className="section-subtitle">{t('contact.heroSub')}</span>
+          <h1 className="font-serif text-3xl md:text-5xl text-white">{t('contact.heroTitle')}</h1>
         </div>
       </div>
 
@@ -40,8 +41,8 @@ export default function Contact() {
 
             {/* Info */}
             <div className="lg:col-span-2">
-              <span className="section-subtitle">Thông Tin</span>
-              <h2 className="font-serif text-2xl text-forest-900 mb-6">Trosie Garden<br />Luôn Sẵn Sàng Chào Đón</h2>
+              <span className="section-subtitle">{t('contact.infoSub')}</span>
+              <h2 className="font-serif text-2xl text-forest-900 mb-6">{t('contact.infoTitle')}<br />{t('contact.infoTitleSub')}</h2>
               <div className="w-10 h-0.5 bg-gold mb-8" />
 
               <div className="space-y-6">
@@ -53,8 +54,8 @@ export default function Contact() {
                     </svg>
                   </div>
                   <div>
-                    <div className="text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-1">Địa Chỉ</div>
-                    <p className="text-sm text-gray-700 leading-relaxed">Trosie Garden, Km Số 2, đường HCM,<br />Khe Sanh, Hướng Hoá, Quảng Trị</p>
+                    <div className="text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-1">{t('contact.addrLabel')}</div>
+                    <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">{t('contact.addrVal')}</p>
                   </div>
                 </div>
 
@@ -65,7 +66,7 @@ export default function Contact() {
                     </svg>
                   </div>
                   <div>
-                    <div className="text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-1">Hotline / Zalo</div>
+                    <div className="text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-1">{t('contact.phoneLabel')}</div>
                     <a href="tel:0345424342" className="block text-sm text-gray-700 hover:text-gold">0345 424 342</a>
                     <a href="tel:0961393370" className="block text-sm text-gray-700 hover:text-gold">0961 393 370</a>
                   </div>
@@ -78,7 +79,7 @@ export default function Contact() {
                     </svg>
                   </div>
                   <div>
-                    <div className="text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-1">Email</div>
+                    <div className="text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-1">{t('contact.emailLabel')}</div>
                     <a href="mailto:trosiegardenks@gmail.com" className="text-sm text-gray-700 hover:text-gold">trosiegardenks@gmail.com</a>
                   </div>
                 </div>
@@ -90,7 +91,7 @@ export default function Contact() {
                     </svg>
                   </div>
                   <div>
-                    <div className="text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-1">Mạng Xã Hội</div>
+                    <div className="text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-1">{t('contact.socialLabel')}</div>
                     <a href="https://www.facebook.com/trosiegardenks" target="_blank" rel="noreferrer" className="block text-sm text-gray-700 hover:text-gold">Facebook: Trosie Garden KS</a>
                     <a href="https://www.instagram.com/trosiegarden.khesanh/" target="_blank" rel="noreferrer" className="block text-sm text-gray-700 hover:text-gold">Instagram: @trosiegarden.khesanh</a>
                     <a href="https://www.tiktok.com/@trosiegardenkhesanh" target="_blank" rel="noreferrer" className="block text-sm text-gray-700 hover:text-gold">TikTok: @trosiegardenkhesanh</a>
@@ -103,16 +104,16 @@ export default function Contact() {
                 <a href="https://maps.app.goo.gl/ZUgWJvEWemr2TMnh7" target="_blank" rel="noreferrer"
                   className="block bg-forest-50 border border-forest-200 hover:border-gold transition-colors p-4 text-center">
                   <div className="text-2xl mb-2">📍</div>
-                  <p className="text-sm font-semibold text-forest-900 mb-1">Xem bản đồ Google Maps</p>
-                  <p className="text-xs text-gray-500">Trosie Garden, Khe Sanh, Quảng Trị</p>
+                  <p className="text-sm font-semibold text-forest-900 mb-1">{t('contact.mapLabel')}</p>
+                  <p className="text-xs text-gray-500">{t('contact.mapSub')}</p>
                 </a>
               </div>
             </div>
 
             {/* Form */}
             <div className="lg:col-span-3">
-              <span className="section-subtitle">Gửi Tin Nhắn</span>
-              <h2 className="font-serif text-2xl text-forest-900 mb-6">Hỏi Chúng Tôi Bất Cứ Điều Gì</h2>
+              <span className="section-subtitle">{t('contact.formSub')}</span>
+              <h2 className="font-serif text-2xl text-forest-900 mb-6">{t('contact.formTitle')}</h2>
               <div className="w-10 h-0.5 bg-gold mb-8" />
 
               {success ? (
@@ -122,52 +123,48 @@ export default function Contact() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                   </div>
-                  <h3 className="font-serif text-xl text-forest-900 mb-2">Đã Gửi Thành Công!</h3>
-                  <p className="text-gray-500 text-sm">Cảm ơn bạn đã liên hệ. Trosie sẽ phản hồi sớm qua điện thoại hoặc email.</p>
-                  <button onClick={() => setSuccess(false)} className="btn-outline mt-6">Gửi Thêm</button>
+                  <h3 className="font-serif text-xl text-forest-900 mb-2">{t('contact.successTitle')}</h3>
+                  <p className="text-gray-500 text-sm">{t('contact.successDesc')}</p>
+                  <button onClick={() => setSuccess(false)} className="btn-outline mt-6">{t('contact.sendMore')}</button>
                 </div>
               ) : (
                 <form onSubmit={submit} className="space-y-5">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                     <div className="md:col-span-2">
-                      <label className="block text-[11px] font-semibold tracking-widest uppercase text-gray-500 mb-1.5">Họ và tên *</label>
-                      <input type="text" name="full_name" value={form.full_name} onChange={set} required placeholder="Nguyễn Văn A"
+                      <label className="block text-[11px] font-semibold tracking-widest uppercase text-gray-500 mb-1.5">{t('contact.nameLabel')}</label>
+                      <input type="text" name="full_name" value={form.full_name} onChange={set} required placeholder={t('contact.namePlaceholder')}
                         className="w-full border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-forest-600" />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-semibold tracking-widest uppercase text-gray-500 mb-1.5">Số điện thoại *</label>
+                      <label className="block text-[11px] font-semibold tracking-widest uppercase text-gray-500 mb-1.5">{t('contact.phoneFieldLabel')}</label>
                       <input type="tel" name="phone" value={form.phone} onChange={set} required placeholder="0912 345 678"
                         className="w-full border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-forest-600" />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-semibold tracking-widest uppercase text-gray-500 mb-1.5">Email</label>
+                      <label className="block text-[11px] font-semibold tracking-widest uppercase text-gray-500 mb-1.5">{t('contact.emailFieldLabel')}</label>
                       <input type="email" name="email" value={form.email} onChange={set} placeholder="email@example.com"
                         className="w-full border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-forest-600" />
                     </div>
                     <div className="md:col-span-2">
-                      <label className="block text-[11px] font-semibold tracking-widest uppercase text-gray-500 mb-1.5">Chủ đề</label>
+                      <label className="block text-[11px] font-semibold tracking-widest uppercase text-gray-500 mb-1.5">{t('contact.subjectLabel')}</label>
                       <select name="subject" value={form.subject} onChange={set}
                         className="w-full border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-forest-600">
-                        <option value="">-- Chọn chủ đề --</option>
-                        <option>Đặt lịch tham quan / lưu trú</option>
-                        <option>Mua cà phê Trosie</option>
-                        <option>Chèo SUP</option>
-                        <option>Vườn hoa hồng</option>
-                        <option>Nhà hàng & ẩm thực</option>
-                        <option>Hoạt động & Team building</option>
-                        <option>Khác</option>
+                        <option value="">{t('contact.subjectDefault')}</option>
+                        {Array.isArray(subjects) && subjects.map(s => (
+                          <option key={s}>{s}</option>
+                        ))}
                       </select>
                     </div>
                     <div className="md:col-span-2">
-                      <label className="block text-[11px] font-semibold tracking-widest uppercase text-gray-500 mb-1.5">Nội dung *</label>
+                      <label className="block text-[11px] font-semibold tracking-widest uppercase text-gray-500 mb-1.5">{t('contact.msgLabel')}</label>
                       <textarea name="message" value={form.message} onChange={set} required rows={5}
-                        placeholder="Nhập nội dung tin nhắn..."
+                        placeholder={t('contact.msgPlaceholder')}
                         className="w-full border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-forest-600 resize-none" />
                     </div>
                   </div>
                   {error && <p className="text-red-500 text-sm">{error}</p>}
                   <button type="submit" disabled={loading} className="btn-primary disabled:opacity-50">
-                    {loading ? 'Đang gửi...' : 'Gửi Yêu Cầu'}
+                    {loading ? t('contact.sending') : t('contact.submitBtn')}
                   </button>
                 </form>
               )}
@@ -178,7 +175,7 @@ export default function Contact() {
 
       {/* Hotline CTA */}
       <section className="py-12 bg-forest-900 text-center">
-        <p className="text-gray-300 mb-3 text-sm">Hoặc liên hệ trực tiếp qua Hotline / Zalo</p>
+        <p className="text-gray-300 mb-3 text-sm">{t('contact.ctaDesc')}</p>
         <a href="tel:0961393370" className="font-serif text-3xl text-gold hover:text-white transition-colors">
           0961 393 370
         </a>

@@ -1,30 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-
-const NAV = [
-  { label: 'Giới Thiệu', href: '/gioi-thieu' },
-  {
-    label: 'Cà Phê', href: '/ca-phe',
-    children: [
-      { label: 'Trang Cà Phê', href: '/ca-phe' },
-      { label: 'Shop Sản Phẩm', href: '/ca-phe/shop' },
-    ],
-  },
-  { label: 'Lưu Trú', href: '/luu-tru' },
-  { label: 'Nhà Hàng', href: '/nha-hang' },
-  { label: 'Chèo SUP', href: '/cheo-sup' },
-  { label: 'Vườn Hoa Hồng', href: '/vuon-hoa-hong' },
-  { label: 'Hoạt Động', href: '/hoat-dong' },
-  { label: 'Blog', href: '/tin-tuc' },
-  { label: 'Liên Hệ', href: '/lien-he' },
-];
+import { useLang } from '../context/LangContext';
 
 export default function Navbar() {
+  const { lang, toggleLang, t } = useLang();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileCafe, setMobileCafe] = useState(false);
   const location = useLocation();
   const isHome = location.pathname === '/';
+
+  const NAV = [
+    { label: t('nav.about'), href: '/gioi-thieu' },
+    {
+      label: t('nav.coffee'), href: '/ca-phe',
+      children: [
+        { label: t('nav.coffeePage'), href: '/ca-phe' },
+        { label: t('nav.coffeeShop'), href: '/ca-phe/shop' },
+      ],
+    },
+    { label: t('nav.stay'), href: '/luu-tru' },
+    { label: t('nav.restaurant'), href: '/nha-hang' },
+    { label: t('nav.sup'), href: '/cheo-sup' },
+    { label: t('nav.roseGarden'), href: '/vuon-hoa-hong' },
+    { label: t('nav.activities'), href: '/hoat-dong' },
+    { label: t('nav.blog'), href: '/tin-tuc' },
+    { label: t('nav.contact'), href: '/lien-he' },
+  ];
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 60);
@@ -84,7 +86,22 @@ export default function Navbar() {
             )}
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
+            {/* Language toggle */}
+            <button
+              onClick={toggleLang}
+              title={lang === 'vi' ? 'Switch to English' : 'Chuyển sang Tiếng Việt'}
+              className={`flex items-center gap-1 px-2.5 py-1.5 border text-[10px] font-bold tracking-wider uppercase transition-all ${
+                solid
+                  ? 'border-forest-300 text-forest-700 hover:border-gold hover:text-gold'
+                  : 'border-white/40 text-white/80 hover:border-gold hover:text-gold'
+              }`}
+            >
+              <span className={lang === 'vi' ? 'text-gold' : 'opacity-50'}>VI</span>
+              <span className="opacity-30">|</span>
+              <span className={lang === 'en' ? 'text-gold' : 'opacity-50'}>EN</span>
+            </button>
+
             <a href="tel:0961393370"
               className={`hidden xl:flex items-center gap-1.5 text-[10px] font-semibold tracking-wide ${solid ? 'text-forest-700' : 'text-white/80'}`}>
               <svg className="w-3.5 h-3.5 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -94,7 +111,7 @@ export default function Navbar() {
             </a>
             <Link to="/lien-he"
               className="hidden xl:block bg-gold hover:bg-gold-dark text-white text-[10px] font-semibold tracking-widest uppercase px-4 py-2.5 transition-colors">
-              Đặt Lịch
+              {t('nav.bookNow')}
             </Link>
             <button onClick={() => setMobileOpen(!mobileOpen)}
               className={`xl:hidden p-2 ${solid ? 'text-forest-900' : 'text-white'}`}>
@@ -138,8 +155,12 @@ export default function Navbar() {
             </div>
           ))}
           <div className="p-4 flex flex-col gap-3">
+            <button onClick={toggleLang}
+              className="text-center text-[11px] font-bold tracking-widest uppercase text-forest-700 border border-forest-200 py-2.5 hover:border-gold hover:text-gold transition-colors">
+              {lang === 'vi' ? '🌐 Switch to English' : '🌐 Chuyển sang Tiếng Việt'}
+            </button>
             <a href="tel:0961393370" className="text-center text-sm text-forest-700 font-semibold py-2">📞 0961 393 370</a>
-            <Link to="/lien-he" className="btn-gold w-full text-center block">Đặt Lịch Ngay</Link>
+            <Link to="/lien-he" className="btn-gold w-full text-center block">{t('nav.bookNow')}</Link>
           </div>
         </div>
       )}

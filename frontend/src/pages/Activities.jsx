@@ -1,37 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useLang } from '../context/LangContext';
 
-const PROGRAMS = [
-  {
-    icon: '⛺',
-    label: 'Cắm Trại',
-    desc: 'Ngủ giữa thiên nhiên, đốt lửa trại, ngắm sao trời – trải nghiệm cắm trại an toàn và đáng nhớ giữa rừng núi Khe Sanh.',
-    target: 'Mọi lứa tuổi',
-    img: '/images/activities/camping/DSCF8260.JPG',
-  },
-  {
-    icon: '🎨',
-    label: 'Vẽ Chai Lọ',
-    desc: 'Workshop sáng tạo – tự tay vẽ và trang trí chai lọ thủy tinh theo phong cách riêng. Lưu giữ kỷ niệm Trosie qua một tác phẩm thủ công độc đáo.',
-    target: 'Gia đình, cặp đôi, nhóm bạn',
-    img: '/images/activities/ve-chai-lo/DSCF1070.JPG',
-  },
-  {
-    icon: '🌸',
-    label: 'Ép Hoa Khô',
-    desc: 'Nghệ thuật ép hoa khô – trải nghiệm thủ công tỉ mỉ, mang hương vị mộc mạc của thiên nhiên vào từng tác phẩm.',
-    target: 'Gia đình, học sinh',
-    img: '/images/activities/ep-hoa-kho/DSCF0062.JPG',
-  },
-];
-
-const FOR_WHO = [
-  { icon: '🎒', label: 'Học Sinh', desc: 'Trải nghiệm học tập thực địa, STEM ngoài trời' },
-  { icon: '👨‍👩‍👧', label: 'Gia Đình', desc: 'Kỳ nghỉ ý nghĩa, gắn kết cùng thiên nhiên' },
-  { icon: '🏢', label: 'Doanh Nghiệp', desc: 'Team building, retreat, hội thảo ngoài trời' },
-];
+const PROGRAM_ICONS = ['⛺', '🎨', '🌸'];
+const FOR_ICONS = ['🎒', '👨‍👩‍👧', '🏢'];
 
 export default function Activities() {
+  const { t } = useLang();
+  const programs = t('activities.programs');
+  const forItems = t('activities.forItems');
+
   return (
     <div>
       <div className="page-hero" style={{ height: '400px' }}>
@@ -39,21 +17,18 @@ export default function Activities() {
           style={{ backgroundImage: 'url(/images/activities/camping/DSCF8273.JPG)' }} />
         <div className="page-hero-overlay" />
         <div className="relative z-10 text-center">
-          <span className="section-subtitle">Trosie Garden</span>
-          <h1 className="font-serif text-3xl md:text-5xl text-white">Hoạt Động Trải Nghiệm</h1>
+          <span className="section-subtitle">{t('activities.heroSub')}</span>
+          <h1 className="font-serif text-3xl md:text-5xl text-white">{t('activities.heroTitle')}</h1>
         </div>
       </div>
 
       {/* Intro */}
       <section className="py-16 bg-cream">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <span className="section-subtitle">Chương Trình</span>
-          <h2 className="section-title mb-4">Trosie Tổ Chức Nhiều Hoạt Động<br /><em>Gắn Với Thiên Nhiên</em></h2>
+          <span className="section-subtitle">{t('activities.introSub')}</span>
+          <h2 className="section-title mb-4">{t('activities.introTitle')}<br /><em>{t('activities.introTitleEm')}</em></h2>
           <div className="w-12 h-0.5 bg-gold mx-auto mb-6" />
-          <p className="text-gray-600 leading-relaxed">
-            Mỗi hoạt động tại Trosie đều được thiết kế để kết nối con người với thiên nhiên và với nhau.
-            Không phải chỉ giải trí, mà là những trải nghiệm để lại dấu ấn thật sự.
-          </p>
+          <p className="text-gray-600 leading-relaxed">{t('activities.introDesc')}</p>
         </div>
       </section>
 
@@ -61,18 +36,22 @@ export default function Activities() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
           <div className="text-center mb-14">
-            <span className="section-subtitle">Các Chương Trình</span>
-            <h2 className="section-title">Lựa Chọn Phù Hợp</h2>
+            <span className="section-subtitle">{t('activities.programsSub')}</span>
+            <h2 className="section-title">{t('activities.programsTitle')}</h2>
             <div className="w-12 h-0.5 bg-gold mx-auto mt-4" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {PROGRAMS.map(p => (
-              <div key={p.label} className="group">
+            {Array.isArray(programs) && programs.map((p, i) => (
+              <div key={i} className="group">
                 <div className="img-zoom mb-5">
-                  <img src={p.img} alt={p.label} className="w-full h-56 object-cover" />
+                  <img src={[
+                    '/images/activities/camping/DSCF8260.JPG',
+                    '/images/activities/ve-chai-lo/DSCF1070.JPG',
+                    '/images/activities/ep-hoa-kho/DSCF0062.JPG',
+                  ][i]} alt={p.label} className="w-full h-56 object-cover" />
                 </div>
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-2xl">{p.icon}</span>
+                  <span className="text-2xl">{PROGRAM_ICONS[i]}</span>
                   <h3 className="font-serif text-lg text-forest-900">{p.label}</h3>
                 </div>
                 <p className="text-sm text-gray-600 leading-relaxed mb-3">{p.desc}</p>
@@ -95,13 +74,11 @@ export default function Activities() {
           {/* Vẽ chai lọ */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <span className="section-subtitle">Thủ Công Sáng Tạo</span>
-              <h2 className="section-title mb-4">Vẽ Chai Lọ<br /><em>Lưu Giữ Kỷ Niệm</em></h2>
+              <span className="section-subtitle">{t('activities.bottleSub')}</span>
+              <h2 className="section-title mb-4">{t('activities.bottleTitle')}<br /><em>{t('activities.bottleTitleEm')}</em></h2>
               <div className="w-12 h-0.5 bg-gold mb-6" />
-              <p className="text-gray-600 leading-relaxed mb-4">
-                Workshop vẽ và trang trí chai lọ thủy tinh – nơi bạn có thể thỏa sức sáng tạo và tạo ra một tác phẩm thủ công mang dấu ấn cá nhân để mang về làm kỷ niệm.
-              </p>
-              <p className="text-gray-600 leading-relaxed">Phù hợp cho gia đình, cặp đôi và nhóm bạn muốn có một hoạt động ý nghĩa khác lạ.</p>
+              <p className="text-gray-600 leading-relaxed mb-4">{t('activities.bottleDesc1')}</p>
+              <p className="text-gray-600 leading-relaxed">{t('activities.bottleDesc2')}</p>
             </div>
             <div className="grid grid-cols-2 gap-3">
               {[
@@ -111,7 +88,7 @@ export default function Activities() {
                 '/images/activities/ve-chai-lo/DSCF1084.JPG',
               ].map((img, i) => (
                 <div key={i} className="img-zoom aspect-square overflow-hidden">
-                  <img src={img} alt={`Vẽ chai lọ ${i + 1}`} className="w-full h-full object-cover" />
+                  <img src={img} alt={`Bottle painting ${i + 1}`} className="w-full h-full object-cover" />
                 </div>
               ))}
             </div>
@@ -127,18 +104,16 @@ export default function Activities() {
                 '/images/activities/ep-hoa-kho/DSCF0094.JPG',
               ].map((img, i) => (
                 <div key={i} className="img-zoom aspect-square overflow-hidden">
-                  <img src={img} alt={`Ép hoa khô ${i + 1}`} className="w-full h-full object-cover" />
+                  <img src={img} alt={`Pressed flower ${i + 1}`} className="w-full h-full object-cover" />
                 </div>
               ))}
             </div>
             <div className="order-1 lg:order-2">
-              <span className="section-subtitle">Nghệ Thuật Thiên Nhiên</span>
-              <h2 className="section-title mb-4">Ép Hoa Khô<br /><em>Từ Vườn Đến Tác Phẩm</em></h2>
+              <span className="section-subtitle">{t('activities.flowerSub')}</span>
+              <h2 className="section-title mb-4">{t('activities.flowerTitle')}<br /><em>{t('activities.flowerTitleEm')}</em></h2>
               <div className="w-12 h-0.5 bg-gold mb-6" />
-              <p className="text-gray-600 leading-relaxed mb-4">
-                Trải nghiệm nghệ thuật ép hoa khô – tỉ mỉ, nhẹ nhàng và đầy sáng tạo. Mỗi tác phẩm là một khoảnh khắc thiên nhiên được lưu giữ mãi mãi.
-              </p>
-              <p className="text-gray-600 leading-relaxed">Đặc biệt phù hợp cho gia đình có trẻ em và những ai yêu thích nghề thủ công.</p>
+              <p className="text-gray-600 leading-relaxed mb-4">{t('activities.flowerDesc1')}</p>
+              <p className="text-gray-600 leading-relaxed">{t('activities.flowerDesc2')}</p>
             </div>
           </div>
 
@@ -149,13 +124,13 @@ export default function Activities() {
       <section className="py-16 bg-forest-900">
         <div className="max-w-5xl mx-auto px-4 lg:px-8">
           <div className="text-center mb-10">
-            <span className="section-subtitle">Đối Tượng</span>
-            <h2 className="font-serif text-3xl text-white">Dành Cho Ai?</h2>
+            <span className="section-subtitle">{t('activities.forSub')}</span>
+            <h2 className="font-serif text-3xl text-white">{t('activities.forTitle')}</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {FOR_WHO.map(f => (
-              <div key={f.label} className="bg-forest-800 p-6 text-center">
-                <div className="text-4xl mb-3">{f.icon}</div>
+            {Array.isArray(forItems) && forItems.map((f, i) => (
+              <div key={i} className="bg-forest-800 p-6 text-center">
+                <div className="text-4xl mb-3">{FOR_ICONS[i]}</div>
                 <h3 className="font-serif text-lg text-white mb-2">{f.label}</h3>
                 <p className="text-gray-400 text-sm">{f.desc}</p>
               </div>
@@ -167,11 +142,11 @@ export default function Activities() {
       {/* CTA */}
       <section className="py-16 bg-cream text-center">
         <div className="max-w-xl mx-auto px-4">
-          <h2 className="section-title mb-4">Đăng Ký Trải Nghiệm</h2>
-          <p className="text-gray-600 text-sm mb-8">Liên hệ để được tư vấn chương trình phù hợp với nhóm của bạn</p>
+          <h2 className="section-title mb-4">{t('activities.ctaTitle')}</h2>
+          <p className="text-gray-600 text-sm mb-8">{t('activities.ctaDesc')}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="tel:0961393370" className="btn-primary">Gọi: 0961 393 370</a>
-            <Link to="/lien-he" className="btn-outline">Gửi Tin Nhắn</Link>
+            <a href="tel:0961393370" className="btn-primary">{t('activities.ctaCall')}</a>
+            <Link to="/lien-he" className="btn-outline">{t('activities.ctaMsg')}</Link>
           </div>
         </div>
       </section>

@@ -1,23 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
-const POLICIES = [
-  {
-    title: 'Chính Sách Vận Chuyển & Đổi Trả',
-    content: `1. Vận chuyển\n• Giao hàng toàn quốc qua Giao Hàng Nhanh, Viettel Post, v.v.\n• Thời gian giao: 2–5 ngày làm việc tùy khu vực.\n• Phí vận chuyển hiển thị khi đặt hàng, có thể miễn phí theo chương trình KM.\n\n2. Đổi trả\n• Hỗ trợ đổi trả trong vòng 3 ngày kể từ ngày nhận hàng nếu:\n  - Hư hỏng do vận chuyển\n  - Sai mẫu mã/loại sản phẩm\n  - Lỗi từ nhà sản xuất\n• Sản phẩm phải còn nguyên tem, nhãn, chưa sử dụng.\n• Không áp dụng với sản phẩm đã mở bao bì hoặc quá thời hạn quy định.`,
-  },
-  {
-    title: 'Chính Sách Thanh Toán',
-    content: `• COD (thanh toán khi nhận hàng)\n• Chuyển khoản ngân hàng: thông tin cung cấp qua Zalo/Email\n• Thanh toán online: thẻ ATM, thẻ tín dụng, ví điện tử\n• Mọi giao dịch đều được bảo mật và tuân thủ pháp luật Việt Nam.`,
-  },
-  {
-    title: 'Chính Sách Bảo Mật',
-    content: `• Cam kết bảo mật tuyệt đối thông tin cá nhân khách hàng.\n• Thông tin chỉ dùng cho mục đích giao dịch & chăm sóc khách hàng.\n• Không bán, chia sẻ hay trao đổi thông tin với bên thứ ba.\n• Khách hàng có quyền kiểm tra, cập nhật hoặc yêu cầu hủy thông tin cá nhân qua Zalo/Email.`,
-  },
-];
+import { useLang } from '../context/LangContext';
 
 export default function Footer() {
+  const { t } = useLang();
   const [openPolicy, setOpenPolicy] = useState(null);
+  const links = t('footer.links');
+  const policies = t('footer.policies');
 
   return (
     <footer className="bg-forest-900 text-gray-300">
@@ -35,9 +24,7 @@ export default function Footer() {
                 <div className="text-[10px] tracking-widest text-gray-400 font-sans">GARDEN KHE SANH</div>
               </div>
             </Link>
-            <p className="text-sm text-gray-400 leading-relaxed mb-5">
-              Chạm vào thiên nhiên – Sống chậm lại một chút. Trosie Garden tại Khe Sanh – Quảng Trị, nơi cà phê đặc sản gặp thiên nhiên nguyên bản.
-            </p>
+            <p className="text-sm text-gray-400 leading-relaxed mb-5">{t('footer.desc')}</p>
             <div className="flex gap-3">
               <a href="https://www.facebook.com/trosiegardenks" target="_blank" rel="noreferrer"
                 className="w-9 h-9 bg-forest-700 hover:bg-gold flex items-center justify-center rounded-full transition-colors" title="Facebook">
@@ -64,34 +51,24 @@ export default function Footer() {
 
           {/* Quick links */}
           <div>
-            <h4 className="text-white text-[11px] font-bold tracking-widest uppercase mb-5">Liên Kết Nhanh</h4>
+            <h4 className="text-white text-[11px] font-bold tracking-widest uppercase mb-5">{t('footer.quickLinks')}</h4>
             <ul className="space-y-2.5">
-              {[
-                ['Giới Thiệu', '/gioi-thieu'],
-                ['Cà Phê', '/ca-phe'],
-                ['Shop Sản Phẩm', '/ca-phe/shop'],
-                ['Lưu Trú', '/luu-tru'],
-                ['Nhà Hàng', '/nha-hang'],
-                ['Chèo SUP', '/cheo-sup'],
-                ['Vườn Hoa Hồng', '/vuon-hoa-hong'],
-                ['Hoạt Động', '/hoat-dong'],
-                ['Blog', '/tin-tuc'],
-              ].map(([l, h]) => (
-                <li key={h}><Link to={h} className="text-sm text-gray-400 hover:text-gold transition-colors">{l}</Link></li>
+              {Array.isArray(links) && links.map(([label, href]) => (
+                <li key={href}><Link to={href} className="text-sm text-gray-400 hover:text-gold transition-colors">{label}</Link></li>
               ))}
             </ul>
           </div>
 
           {/* Contact */}
           <div>
-            <h4 className="text-white text-[11px] font-bold tracking-widest uppercase mb-5">Thông Tin Liên Hệ</h4>
+            <h4 className="text-white text-[11px] font-bold tracking-widest uppercase mb-5">{t('footer.contactTitle')}</h4>
             <ul className="space-y-4 text-sm text-gray-400">
               <li className="flex gap-3">
                 <svg className="w-4 h-4 text-gold mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                 </svg>
-                <span>Km Số 2, đường HCM, Khe Sanh,<br />Hướng Hoá, Quảng Trị</span>
+                <span className="whitespace-pre-line">{t('footer.address')}</span>
               </li>
               <li className="flex gap-3">
                 <svg className="w-4 h-4 text-gold mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -112,16 +89,16 @@ export default function Footer() {
                 <svg className="w-4 h-4 text-gold mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
-                <span>Mở cửa hàng ngày<br />Hotline / Zalo: 0961 393 370</span>
+                <span className="whitespace-pre-line">{t('footer.hours')}</span>
               </li>
             </ul>
           </div>
 
           {/* Policies */}
           <div>
-            <h4 className="text-white text-[11px] font-bold tracking-widest uppercase mb-5">Chính Sách</h4>
+            <h4 className="text-white text-[11px] font-bold tracking-widest uppercase mb-5">{t('footer.policiesTitle')}</h4>
             <div className="space-y-2">
-              {POLICIES.map((p, i) => (
+              {Array.isArray(policies) && policies.map((p, i) => (
                 <div key={i} className="border border-forest-700">
                   <button
                     onClick={() => setOpenPolicy(openPolicy === i ? null : i)}
@@ -145,10 +122,10 @@ export default function Footer() {
 
       <div className="border-t border-forest-800">
         <div className="max-w-7xl mx-auto px-4 lg:px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-gray-500">
-          <p>© 2025 Trosie Garden Khe Sanh – Công ty TNHH XNK & TM Trosie. All rights reserved.</p>
+          <p>{t('footer.copyright')}</p>
           <div className="flex gap-5">
-            <a href="https://maps.app.goo.gl/ZUgWJvEWemr2TMnh7" target="_blank" rel="noreferrer" className="hover:text-gold">Bản Đồ</a>
-            <a href="mailto:trosiegardenks@gmail.com" className="hover:text-gold">Liên Hệ</a>
+            <a href="https://maps.app.goo.gl/ZUgWJvEWemr2TMnh7" target="_blank" rel="noreferrer" className="hover:text-gold">{t('footer.mapLink')}</a>
+            <a href="mailto:trosiegardenks@gmail.com" className="hover:text-gold">{t('footer.contactLink')}</a>
           </div>
         </div>
       </div>
