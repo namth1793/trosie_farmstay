@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useCallback, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useLang } from '../context/LangContext';
 
 const HERO_SLIDES = [
@@ -80,7 +80,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70" />
 
         {/* Content */}
-        <div className="relative z-10 text-center text-white px-4 w-full max-w-4xl mx-auto">
+        <div className="relative z-10 text-center text-white px-4 w-full max-w-7xl mx-auto">
           <p className="text-[11px] tracking-widest uppercase text-gold font-semibold mb-4">
             {t('home.heroLocation')}
           </p>
@@ -90,11 +90,6 @@ export default function Home() {
           <p className="text-white/80 text-lg md:text-xl mb-4 font-light italic">
             {t('home.heroSlogan')}
           </p>
-          <div className="text-white/70 text-sm mb-10 space-y-1.5">
-            <p>{t('home.heroLine1')}</p>
-            <p>{t('home.heroLine2')}</p>
-            <p>{t('home.heroLine3')}</p>
-          </div>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/lien-he" className="btn-gold text-center">{t('home.bookBtn')}</Link>
             <Link to="/gioi-thieu" className="btn-outline !border-white/60 !text-white hover:!bg-white/10 hover:!text-white text-center">
