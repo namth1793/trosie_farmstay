@@ -6,14 +6,14 @@ const TYPES = [
     icon: '🏕',
     label: 'Lều Cắm Trại',
     desc: 'Ngủ giữa thiên nhiên trong lều được trang bị đầy đủ. Trải nghiệm cắm trại an toàn, thoải mái nhưng vẫn giữ được sự gần gũi với rừng núi.',
-    img: 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?w=800&q=80',
+    img: '/images/activities/camping/DSCF8235.JPG',
     features: ['Lều chống thấm chất lượng cao', 'Túi ngủ & nệm ngoài trời', 'Đèn chiếu sáng', 'Phù hợp 2–4 người'],
   },
   {
     icon: '🌿',
     label: 'Khu Nghỉ Đơn Giản',
     desc: 'Không gian lưu trú mộc mạc nhưng đủ tiện nghi. Thiết kế gần gũi với thiên nhiên, phù hợp cho những ai muốn trải nghiệm thực sự.',
-    img: 'https://images.unsplash.com/photo-1578645510447-e20b4311e3ce?w=800&q=80',
+    img: '/images/activities/camping/DSCF8247.JPG',
     features: ['Giường đôi / đơn', 'Nhà vệ sinh chung sạch sẽ', 'Quạt / thông gió tự nhiên', 'Phù hợp 2 người'],
   },
 ];
@@ -32,7 +32,7 @@ export default function LuuTru() {
     <div>
       <div className="page-hero" style={{ height: '400px' }}>
         <div className="page-hero-bg"
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1510312305653-8ed496efae75?w=1920&q=80)' }} />
+          style={{ backgroundImage: 'url(/images/activities/camping/DSCF0852.JPG)' }} />
         <div className="page-hero-overlay" />
         <div className="relative z-10 text-center">
           <span className="section-subtitle">Trosie Garden</span>
@@ -82,6 +82,33 @@ export default function LuuTru() {
                     </li>
                   ))}
                 </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Camping Gallery */}
+      <section className="py-12 bg-cream">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8">
+          <div className="text-center mb-8">
+            <span className="section-subtitle">Hình Ảnh</span>
+            <h2 className="section-title">Không Gian Cắm Trại</h2>
+            <div className="w-12 h-0.5 bg-gold mx-auto mt-4" />
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {[
+              '/images/activities/camping/DSCF8258.JPG',
+              '/images/activities/camping/DSCF8260.JPG',
+              '/images/activities/camping/DSCF8261.JPG',
+              '/images/activities/camping/DSCF8265.JPG',
+              '/images/activities/camping/DSCF8273.JPG',
+              '/images/activities/camping/DSCF8275.JPG',
+              '/images/activities/camping/DSCF8285.JPG',
+              '/images/activities/camping/DSCF0865.JPG',
+            ].map((img, i) => (
+              <div key={i} className="img-zoom aspect-square overflow-hidden">
+                <img src={img} alt={`Cắm trại ${i + 1}`} className="w-full h-full object-cover" />
               </div>
             ))}
           </div>

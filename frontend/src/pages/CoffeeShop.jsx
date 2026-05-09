@@ -28,7 +28,7 @@ export default function CoffeeShop() {
     <div>
       <div className="page-hero" style={{ height: '320px' }}>
         <div className="page-hero-bg"
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=1920&q=80)' }} />
+          style={{ backgroundImage: 'url(/images/coffee/cafe-area/679930378_122270991404137494_3572875436896164920_n.jpg)' }} />
         <div className="page-hero-overlay" />
         <div className="relative z-10 text-center">
           <span className="section-subtitle">Trosie Coffee</span>

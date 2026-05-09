@@ -20,7 +20,7 @@ export default function Coffee() {
       {/* Hero */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1920&q=80)' }} />
+          style={{ backgroundImage: 'url(/images/coffee/cafe-area/DSCF0163.JPG)' }} />
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/70" />
         <div className="relative z-10 text-center text-white px-4 max-w-3xl mx-auto">
           <p className="text-[11px] tracking-widest uppercase text-gold font-semibold mb-4">
@@ -62,7 +62,7 @@ export default function Coffee() {
               <Link to="/ca-phe/shop" className="btn-primary">Xem Sản Phẩm</Link>
             </div>
             <div className="img-zoom">
-              <img src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=900&q=80"
+              <img src="/images/coffee/cafe-area/z6673902262574_ba371fdf56beb4a954af29a5ed722b0b.jpg"
                 alt="Trosie Coffee" className="w-full h-[450px] object-cover" />
             </div>
           </div>
@@ -120,6 +120,33 @@ export default function Coffee() {
           </div>
         </section>
       )}
+
+      {/* Cafe Area Gallery */}
+      <section className="py-16 bg-cream">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8">
+          <div className="text-center mb-10">
+            <span className="section-subtitle">Không Gian</span>
+            <h2 className="section-title">Khu Cà Phê Trosie</h2>
+            <div className="w-12 h-0.5 bg-gold mx-auto mt-4" />
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+            {[
+              '/images/coffee/cafe-area/DSCF0240.JPG',
+              '/images/coffee/cafe-area/z6649009570055_d50c460157a845e591f168629f5912db.jpg',
+              '/images/coffee/cafe-area/z6649009578222_9ac387fc5ffd6d046c5bef3b87116579.jpg',
+              '/images/coffee/cafe-area/z6673899525879_7c195ab7b7964eb8c66ccbd97abe22ce.jpg',
+              '/images/coffee/cafe-area/z6673899540727_8ff55c5b2c40ed3684531d0d242e4f08.jpg',
+              '/images/coffee/cafe-area/z6673900727809_04919ec614e1c769fbc8ddf213d5d369.jpg',
+              '/images/coffee/cafe-area/z6673900740557_666f02250eb025f86fee55920caf494e.jpg',
+              '/images/coffee/cafe-area/z6673902293422_21ed52ab7c17728c1ac9b9771cf7ced7.jpg',
+            ].map((img, i) => (
+              <div key={i} className="img-zoom aspect-square overflow-hidden">
+                <img src={img} alt={`Khu cà phê ${i + 1}`} className="w-full h-full object-cover" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* CTA */}
       <section className="py-16 bg-cream text-center">

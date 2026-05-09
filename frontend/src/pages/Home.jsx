@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-const HERO = 'https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?w=1920&q=80';
-const CTA_BG = 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1920&q=80';
+const HERO = '/images/home/overview/z6673900773383_7faf7162fc65ba99a780e7c23365085e.jpg';
+const CTA_BG = '/images/activities/camping/DSCF8235.JPG';
 
 const SERVICES = [
-  { icon: '☕', label: 'Cà Phê Đặc Sản', desc: 'Cà phê organic trồng tại Khe Sanh, rang xay tại chỗ, những thức uống mát lành giữa rừng.', href: '/ca-phe', img: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&q=80' },
-  { icon: '🏕', label: 'Lưu Trú & Cắm Trại', desc: 'Ngủ giữa thiên nhiên, sáng thức dậy trong sương và tiếng chim rừng.', href: '/luu-tru', img: 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?w=600&q=80' },
-  { icon: '🍽', label: 'Nhà Hàng', desc: 'Ẩm thực địa phương – đậm vị – mộc mạc. Nguyên liệu tươi từ vườn và núi rừng Khe Sanh.', href: '/nha-hang', img: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80' },
-  { icon: '🛶', label: 'Chèo SUP', desc: 'Trải nghiệm nhẹ nhàng trên mặt nước yên bình, ngắm thiên nhiên xung quanh.', href: '/cheo-sup', img: 'https://images.unsplash.com/photo-1503516459261-40c66117780a?w=600&q=80' },
-  { icon: '🌹', label: 'Vườn Hoa Hồng Cổ', desc: 'Không gian check-in đầy cảm xúc – nơi hoa hồng cổ nở theo mùa giữa núi đồi Khe Sanh.', href: '/vuon-hoa-hong', img: 'https://images.unsplash.com/photo-1490750967868-88df5691cc8e?w=600&q=80' },
-  { icon: '🌿', label: 'Hoạt Động Trải Nghiệm', desc: 'STEM, team building, trải nghiệm nông nghiệp – dành cho gia đình, học sinh, doanh nghiệp.', href: '/hoat-dong', img: 'https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=600&q=80' },
+  { icon: '☕', label: 'Cà Phê Đặc Sản', desc: 'Cà phê organic trồng tại Khe Sanh, rang xay tại chỗ, những thức uống mát lành giữa rừng.', href: '/ca-phe', img: '/images/coffee/cafe-area/DSCF0163.JPG' },
+  { icon: '🏕', label: 'Lưu Trú & Cắm Trại', desc: 'Ngủ giữa thiên nhiên, sáng thức dậy trong sương và tiếng chim rừng.', href: '/luu-tru', img: '/images/activities/camping/DSCF0852.JPG' },
+  { icon: '🍽', label: 'Nhà Hàng', desc: 'Ẩm thực địa phương – đậm vị – mộc mạc. Nguyên liệu tươi từ vườn và núi rừng Khe Sanh.', href: '/nha-hang', img: '/images/restaurant/gallery/DSCF6002.JPG' },
+  { icon: '🛶', label: 'Chèo SUP', desc: 'Trải nghiệm nhẹ nhàng trên mặt nước yên bình, ngắm thiên nhiên xung quanh.', href: '/cheo-sup', img: '/images/activities/sup/z6675583185740_e3d20bed681974dca792a6368981c4f7.jpg' },
+  { icon: '🌹', label: 'Vườn Hoa Hồng Cổ', desc: 'Không gian check-in đầy cảm xúc – nơi hoa hồng cổ nở theo mùa giữa núi đồi Khe Sanh.', href: '/vuon-hoa-hong', img: '/images/activities/rose-garden/z6673899322687_4f7481839fba719ad73a5a1e9db0b56d.jpg' },
+  { icon: '🌿', label: 'Hoạt Động Trải Nghiệm', desc: 'Vẽ chai lọ, ép hoa khô, cắm trại, team building – dành cho gia đình, học sinh, doanh nghiệp.', href: '/hoat-dong', img: '/images/activities/ep-hoa-kho/DSCF0062.JPG' },
 ];
 
 const TIMELINE = [
@@ -145,7 +145,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div className="img-zoom">
-              <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=900&q=80"
+              <img src="/images/coffee/cafe-area/DSCF0211.JPG"
                 alt="Trosie Coffee" className="w-full h-[450px] object-cover" />
             </div>
             <div>
@@ -163,6 +163,33 @@ export default function Home() {
                 <Link to="/ca-phe/shop" className="btn-gold">Mua Cà Phê</Link>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Guest Gallery ── */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8">
+          <div className="text-center mb-10">
+            <span className="section-subtitle">Check-in Tại Trosie</span>
+            <h2 className="section-title">Khoảnh Khắc Của Khách</h2>
+            <div className="w-12 h-0.5 bg-gold mx-auto mt-4" />
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+            {[
+              '/images/gallery/checkin/z6673902322313_77a98fc5b609a9836b6c55e2388bba83.jpg',
+              '/images/gallery/checkin/z6673902331887_fb0223028c3f18db46a01ffba48bf64f.jpg',
+              '/images/gallery/checkin/z6673902364455_3ccb72a9d70161457a7432a173249cee.jpg',
+              '/images/gallery/checkin/z6673902371745_97bf5508c093ef65676aab117a85f901.jpg',
+              '/images/gallery/checkin/z6673902394002_47d0f7d9f33bdae2d4f893941301fcff.jpg',
+              '/images/gallery/checkin/z6673902404703_2e3f2f4e64754144218af1aedba8b928.jpg',
+              '/images/gallery/checkin/z6673902442783_d2adafc060da8806c098ce40cf32e315.jpg',
+              '/images/gallery/checkin/z6673902451299_f7b69b5c7c30a0cccb131f6e390dabb5.jpg',
+            ].map((img, i) => (
+              <div key={i} className="img-zoom aspect-square overflow-hidden">
+                <img src={img} alt={`Khách check-in ${i + 1}`} className="w-full h-full object-cover" />
+              </div>
+            ))}
           </div>
         </div>
       </section>

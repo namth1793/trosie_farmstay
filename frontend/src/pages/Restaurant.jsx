@@ -12,7 +12,7 @@ export default function Restaurant() {
     <div>
       <div className="page-hero" style={{ height: '400px' }}>
         <div className="page-hero-bg"
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1920&q=80)' }} />
+          style={{ backgroundImage: 'url(/images/restaurant/gallery/DSCF6002.JPG)' }} />
         <div className="page-hero-overlay" />
         <div className="relative z-10 text-center">
           <span className="section-subtitle">Trosie Garden</span>
@@ -48,7 +48,7 @@ export default function Restaurant() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="img-zoom">
-              <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=900&q=80"
+              <img src="/images/restaurant/gallery/DSCF6050.JPG"
                 alt="Nhà hàng Trosie" className="w-full h-[400px] object-cover" />
             </div>
             <div>
@@ -69,6 +69,55 @@ export default function Restaurant() {
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Restaurant Gallery */}
+      <section className="py-16 bg-cream">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8">
+          <div className="text-center mb-10">
+            <span className="section-subtitle">Hình Ảnh</span>
+            <h2 className="section-title">Không Gian Nhà Hàng</h2>
+            <div className="w-12 h-0.5 bg-gold mx-auto mt-4" />
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            {[
+              '/images/restaurant/gallery/DSCF6032.JPG',
+              '/images/restaurant/gallery/DSCF6071.JPG',
+              '/images/restaurant/gallery/DSCF6110.JPG',
+              '/images/restaurant/gallery/DSCF6118.JPG',
+              '/images/restaurant/gallery/z6673899630984_c763c4ec25e8e58d87862f63c655c227.jpg',
+              '/images/restaurant/gallery/z6673900656558_442bc53a2dce0291218a17a015b0da7c.jpg',
+              '/images/restaurant/gallery/z6673900664660_316c74963db9f852fa72b535dfc7f026.jpg',
+              '/images/restaurant/gallery/z6673900671807_2ce6ba3aa268d0cd480219e518c85c3c.jpg',
+              '/images/restaurant/gallery/z6673900678393_00264a90c032916761524285041721a2.jpg',
+            ].map((img, i) => (
+              <div key={i} className="img-zoom aspect-[4/3] overflow-hidden">
+                <img src={img} alt={`Nhà hàng ${i + 1}`} className="w-full h-full object-cover" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Menu Images */}
+      <section className="py-16 bg-white">
+        <div className="max-w-5xl mx-auto px-4 lg:px-8">
+          <div className="text-center mb-10">
+            <span className="section-subtitle">Thực Đơn</span>
+            <h2 className="section-title">Menu Nhà Hàng & Cà Phê</h2>
+            <div className="w-12 h-0.5 bg-gold mx-auto mt-4" />
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {['1','2','3','4','5','6','7','8','9','10','11','12','13'].map(n => (
+              <div key={n} className="img-zoom overflow-hidden border border-gray-100">
+                <img src={`/images/restaurant/menu/${n}.jpg`} alt={`Menu trang ${n}`} className="w-full h-auto object-contain" />
+              </div>
+            ))}
+            <div className="img-zoom overflow-hidden border border-gray-100">
+              <img src="/images/restaurant/menu/menu-coffee-trosie.jpg" alt="Menu cà phê Trosie" className="w-full h-auto object-contain" />
             </div>
           </div>
         </div>

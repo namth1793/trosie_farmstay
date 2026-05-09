@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import BookingModal from '../components/BookingModal';
 
-const HERO = 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=80';
+const HERO = '/images/home/overview/z6648874072460_a175aad7de2fb64216ed61f1b4b8b9af.jpg';
 
 const OFFERS = [
   {

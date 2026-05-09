@@ -3,25 +3,25 @@ import { Link } from 'react-router-dom';
 
 const PROGRAMS = [
   {
-    icon: '🔬',
-    label: 'Trải Nghiệm STEM',
-    desc: 'Chương trình giáo dục thực nghiệm gắn với thiên nhiên – khoa học, công nghệ, kỹ thuật và toán học qua hoạt động ngoài trời.',
-    target: 'Học sinh, giáo viên',
-    img: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=80',
-  },
-  {
-    icon: '🌳',
-    label: 'Hoạt Động Ngoài Trời',
-    desc: 'Khám phá thiên nhiên, leo núi nhẹ, cắm trại, trò chơi tập thể giữa rừng núi Khe Sanh.',
+    icon: '⛺',
+    label: 'Cắm Trại',
+    desc: 'Ngủ giữa thiên nhiên, đốt lửa trại, ngắm sao trời – trải nghiệm cắm trại an toàn và đáng nhớ giữa rừng núi Khe Sanh.',
     target: 'Mọi lứa tuổi',
-    img: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600&q=80',
+    img: '/images/activities/camping/DSCF8260.JPG',
   },
   {
-    icon: '🤝',
-    label: 'Team Building',
-    desc: 'Chương trình gắn kết doanh nghiệp kết hợp thiên nhiên – xây dựng tinh thần đội nhóm qua các thử thách ngoài trời sáng tạo.',
-    target: 'Doanh nghiệp, tổ chức',
-    img: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=80',
+    icon: '🎨',
+    label: 'Vẽ Chai Lọ',
+    desc: 'Workshop sáng tạo – tự tay vẽ và trang trí chai lọ thủy tinh theo phong cách riêng. Lưu giữ kỷ niệm Trosie qua một tác phẩm thủ công độc đáo.',
+    target: 'Gia đình, cặp đôi, nhóm bạn',
+    img: '/images/activities/ve-chai-lo/DSCF1070.JPG',
+  },
+  {
+    icon: '🌸',
+    label: 'Ép Hoa Khô',
+    desc: 'Nghệ thuật ép hoa khô – trải nghiệm thủ công tỉ mỉ, mang hương vị mộc mạc của thiên nhiên vào từng tác phẩm.',
+    target: 'Gia đình, học sinh',
+    img: '/images/activities/ep-hoa-kho/DSCF0062.JPG',
   },
 ];
 
@@ -36,7 +36,7 @@ export default function Activities() {
     <div>
       <div className="page-hero" style={{ height: '400px' }}>
         <div className="page-hero-bg"
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1920&q=80)' }} />
+          style={{ backgroundImage: 'url(/images/activities/camping/DSCF8273.JPG)' }} />
         <div className="page-hero-overlay" />
         <div className="relative z-10 text-center">
           <span className="section-subtitle">Trosie Garden</span>
@@ -85,6 +85,63 @@ export default function Activities() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Activity Detail Galleries */}
+      <section className="py-20 bg-cream">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8 space-y-20">
+
+          {/* Vẽ chai lọ */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <span className="section-subtitle">Thủ Công Sáng Tạo</span>
+              <h2 className="section-title mb-4">Vẽ Chai Lọ<br /><em>Lưu Giữ Kỷ Niệm</em></h2>
+              <div className="w-12 h-0.5 bg-gold mb-6" />
+              <p className="text-gray-600 leading-relaxed mb-4">
+                Workshop vẽ và trang trí chai lọ thủy tinh – nơi bạn có thể thỏa sức sáng tạo và tạo ra một tác phẩm thủ công mang dấu ấn cá nhân để mang về làm kỷ niệm.
+              </p>
+              <p className="text-gray-600 leading-relaxed">Phù hợp cho gia đình, cặp đôi và nhóm bạn muốn có một hoạt động ý nghĩa khác lạ.</p>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                '/images/activities/ve-chai-lo/DSCF1072.JPG',
+                '/images/activities/ve-chai-lo/DSCF1074.JPG',
+                '/images/activities/ve-chai-lo/DSCF1080.JPG',
+                '/images/activities/ve-chai-lo/DSCF1084.JPG',
+              ].map((img, i) => (
+                <div key={i} className="img-zoom aspect-square overflow-hidden">
+                  <img src={img} alt={`Vẽ chai lọ ${i + 1}`} className="w-full h-full object-cover" />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Ép hoa khô */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="grid grid-cols-2 gap-3 order-2 lg:order-1">
+              {[
+                '/images/activities/ep-hoa-kho/DSCF0081.JPG',
+                '/images/activities/ep-hoa-kho/DSCF0082.JPG',
+                '/images/activities/ep-hoa-kho/DSCF0089.JPG',
+                '/images/activities/ep-hoa-kho/DSCF0094.JPG',
+              ].map((img, i) => (
+                <div key={i} className="img-zoom aspect-square overflow-hidden">
+                  <img src={img} alt={`Ép hoa khô ${i + 1}`} className="w-full h-full object-cover" />
+                </div>
+              ))}
+            </div>
+            <div className="order-1 lg:order-2">
+              <span className="section-subtitle">Nghệ Thuật Thiên Nhiên</span>
+              <h2 className="section-title mb-4">Ép Hoa Khô<br /><em>Từ Vườn Đến Tác Phẩm</em></h2>
+              <div className="w-12 h-0.5 bg-gold mb-6" />
+              <p className="text-gray-600 leading-relaxed mb-4">
+                Trải nghiệm nghệ thuật ép hoa khô – tỉ mỉ, nhẹ nhàng và đầy sáng tạo. Mỗi tác phẩm là một khoảnh khắc thiên nhiên được lưu giữ mãi mãi.
+              </p>
+              <p className="text-gray-600 leading-relaxed">Đặc biệt phù hợp cho gia đình có trẻ em và những ai yêu thích nghề thủ công.</p>
+            </div>
+          </div>
+
         </div>
       </section>
 

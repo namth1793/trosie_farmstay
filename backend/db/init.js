@@ -228,7 +228,7 @@ function seedProducts(db) {
     'Phù hợp để pha phin truyền thống hoặc pour-over (V60), thích hợp uống đen hoặc kèm sữa đá.',
     'Natural', 'Medium',
     JSON.stringify(['Phin', 'Pour-over', 'Arabica 30%', 'Robusta 70%']),
-    'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&q=80', null
+    '/images/coffee/products/bot-blend/DSCF8774.jpg', null
   );
 
   ins.run(
@@ -238,7 +238,7 @@ function seedProducts(db) {
     'Xay mịn để pha phin truyền thống. Xay vừa để pha máy Espresso hoặc pour-over (V60). Phù hợp uống đen nguyên chất hoặc kèm sữa đá.',
     'Natural', 'Medium',
     JSON.stringify(['Phin', 'Espresso', 'Pour-over', 'Arabica 30%', 'Robusta 70%']),
-    'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&q=80', null
+    '/images/coffee/products/hat-blend/DSCF8724.jpg', null
   );
 
   ins.run(
@@ -248,7 +248,7 @@ function seedProducts(db) {
     'Pour-over (V60, Kalita), Cold brew, Drip coffee, Aeropress.',
     'Natural', 'Light',
     JSON.stringify(['Pour-over', 'Cold brew', 'Top 1 VN 2025', '100% Arabica']),
-    'https://images.unsplash.com/photo-1611854779393-1b2da9d400fe?w=600&q=80', 'Top 1 VN 2025'
+    '/images/coffee/products/arabica/hat-arabica-natural.jpg', 'Top 1 VN 2025'
   );
 
   ins.run(
@@ -258,7 +258,7 @@ function seedProducts(db) {
     'Phin truyền thống, Pour-over (V60, Kalita), Drip coffee, Espresso máy.',
     'Honey', 'Medium',
     JSON.stringify(['Phin', 'Pour-over', 'Espresso', 'Top 3 VN 2022-2024']),
-    'https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=600&q=80', 'Top 3 VN 2022-2024'
+    '/images/coffee/products/arabica/hat-arabica-honey.jpg', 'Top 3 VN 2022-2024'
   );
 
   ins.run(
@@ -268,7 +268,7 @@ function seedProducts(db) {
     'Phin truyền thống, Pour-over (V60), Cold brew, Drip coffee.',
     'Natural', 'Medium',
     JSON.stringify(['Phin', 'Pour-over', 'Cold brew', 'Specialty', '100% Liberica']),
-    'https://images.unsplash.com/photo-1501492673258-2bc9e83bf38d?w=600&q=80', 'Specialty'
+    '/images/coffee/products/arabica/hat-liberica-top1.jpg', 'Specialty'
   );
 
   ins.run(
@@ -278,7 +278,7 @@ function seedProducts(db) {
     '1. Cho 1 túi lọc vào cốc.\n2. Rót khoảng 150ml nước nóng dưới 92°C.\n3. Nhúng túi 3–4 lần để chiết xuất hương vị.\n4. Thưởng thức nóng hoặc thêm đá tùy khẩu vị.',
     'Natural', 'Medium',
     JSON.stringify(['Drip bag', 'Tiện lợi', '100% Arabica', 'Văn phòng']),
-    'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80', null
+    '/images/coffee/products/tui-nhung/DSCF0485.JPG', null
   );
 
   ins.run(
@@ -288,7 +288,7 @@ function seedProducts(db) {
     '1. Cho túi lọc vào cốc.\n2. Rót 150ml nước nóng dưới 92°C.\n3. Nhúng túi 3–4 lần.\n4. Thưởng thức nóng hoặc thêm đá.',
     'Natural', 'Medium',
     JSON.stringify(['Drip bag', 'Tiện lợi', 'Arabica + Robusta']),
-    'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80', null
+    '/images/coffee/products/tui-nhung/DSCF0489.JPG', null
   );
 
   ins.run(
@@ -298,6 +298,6 @@ function seedProducts(db) {
     'Trà nóng: Cho 1 túi lọc vào cốc, rót 200–250ml nước nóng, ngâm 5 phút.\nTrà lạnh: Cho túi vào bình thủy tinh, châm 100ml nước nóng, thêm 300ml nước nguội, ngăn mát 24h.',
     'Hữu cơ', null,
     JSON.stringify(['Herbal', 'Hữu cơ', 'Thư giãn', 'Không caffeine']),
-    'https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=600&q=80', null
+    '/images/coffee/products/tra-vo-ca-phe/DSCF0918.JPG', null
   );
 }

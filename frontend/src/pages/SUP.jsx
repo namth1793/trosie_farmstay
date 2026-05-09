@@ -13,7 +13,7 @@ export default function SUP() {
     <div>
       <div className="page-hero" style={{ height: '500px' }}>
         <div className="page-hero-bg"
-          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1503516459261-40c66117780a?w=1920&q=80)' }} />
+          style={{ backgroundImage: 'url(/images/activities/sup/z6675583185740_e3d20bed681974dca792a6368981c4f7.jpg)' }} />
         <div className="page-hero-overlay" />
         <div className="relative z-10 text-center">
           <span className="section-subtitle">Trosie Garden</span>
@@ -42,7 +42,7 @@ export default function SUP() {
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div className="img-zoom">
-              <img src="https://images.unsplash.com/photo-1558618047-3c8b8e4ddf9c?w=900&q=80"
+              <img src="/images/activities/sup/z6675583237362_8754e49f33c4e2b005725e213d23f920.jpg"
                 alt="Chèo SUP Trosie" className="w-full h-[450px] object-cover" />
             </div>
             <div>
@@ -62,6 +62,34 @@ export default function SUP() {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SUP Gallery */}
+      <section className="py-16 bg-cream">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8">
+          <div className="text-center mb-10">
+            <span className="section-subtitle">Hình Ảnh</span>
+            <h2 className="section-title">Khoảnh Khắc Chèo SUP</h2>
+            <div className="w-12 h-0.5 bg-gold mx-auto mt-4" />
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            {[
+              '/images/activities/sup/z6675583272946_be4e0cfe0ebcacaa80e37de6e51da87b.jpg',
+              '/images/activities/sup/z6675583273246_7da2f8582a549811a35bd148f87b8880.jpg',
+              '/images/activities/sup/z6675583293269_4bcfe18b8fa8d2876ec26f44d26a4b6c.jpg',
+              '/images/activities/sup/z6675583306642_fade33bfc1609207f474864e272b44ca.jpg',
+              '/images/activities/sup/z6675583316783_9cb43a3c25bf88742771cbf155f63abe.jpg',
+              '/images/activities/sup/z6675583431533_983fc08b1c5221b43be556341a299651.jpg',
+              '/images/activities/sup/z6675583442103_6fef89e2c29fed23ee12e7de4c6e27de.jpg',
+              '/images/activities/sup/z6675583496788_f8deabb3973825e914f24916adeffa0a.jpg',
+              '/images/activities/sup/z6675583507756_8375ad5886b8e9ab07cc981278424953.jpg',
+            ].map((img, i) => (
+              <div key={i} className="img-zoom aspect-[4/3] overflow-hidden">
+                <img src={img} alt={`Chèo SUP ${i + 1}`} className="w-full h-full object-cover" />
+              </div>
+            ))}
           </div>
         </div>
       </section>
