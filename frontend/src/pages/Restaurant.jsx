@@ -21,7 +21,7 @@ export default function Restaurant() {
       </div>
 
       {/* Intro */}
-      <section className="py-16 bg-cream">
+      <section className="py-10 md:py-16 bg-cream">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <span className="section-subtitle">{t('restaurant.introSub')}</span>
           <h2 className="section-title mb-4">{t('restaurant.introTitle')}<br /><em>{t('restaurant.introTitleEm')}</em></h2>
@@ -31,11 +31,11 @@ export default function Restaurant() {
       </section>
 
       {/* Menu highlights */}
-      <section className="py-20 bg-white">
+      <section className="py-12 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mb-8 md:mb-16">
             {Array.isArray(highlights) && highlights.map((m, i) => (
-              <div key={i} className="bg-cream p-8 text-center">
+              <div key={i} className="bg-cream p-5 md:p-8 text-center">
                 <div className="text-4xl mb-4">{RESTAURANT_ICONS[i]}</div>
                 <h3 className="font-serif text-xl text-forest-900 mb-3">{m.label}</h3>
                 <p className="text-sm text-gray-600 leading-relaxed">{m.desc}</p>
@@ -43,10 +43,10 @@ export default function Restaurant() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="img-zoom">
               <img src="/images/restaurant/gallery/DSCF6050.JPG"
-                alt="Nhà hàng Trosie" className="w-full h-[400px] object-cover" />
+                alt="Nhà hàng Trosie" className="w-full h-52 sm:h-64 md:h-[400px] object-cover" />
             </div>
             <div>
               <span className="section-subtitle">{t('restaurant.spaceSub')}</span>
@@ -69,7 +69,7 @@ export default function Restaurant() {
       </section>
 
       {/* Restaurant Gallery */}
-      <section className="py-16 bg-cream">
+      <section className="py-10 md:py-16 bg-cream">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
           <div className="text-center mb-10">
             <span className="section-subtitle">{t('restaurant.gallerySub')}</span>

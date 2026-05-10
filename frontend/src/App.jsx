@@ -10,6 +10,8 @@ import Coffee from './pages/Coffee';
 import CoffeeShop from './pages/CoffeeShop';
 import ProductDetail from './pages/ProductDetail';
 import LuuTru from './pages/LuuTru';
+import Homestay from './pages/Homestay';
+import Camping from './pages/Camping';
 import Restaurant from './pages/Restaurant';
 import SUP from './pages/SUP';
 import RoseGarden from './pages/RoseGarden';
@@ -31,6 +33,8 @@ export default function App() {
         <Route path="/ca-phe/shop" element={<CoffeeShop />} />
         <Route path="/ca-phe/shop/:slug" element={<ProductDetail />} />
         <Route path="/luu-tru" element={<LuuTru />} />
+        <Route path="/luu-tru/homestay" element={<Homestay />} />
+        <Route path="/luu-tru/camping" element={<Camping />} />
         <Route path="/nha-hang" element={<Restaurant />} />
         <Route path="/cheo-sup" element={<SUP />} />
         <Route path="/vuon-hoa-hong" element={<RoseGarden />} />

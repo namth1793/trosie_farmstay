@@ -36,9 +36,9 @@ export default function RoseGarden() {
       </div>
 
       {/* Intro */}
-      <section className="py-20 bg-cream">
+      <section className="py-12 md:py-20 bg-cream">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
             <div>
               <span className="section-subtitle">{t('roseGarden.introSub')}</span>
               <h2 className="section-title mb-4">{t('roseGarden.introTitle')}<br /><em>{t('roseGarden.introTitleEm')}</em></h2>
@@ -59,7 +59,7 @@ export default function RoseGarden() {
             </div>
             <div className="img-zoom">
               <img src="/images/activities/rose-garden/z6673899493481_67e06076e4a4426cac6f15d765557341.jpg"
-                alt="Rose Garden Trosie" className="w-full h-[500px] object-cover" />
+                alt="Rose Garden Trosie" className="w-full h-56 sm:h-72 md:h-[500px] object-cover" />
             </div>
           </div>
         </div>

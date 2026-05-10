@@ -42,9 +42,9 @@ export default function Coffee() {
       </section>
 
       {/* About */}
-      <section id="gioi-thieu" className="py-20 bg-cream">
+      <section id="gioi-thieu" className="py-12 md:py-20 bg-cream">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
             <div>
               <span className="section-subtitle">{t('coffee.aboutSub')}</span>
               <h2 className="section-title mb-4">{t('coffee.aboutTitle')}<br /><em>{t('coffee.aboutTitleEm')}</em></h2>
@@ -55,14 +55,14 @@ export default function Coffee() {
             </div>
             <div className="img-zoom">
               <img src="/images/coffee/cafe-area/z6673902262574_ba371fdf56beb4a954af29a5ed722b0b.jpg"
-                alt="Trosie Coffee" className="w-full h-[450px] object-cover" />
+                alt="Trosie Coffee" className="w-full h-56 sm:h-72 md:h-[450px] object-cover" />
             </div>
           </div>
         </div>
       </section>
 
       {/* Process */}
-      <section className="py-20 bg-forest-900">
+      <section className="py-12 md:py-20 bg-forest-900">
         <div className="max-w-5xl mx-auto px-4 lg:px-8">
           <div className="text-center mb-14">
             <span className="section-subtitle">{t('coffee.processSub')}</span>
@@ -113,8 +113,35 @@ export default function Coffee() {
         </section>
       )}
 
+      {/* Cafe Space */}
+      <section className="py-12 md:py-20 bg-cream">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                '/images/coffee/cafe-area/DSCF0240.JPG',
+                '/images/coffee/cafe-area/z6673899525879_7c195ab7b7964eb8c66ccbd97abe22ce.jpg',
+                '/images/coffee/cafe-area/z6673899540727_8ff55c5b2c40ed3684531d0d242e4f08.jpg',
+                '/images/coffee/cafe-area/z6673900740557_666f02250eb025f86fee55920caf494e.jpg',
+              ].map((img, i) => (
+                <div key={i} className="img-zoom aspect-square overflow-hidden">
+                  <img src={img} alt={`Cafe space ${i + 1}`} className="w-full h-full object-cover" />
+                </div>
+              ))}
+            </div>
+            <div>
+              <span className="section-subtitle">{t('coffee.spaceSub')}</span>
+              <h2 className="section-title mb-4">{t('coffee.spaceTitle')}<br /><em>{t('coffee.spaceTitleEm')}</em></h2>
+              <div className="w-12 h-0.5 bg-gold mb-6" />
+              <p className="text-gray-600 leading-relaxed mb-4">{t('coffee.spaceDesc1')}</p>
+              <p className="text-gray-600 leading-relaxed">{t('coffee.spaceDesc2')}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Cafe Area Gallery */}
-      <section className="py-16 bg-cream">
+      <section className="py-12 md:py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
           <div className="text-center mb-10">
             <span className="section-subtitle">{t('coffee.gallerySub')}</span>
@@ -123,19 +150,34 @@ export default function Coffee() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
             {[
-              '/images/coffee/cafe-area/DSCF0240.JPG',
               '/images/coffee/cafe-area/z6649009570055_d50c460157a845e591f168629f5912db.jpg',
               '/images/coffee/cafe-area/z6649009578222_9ac387fc5ffd6d046c5bef3b87116579.jpg',
-              '/images/coffee/cafe-area/z6673899525879_7c195ab7b7964eb8c66ccbd97abe22ce.jpg',
-              '/images/coffee/cafe-area/z6673899540727_8ff55c5b2c40ed3684531d0d242e4f08.jpg',
               '/images/coffee/cafe-area/z6673900727809_04919ec614e1c769fbc8ddf213d5d369.jpg',
-              '/images/coffee/cafe-area/z6673900740557_666f02250eb025f86fee55920caf494e.jpg',
               '/images/coffee/cafe-area/z6673902293422_21ed52ab7c17728c1ac9b9771cf7ced7.jpg',
+              '/images/coffee/cafe-area/z6673902262574_ba371fdf56beb4a954af29a5ed722b0b.jpg',
+              '/images/coffee/cafe-area/DSCF0163.JPG',
+              '/images/coffee/cafe-area/DSCF0240.JPG',
+              '/images/coffee/cafe-area/z6673900740557_666f02250eb025f86fee55920caf494e.jpg',
             ].map((img, i) => (
               <div key={i} className="img-zoom aspect-square overflow-hidden">
                 <img src={img} alt={`Cafe area ${i + 1}`} className="w-full h-full object-cover" />
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Coffee Menu */}
+      <section className="py-12 md:py-16 bg-cream">
+        <div className="max-w-3xl mx-auto px-4 lg:px-8">
+          <div className="text-center mb-8">
+            <span className="section-subtitle">{t('coffee.menuSub')}</span>
+            <h2 className="section-title">{t('coffee.menuTitle')}</h2>
+            <div className="w-12 h-0.5 bg-gold mx-auto mt-4" />
+          </div>
+          <div className="img-zoom overflow-hidden border border-gray-200">
+            <img src="/images/restaurant/menu/menu-coffee-trosie.jpg"
+              alt="Coffee Menu" className="w-full h-auto object-contain" />
           </div>
         </div>
       </section>

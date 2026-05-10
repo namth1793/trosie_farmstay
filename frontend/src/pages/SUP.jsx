@@ -21,6 +21,7 @@ export default function SUP() {
   const { t } = useLang();
   const features = t('sup.features');
   const forItems = t('sup.forItems');
+  const priceIncludes = t('sup.priceIncludes');
 
   return (
     <div>
@@ -36,7 +37,7 @@ export default function SUP() {
       </div>
 
       {/* Intro */}
-      <section className="py-16 bg-cream">
+      <section className="py-10 md:py-16 bg-cream">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <span className="section-subtitle">{t('sup.introSub')}</span>
           <h2 className="section-title mb-4">{t('sup.introTitle')}<br /><em>{t('sup.introTitleEm')}</em></h2>
@@ -46,12 +47,12 @@ export default function SUP() {
       </section>
 
       {/* Features */}
-      <section className="py-20 bg-white">
+      <section className="py-12 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="img-zoom">
               <img src="/images/activities/sup/z6675583237362_8754e49f33c4e2b005725e213d23f920.jpg"
-                alt="SUP Trosie" className="w-full h-[450px] object-cover" />
+                alt="SUP Trosie" className="w-full h-56 sm:h-72 md:h-[450px] object-cover" />
             </div>
             <div>
               <span className="section-subtitle">{t('sup.featuresSub')}</span>
@@ -74,8 +75,39 @@ export default function SUP() {
         </div>
       </section>
 
+      {/* Pricing */}
+      <section className="py-10 md:py-16 bg-cream">
+        <div className="max-w-4xl mx-auto px-4 lg:px-8">
+          <div className="text-center mb-10">
+            <span className="section-subtitle">{t('sup.priceSub')}</span>
+            <h2 className="section-title">{t('sup.priceTitle')}</h2>
+            <div className="w-12 h-0.5 bg-gold mx-auto mt-4" />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="bg-forest-900 p-8 text-center">
+              <div className="font-serif text-5xl text-gold mb-2">{t('sup.price')}</div>
+              <div className="text-gray-300 text-sm mb-1">{t('sup.priceUnit')}</div>
+              <div className="text-gold/70 text-xs tracking-widest uppercase mt-3">{t('sup.priceNote')}</div>
+            </div>
+            <div>
+              <h4 className="text-forest-900 text-xs font-bold tracking-widest uppercase mb-4">Bao gồm:</h4>
+              <ul className="space-y-3">
+                {Array.isArray(priceIncludes) && priceIncludes.map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-sm text-gray-600">
+                    <svg className="w-4 h-4 text-gold shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* SUP Gallery */}
-      <section className="py-16 bg-cream">
+      <section className="py-10 md:py-16 bg-cream">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
           <div className="text-center mb-10">
             <span className="section-subtitle">{t('sup.gallerySub')}</span>
@@ -93,7 +125,7 @@ export default function SUP() {
       </section>
 
       {/* For who */}
-      <section className="py-16 bg-forest-900">
+      <section className="py-10 md:py-16 bg-forest-900">
         <div className="max-w-5xl mx-auto px-4 lg:px-8">
           <div className="text-center mb-10">
             <span className="section-subtitle">{t('sup.forSub')}</span>
@@ -112,7 +144,7 @@ export default function SUP() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-cream text-center">
+      <section className="py-10 md:py-16 bg-cream text-center">
         <div className="max-w-xl mx-auto px-4">
           <h2 className="section-title mb-4">{t('sup.ctaTitle')}</h2>
           <p className="text-gray-600 text-sm mb-8">{t('sup.ctaDesc')}</p>

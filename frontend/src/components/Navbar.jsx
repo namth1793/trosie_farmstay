@@ -6,7 +6,7 @@ export default function Navbar() {
   const { lang, toggleLang, t } = useLang();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileCafe, setMobileCafe] = useState(false);
+  const [mobileExpanded, setMobileExpanded] = useState({});
   const location = useLocation();
   const isHome = location.pathname === '/';
 
@@ -19,7 +19,13 @@ export default function Navbar() {
         { label: t('nav.coffeeShop'), href: '/ca-phe/shop' },
       ],
     },
-    { label: t('nav.stay'), href: '/luu-tru' },
+    {
+      label: t('nav.stay'), href: '/luu-tru',
+      children: [
+        { label: t('nav.homestay'), href: '/luu-tru/homestay' },
+        { label: t('nav.camping'), href: '/luu-tru/camping' },
+      ],
+    },
     { label: t('nav.restaurant'), href: '/nha-hang' },
     { label: t('nav.sup'), href: '/cheo-sup' },
     { label: t('nav.roseGarden'), href: '/vuon-hoa-hong' },
@@ -34,7 +40,7 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', fn);
   }, []);
 
-  useEffect(() => { setMobileOpen(false); setMobileCafe(false); }, [location]);
+  useEffect(() => { setMobileOpen(false); setMobileExpanded({}); }, [location]);
 
   const solid = scrolled || !isHome;
   const tc = solid ? 'text-forest-900 hover:text-gold' : 'text-white/90 hover:text-gold';
@@ -52,8 +58,8 @@ export default function Navbar() {
               <circle cx="20" cy="16" r="3" opacity=".4"/>
             </svg>
             <div>
-              <div className="text-sm font-bold tracking-widest uppercase leading-none">Trosie</div>
-              <div className="text-[10px] tracking-widest opacity-70 font-sans">GARDEN KHE SANH</div>
+              <div className="text-sm font-bold tracking-widest uppercase leading-none">TROSIE GARDEN</div>
+              <div className="text-[10px] tracking-widest opacity-70 font-sans">KHE SANH</div>
             </div>
           </Link>
 
@@ -127,19 +133,19 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="xl:hidden bg-white shadow-xl border-t border-gray-100 max-h-[80vh] overflow-y-auto">
-          {NAV.map(item => (
+        <div className="xl:hidden bg-white shadow-xl border-t border-gray-100 max-h-[85vh] overflow-y-auto overscroll-contain">
+          {NAV.map((item, idx) => (
             <div key={item.label}>
               {item.children ? (
                 <>
-                  <button onClick={() => setMobileCafe(!mobileCafe)}
+                  <button onClick={() => setMobileExpanded(p => ({ ...p, [idx]: !p[idx] }))}
                     className="w-full flex items-center justify-between px-6 py-4 text-[11px] font-semibold tracking-widest uppercase text-forest-800 hover:bg-forest-50 border-b border-gray-100">
                     {item.label}
-                    <svg className={`w-3 h-3 transition-transform ${mobileCafe ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className={`w-3 h-3 transition-transform ${mobileExpanded[idx] ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </button>
-                  {mobileCafe && item.children.map(c => (
+                  {mobileExpanded[idx] && item.children.map(c => (
                     <Link key={c.href} to={c.href}
                       className="block pl-10 pr-6 py-3 text-[11px] tracking-widest uppercase text-gray-600 hover:bg-forest-50 hover:text-gold border-b border-gray-50">
                       — {c.label}

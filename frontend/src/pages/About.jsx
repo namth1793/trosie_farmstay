@@ -21,12 +21,12 @@ export default function About() {
       </div>
 
       {/* Story */}
-      <section className="py-20 bg-cream">
+      <section className="py-12 md:py-20 bg-cream">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
             <div className="img-zoom">
               <img src="/images/home/overview/z6673900790553_ed9da3d68d18ead3a8dab0e43a71a9c8.jpg"
-                alt="Trosie Garden" className="w-full h-[500px] object-cover" />
+                alt="Trosie Garden" className="w-full h-56 sm:h-72 md:h-[500px] object-cover" />
             </div>
             <div>
               <span className="section-subtitle">{t('about.storySub')}</span>
@@ -44,7 +44,7 @@ export default function About() {
       </section>
 
       {/* Mission */}
-      <section className="py-20 bg-forest-900 text-center">
+      <section className="py-12 md:py-20 bg-forest-900 text-center">
         <div className="max-w-3xl mx-auto px-4">
           <span className="section-subtitle">{t('about.missionSub')}</span>
           <h2 className="font-serif text-3xl md:text-4xl text-white mb-6">
@@ -55,7 +55,7 @@ export default function About() {
       </section>
 
       {/* Values */}
-      <section className="py-20 bg-white">
+      <section className="py-12 md:py-20 bg-white">
         <div className="max-w-5xl mx-auto px-4 lg:px-8">
           <div className="text-center mb-12">
             <span className="section-subtitle">{t('about.valuesSub')}</span>
@@ -75,9 +75,9 @@ export default function About() {
       </section>
 
       {/* Journey */}
-      <section className="py-20 bg-cream">
+      <section className="py-12 md:py-20 bg-cream">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
             <div>
               <span className="section-subtitle">{t('about.journeySub')}</span>
               <h2 className="section-title mb-4">{t('about.journeyTitle')}<br /><em>{t('about.journeyTitleEm')}</em></h2>
@@ -98,7 +98,7 @@ export default function About() {
             </div>
             <div className="img-zoom">
               <img src="/images/coffee/cafe-area/DSCF0211.JPG"
-                alt="Trosie Coffee Farm" className="w-full h-[500px] object-cover" />
+                alt="Trosie Coffee Farm" className="w-full h-56 sm:h-72 md:h-[500px] object-cover" />
             </div>
           </div>
         </div>

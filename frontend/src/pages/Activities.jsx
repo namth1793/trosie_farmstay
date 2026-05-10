@@ -23,7 +23,7 @@ export default function Activities() {
       </div>
 
       {/* Intro */}
-      <section className="py-16 bg-cream">
+      <section className="py-10 md:py-16 bg-cream">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <span className="section-subtitle">{t('activities.introSub')}</span>
           <h2 className="section-title mb-4">{t('activities.introTitle')}<br /><em>{t('activities.introTitleEm')}</em></h2>
@@ -33,9 +33,9 @@ export default function Activities() {
       </section>
 
       {/* Programs */}
-      <section className="py-20 bg-white">
+      <section className="py-12 md:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="text-center mb-14">
+          <div className="text-center mb-8 md:mb-14">
             <span className="section-subtitle">{t('activities.programsSub')}</span>
             <h2 className="section-title">{t('activities.programsTitle')}</h2>
             <div className="w-12 h-0.5 bg-gold mx-auto mt-4" />
@@ -68,17 +68,25 @@ export default function Activities() {
       </section>
 
       {/* Activity Detail Galleries */}
-      <section className="py-20 bg-cream">
-        <div className="max-w-7xl mx-auto px-4 lg:px-8 space-y-20">
+      <section className="py-12 md:py-20 bg-cream">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8 space-y-12 md:space-y-20">
 
           {/* Vẽ chai lọ */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
               <span className="section-subtitle">{t('activities.bottleSub')}</span>
               <h2 className="section-title mb-4">{t('activities.bottleTitle')}<br /><em>{t('activities.bottleTitleEm')}</em></h2>
               <div className="w-12 h-0.5 bg-gold mb-6" />
               <p className="text-gray-600 leading-relaxed mb-4">{t('activities.bottleDesc1')}</p>
-              <p className="text-gray-600 leading-relaxed">{t('activities.bottleDesc2')}</p>
+              <p className="text-gray-600 leading-relaxed mb-5">{t('activities.bottleDesc2')}</p>
+              <div className="inline-flex flex-col sm:flex-row gap-3">
+                <div className="bg-gold text-white text-xs font-bold tracking-wide px-4 py-2 uppercase">
+                  {t('activities.bottlePrice')}
+                </div>
+                <div className="bg-forest-100 text-forest-800 text-xs px-4 py-2">
+                  {t('activities.bottlePriceNote')}
+                </div>
+              </div>
             </div>
             <div className="grid grid-cols-2 gap-3">
               {[
@@ -95,7 +103,7 @@ export default function Activities() {
           </div>
 
           {/* Ép hoa khô */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="grid grid-cols-2 gap-3 order-2 lg:order-1">
               {[
                 '/images/activities/ep-hoa-kho/DSCF0081.JPG',
@@ -113,7 +121,15 @@ export default function Activities() {
               <h2 className="section-title mb-4">{t('activities.flowerTitle')}<br /><em>{t('activities.flowerTitleEm')}</em></h2>
               <div className="w-12 h-0.5 bg-gold mb-6" />
               <p className="text-gray-600 leading-relaxed mb-4">{t('activities.flowerDesc1')}</p>
-              <p className="text-gray-600 leading-relaxed">{t('activities.flowerDesc2')}</p>
+              <p className="text-gray-600 leading-relaxed mb-5">{t('activities.flowerDesc2')}</p>
+              <div className="inline-flex flex-col sm:flex-row gap-3">
+                <div className="bg-gold text-white text-xs font-bold tracking-wide px-4 py-2 uppercase">
+                  {t('activities.flowerPrice')}
+                </div>
+                <div className="bg-forest-100 text-forest-800 text-xs px-4 py-2">
+                  {t('activities.flowerPriceIncludes')}
+                </div>
+              </div>
             </div>
           </div>
 
@@ -121,7 +137,7 @@ export default function Activities() {
       </section>
 
       {/* For who */}
-      <section className="py-16 bg-forest-900">
+      <section className="py-10 md:py-16 bg-forest-900">
         <div className="max-w-5xl mx-auto px-4 lg:px-8">
           <div className="text-center mb-10">
             <span className="section-subtitle">{t('activities.forSub')}</span>
@@ -140,7 +156,7 @@ export default function Activities() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 bg-cream text-center">
+      <section className="py-10 md:py-16 bg-cream text-center">
         <div className="max-w-xl mx-auto px-4">
           <h2 className="section-title mb-4">{t('activities.ctaTitle')}</h2>
           <p className="text-gray-600 text-sm mb-8">{t('activities.ctaDesc')}</p>

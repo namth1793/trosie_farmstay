@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <footer className="bg-forest-900 text-gray-300">
       <div className="max-w-7xl mx-auto px-4 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
 
           {/* Brand */}
           <div>
@@ -20,8 +20,8 @@ export default function Footer() {
                 <path d="M20 4C10.6 4 3 11.6 3 21c0 6 3.1 11.3 7.8 14.4L20 41l9.2-5.6C33.9 32.3 37 27 37 21 37 11.6 29.4 4 20 4zm0 4c2.8 0 5.4 1 7.4 2.6-1-.4-2.2-.6-3.4-.6-4 0-7.2 2.7-7.2 6 0 2.2 1.3 4.1 3.3 5.2L20 23l-.1-1.8C17.9 20 16.8 18.2 16.8 16c0-3.3-3.2-6-7.2-6-.2 0-.3 0-.5.1C10.6 7.1 15 8 20 8z"/>
               </svg>
               <div>
-                <div className="font-bold tracking-widest uppercase text-sm font-serif">Trosie</div>
-                <div className="text-[10px] tracking-widest text-gray-400 font-sans">GARDEN KHE SANH</div>
+                <div className="font-bold tracking-widest uppercase text-sm font-serif">TROSIE GARDEN</div>
+                <div className="text-[10px] tracking-widest text-gray-400 font-sans">KHE SANH</div>
               </div>
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed mb-5">{t('footer.desc')}</p>

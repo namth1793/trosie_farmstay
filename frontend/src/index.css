@@ -10,16 +10,16 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-forest-700 text-white px-7 py-3 text-xs tracking-widest uppercase hover:bg-forest-600 transition-colors duration-300 font-sans font-semibold inline-block;
+    @apply bg-forest-700 text-white px-6 py-3 text-xs tracking-widest uppercase hover:bg-forest-600 transition-colors duration-300 font-sans font-semibold inline-block;
   }
   .btn-outline {
-    @apply border border-forest-700 text-forest-700 px-7 py-3 text-xs tracking-widest uppercase hover:bg-forest-700 hover:text-white transition-colors duration-300 font-sans font-semibold inline-block;
+    @apply border border-forest-700 text-forest-700 px-6 py-3 text-xs tracking-widest uppercase hover:bg-forest-700 hover:text-white transition-colors duration-300 font-sans font-semibold inline-block;
   }
   .btn-gold {
-    @apply bg-gold text-white px-7 py-3 text-xs tracking-widest uppercase hover:bg-gold-dark transition-colors duration-300 font-sans font-semibold inline-block;
+    @apply bg-gold text-white px-6 py-3 text-xs tracking-widest uppercase hover:bg-gold-dark transition-colors duration-300 font-sans font-semibold inline-block;
   }
   .section-title {
-    @apply font-serif text-3xl md:text-4xl text-forest-900 leading-snug;
+    @apply font-serif text-2xl sm:text-3xl md:text-4xl text-forest-900 leading-snug;
   }
   .section-subtitle {
     @apply text-xs uppercase tracking-widest text-gold font-sans font-semibold mb-3 block;
@@ -31,7 +31,8 @@
 
 /* page hero banner */
 .page-hero {
-  @apply relative h-64 md:h-80 flex items-center justify-center text-white overflow-hidden;
+  @apply relative flex items-center justify-center text-white overflow-hidden;
+  height: clamp(200px, 40vw, 400px);
 }
 .page-hero-bg {
   @apply absolute inset-0 bg-cover bg-center;
@@ -39,6 +40,12 @@
 .page-hero-overlay {
   @apply absolute inset-0 bg-forest-900/60;
 }
+
+/* hero carousel swipe hint */
+.hero-carousel { touch-action: pan-y; }
+
+/* ensure touch targets are comfortable */
+button, a { -webkit-tap-highlight-color: transparent; }
 
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: #f1f1f1; }
