@@ -51,11 +51,20 @@ export default function Coffee() {
               <div className="w-12 h-0.5 bg-gold mb-6" />
               <p className="text-gray-600 leading-relaxed mb-4">{t('coffee.aboutDesc1')}</p>
               <p className="text-gray-600 leading-relaxed mb-8">{t('coffee.aboutDesc2')}</p>
-              <Link to="/ca-phe/shop" className="btn-primary">{t('coffee.viewProducts')}</Link>
+              <div className="flex flex-wrap gap-3">
+                <Link to="/ca-phe/shop" className="btn-primary">{t('coffee.viewProducts')}</Link>
+                <Link to="/menu"
+                  className="inline-flex items-center gap-2 bg-forest-800 hover:bg-forest-700 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors">
+                  <svg className="w-4 h-4 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                  </svg>
+                  Xem menu cà phê
+                </Link>
+              </div>
             </div>
             <div className="img-zoom">
               <img src="/images/coffee/cafe-area/z6673902262574_ba371fdf56beb4a954af29a5ed722b0b.jpg"
-                alt="Trosie Coffee" className="w-full h-56 sm:h-72 md:h-[450px] object-cover" />
+                alt="Trosie Coffee" className="w-full h-auto md:h-[450px] md:object-cover" />
             </div>
           </div>
         </div>
@@ -93,7 +102,7 @@ export default function Coffee() {
               {products.map(p => (
                 <Link key={p.id} to={`/ca-phe/shop/${p.slug}`} className="group block">
                   <div className="img-zoom mb-4 relative">
-                    <img src={p.image} alt={p.name} className="w-full h-52 object-cover" />
+                    <img src={p.image} alt={p.name} className="w-full aspect-[4/3] object-cover" />
                     {p.badge && (
                       <span className="absolute top-2 left-2 bg-gold text-white text-[10px] font-bold tracking-wide px-2 py-1 uppercase">
                         {p.badge}
@@ -124,7 +133,7 @@ export default function Coffee() {
                 '/images/coffee/cafe-area/z6673899540727_8ff55c5b2c40ed3684531d0d242e4f08.jpg',
                 '/images/coffee/cafe-area/z6673900740557_666f02250eb025f86fee55920caf494e.jpg',
               ].map((img, i) => (
-                <div key={i} className="img-zoom aspect-square overflow-hidden">
+                <div key={i} className="img-zoom aspect-[4/3] overflow-hidden">
                   <img src={img} alt={`Cafe space ${i + 1}`} className="w-full h-full object-cover" />
                 </div>
               ))}
@@ -159,7 +168,7 @@ export default function Coffee() {
               '/images/coffee/cafe-area/DSCF0240.JPG',
               '/images/coffee/cafe-area/z6673900740557_666f02250eb025f86fee55920caf494e.jpg',
             ].map((img, i) => (
-              <div key={i} className="img-zoom aspect-square overflow-hidden">
+              <div key={i} className="img-zoom aspect-[4/3] overflow-hidden">
                 <img src={img} alt={`Cafe area ${i + 1}`} className="w-full h-full object-cover" />
               </div>
             ))}

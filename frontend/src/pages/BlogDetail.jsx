@@ -82,7 +82,7 @@ export default function BlogDetail() {
               {post.related.map(p => (
                 <Link key={p.id} to={`/tin-tuc/${p.slug}`} className="group block">
                   <div className="img-zoom mb-4">
-                    <img src={p.image} alt={p.title} className="w-full h-44 object-cover" />
+                    <img src={p.image} alt={p.title} className="w-full aspect-[4/3] object-cover" />
                   </div>
                   <span className="text-[11px] font-bold uppercase tracking-wider text-gold block mb-1">{p.category}</span>
                   <h3 className="font-serif text-base text-forest-900 group-hover:text-gold transition-colors line-clamp-2">{p.title}</h3>

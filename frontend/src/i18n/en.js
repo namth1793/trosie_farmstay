@@ -13,6 +13,8 @@ export default {
     activities: 'Activities',
     blog: 'Blog',
     contact: 'Contact',
+    policy: 'Policies',
+    menu: 'Menu',
     bookNow: 'Book Now',
   },
 
@@ -247,11 +249,11 @@ export default {
     introTitleEm: 'In Heritage Style',
     introDesc: 'Five guestrooms at Trosie are designed in a warm, classic style – each with its own name and distinct character. Quiet, scenic, and well-equipped – a place where you truly rest.',
     rooms: [
-      { name: 'Cổ Huế Room', desc: 'Classic Hue-inspired style – warm and timeless. Double bed, garden view.', capacity: '2 guests', price: 'Contact for pricing' },
-      { name: 'Cổ Bạch Room', desc: 'Pure white tones, light and airy. Double bed, natural light throughout.', capacity: '2 guests', price: 'Contact for pricing' },
-      { name: 'Cổ Quế Room', desc: 'Warm cinnamon tones, rustic wood. The perfect space to unwind after a long day.', capacity: '2 guests', price: 'Contact for pricing' },
-      { name: 'Cổ Vân Khôi Room', desc: 'Elegant, understated luxury in harmony with the Khe Sanh landscape.', capacity: '2–3 guests', price: 'Contact for pricing' },
-      { name: 'Cổ Đào Room', desc: 'Romantic peach tones – ideal for couples seeking a truly unique getaway.', capacity: '2 guests', price: 'Contact for pricing' },
+      { name: 'Cổ Huế Room', desc: 'Classic Hue-inspired style – warm and timeless. Double bed, garden view.', capacity: '2 adults · 2 children', price: 'Contact for pricing' },
+      { name: 'Cổ Bạch Room', desc: 'Pure white tones, light and airy. Double bed, natural light throughout.', capacity: '2 adults · 2 children', price: 'Contact for pricing' },
+      { name: 'Cổ Quế Room', desc: 'Warm cinnamon tones, rustic wood. The perfect space to unwind after a long day.', capacity: '2 adults · 2 children', price: 'Contact for pricing' },
+      { name: 'Cổ Vân Khôi Room', desc: 'Elegant, understated luxury in harmony with the Khe Sanh landscape.', capacity: '2 adults · 2 children', price: 'Contact for pricing' },
+      { name: 'Cổ Đào Room', desc: 'Romantic peach tones – ideal for couples seeking a truly unique getaway.', capacity: '2 adults · 2 children', price: 'Contact for pricing' },
     ],
     amenitiesSub: 'Common Areas',
     amenitiesTitle: 'Shared Facilities',
@@ -317,7 +319,7 @@ export default {
     ],
     priceSub: 'Pricing',
     priceTitle: 'SUP Session Price',
-    price: '150,000 VND',
+    price: '200,000 VND',
     priceUnit: '/ board / 2 people',
     priceNote: 'Unlimited session time',
     priceIncludes: ['SUP board', 'Paddle & accessories', 'Life jacket', 'Waterproof phone bag', 'Personal guide & instructor'],
@@ -433,37 +435,15 @@ export default {
   },
 
   footer: {
-    desc: 'No noise, no rush – only nature and serenity. Trosie Garden in Khe Sanh, Quang Tri.',
+    desc: 'Touch nature – slow down a little.\nTrosie Garden Khe Sanh, where birdsong, golden sunsets and close-to-nature experiences become the most memorable moments.',
     quickLinks: 'Quick Links',
     links: [['About', '/gioi-thieu'], ['Coffee', '/ca-phe'], ['Shop', '/ca-phe/shop'], ['Homestay', '/luu-tru/homestay'], ['Camping', '/luu-tru/camping'], ['Restaurant', '/nha-hang'], ['SUP Paddling', '/cheo-sup'], ['Rose Garden', '/vuon-hoa-hong'], ['Activities', '/hoat-dong']],
     contactTitle: 'Contact Information',
     address: 'Km 2, Ho Chi Minh Road\nKhe Sanh Commune, Quang Tri Province',
     hours: 'Open daily\nHotline / Zalo: 0961 393 370',
-    policiesTitle: 'Policies',
     mapLink: 'Map',
     contactLink: 'Contact',
+    policyLink: 'Policies',
     copyright: '© 2025 Trosie Garden Khe Sanh – Trosie Import-Export & Trading Co., Ltd. All rights reserved.',
-    policies: [
-      {
-        title: 'Booking & Reservation Policy',
-        content: '• Book via Hotline or Zalo: 0961 393 370\n• Reservation confirmed upon deposit payment (50% of total)\n• Please book at least 1 day in advance\n• Check-in: 2:00 PM | Check-out: 11:00 AM\n• Tent check-in: 3:00 PM | Tent return: 10:00 AM\n• Provide full guest information (name, number of guests) when booking'
-      },
-      {
-        title: 'Cancellation & Refund Policy',
-        content: '• Cancel 48+ hours in advance: 100% deposit refund\n• Cancel 24+ hours in advance: 50% deposit refund\n• Same-day cancellation or no-show: no refund\n• Bad weather affecting camping: Trosie will notify and offer full refund or reschedule\n• Refunds processed within 3–5 working days via bank transfer'
-      },
-      {
-        title: 'Shipping & Returns Policy',
-        content: '1. Shipping\n• Nationwide delivery via express couriers.\n• Delivery time: 2–5 working days depending on region.\n• Shipping fee shown at checkout, may be free during promotions.\n\n2. Returns\n• Returns accepted within 3 days of receipt if:\n  - Damaged during shipping\n  - Wrong product/type\n  - Manufacturer defect\n• Product must be unopened, with intact labels.'
-      },
-      {
-        title: 'Payment Policy',
-        content: '• COD (cash on delivery)\n• Bank transfer: details provided via Zalo/Email\n• Online payment: ATM, credit card, e-wallet\n• All transactions are secure and legally compliant.'
-      },
-      {
-        title: 'Privacy Policy',
-        content: '• We are fully committed to protecting your personal information.\n• Information is used solely for transactions & customer care.\n• We do not sell, share or exchange information with third parties.\n• You have the right to review, update, or request deletion of your data via Zalo/Email.'
-      },
-    ],
   },
 };

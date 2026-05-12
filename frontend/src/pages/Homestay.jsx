@@ -61,24 +61,48 @@ const COMMON_IMGS = [
 
 function RoomCard({ room, info }) {
   const [activeImg, setActiveImg] = useState(0);
+  const touchStartX = React.useRef(null);
+
+  const prev = () => setActiveImg(i => (i - 1 + room.imgs.length) % room.imgs.length);
+  const next = () => setActiveImg(i => (i + 1) % room.imgs.length);
+
+  const onTouchStart = e => { touchStartX.current = e.touches[0].clientX; };
+  const onTouchEnd = e => {
+    if (touchStartX.current === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    if (Math.abs(dx) > 40) dx < 0 ? next() : prev();
+    touchStartX.current = null;
+  };
+
   return (
     <div className="bg-white group">
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
         <img
           src={room.imgs[activeImg]}
           alt={info.name}
-          className="w-full h-64 sm:h-72 object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-auto sm:h-72 sm:object-cover transition-opacity duration-300"
         />
         {room.imgs.length > 1 && (
-          <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5">
-            {room.imgs.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setActiveImg(i)}
-                className={`w-2 h-2 rounded-full transition-all ${i === activeImg ? 'bg-gold scale-125' : 'bg-white/70'}`}
-              />
-            ))}
-          </div>
+          <>
+            <button onClick={prev}
+              className="absolute left-2 top-1/2 -translate-y-1/2 w-7 h-7 bg-black/40 hover:bg-black/60 text-white rounded-full flex items-center justify-center transition-colors">
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button onClick={next}
+              className="absolute right-2 top-1/2 -translate-y-1/2 w-7 h-7 bg-black/40 hover:bg-black/60 text-white rounded-full flex items-center justify-center transition-colors">
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+            <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5">
+              {room.imgs.map((_, i) => (
+                <button key={i} onClick={() => setActiveImg(i)}
+                  className={`w-2 h-2 rounded-full transition-all ${i === activeImg ? 'bg-gold scale-125' : 'bg-white/70'}`} />
+              ))}
+            </div>
+          </>
         )}
       </div>
       <div className="p-5">

@@ -37,7 +37,7 @@ export default function LuuTru() {
           <div className="group relative overflow-hidden">
             <div className="img-zoom">
               <img src="/images/rooms/homestay/common/682102137_122270991656137494_8915823433484477129_n.jpg"
-                alt="Homestay" className="w-full h-64 sm:h-80 md:h-[420px] object-cover transition-transform duration-500 group-hover:scale-105" />
+                alt="Homestay" className="w-full h-auto md:h-[420px] md:object-cover transition-transform duration-500 group-hover:scale-105" />
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
@@ -67,7 +67,7 @@ export default function LuuTru() {
           <div className="group relative overflow-hidden">
             <div className="img-zoom">
               <img src="/images/activities/camping/DSCF8273.JPG"
-                alt="Camping" className="w-full h-64 sm:h-80 md:h-[420px] object-cover transition-transform duration-500 group-hover:scale-105" />
+                alt="Camping" className="w-full h-auto md:h-[420px] md:object-cover transition-transform duration-500 group-hover:scale-105" />
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">

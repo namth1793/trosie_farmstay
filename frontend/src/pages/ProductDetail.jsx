@@ -50,7 +50,7 @@ export default function ProductDetail() {
             {/* Image */}
             <div>
               <div className="img-zoom">
-                <img src={product.image} alt={product.name} className="w-full h-[500px] object-cover" />
+                <img src={product.image} alt={product.name} className="w-full h-auto sm:h-[500px] sm:object-cover" />
               </div>
               {product.badge && (
                 <div className="mt-4">

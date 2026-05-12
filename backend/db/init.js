@@ -174,7 +174,7 @@ function seedBlog(db) {
     'du-lich-phong-nha-2026',
     'Huong dan toan dien cho chuyen du lich Phong Nha - Ke Bang nam 2026: nhung diem den khong the bo qua, am thuc dac sac va hoat dong hap dan.',
     '<p>Phong Nha - Ke Bang la diem den dau tien phai ke den khi nhac den du lich Quang Binh. Voi he thong hang dong phong phu va da dang, khu vuc nay da duoc UNESCO cong nhan la Di san Thien nhien The gioi.</p><p>Nhung diem den khong the bo qua: Hang Phong Nha, Hang Thien Duong, Hang Son Doong, Hang En, Ozo Park va nhieu dia diem hap dan khac.</p><p>Am thuc dac sac Quang Binh: Banh canh ca loc, chao canh, muc kho nuong, khoai deo va nhieu mon ngon khac.</p>',
-    'https://images.unsplash.com/photo-1559827291-72ebdf9e4783?w=800&q=80',
+    'https://images.unsplash.com/photo-1583417267826-aebc4d1542e1?w=800&q=80',
     'Huong dan', '2026-04-01 08:00:00'
   );
 

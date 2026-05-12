@@ -51,7 +51,7 @@ export default function Blog() {
                 <Link to={`/tin-tuc/${displayed[0].slug}`} className="group mb-12 block">
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-cream">
                     <div className="img-zoom">
-                      <img src={displayed[0].image} alt={displayed[0].title} className="w-full h-72 lg:h-96 object-cover" />
+                      <img src={displayed[0].image} alt={displayed[0].title} className="w-full h-auto lg:h-96 lg:object-cover" />
                     </div>
                     <div className="p-8 lg:p-10">
                       <div className="flex items-center gap-3 mb-3">
@@ -74,7 +74,7 @@ export default function Blog() {
                   {displayed.slice(1).map(p => (
                     <Link key={p.id} to={`/tin-tuc/${p.slug}`} className="group block">
                       <div className="img-zoom mb-4">
-                        <img src={p.image} alt={p.title} className="w-full h-52 object-cover" />
+                        <img src={p.image} alt={p.title} className="w-full aspect-[4/3] object-cover" />
                       </div>
                       <div className="flex items-center gap-3 mb-2">
                         <span className="text-[11px] bg-forest-100 text-forest-700 px-2 py-0.5 font-bold uppercase tracking-wider">{p.category}</span>

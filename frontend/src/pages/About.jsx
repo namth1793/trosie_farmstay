@@ -26,7 +26,7 @@ export default function About() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-center">
             <div className="img-zoom">
               <img src="/images/home/overview/z6673900790553_ed9da3d68d18ead3a8dab0e43a71a9c8.jpg"
-                alt="Trosie Garden" className="w-full h-56 sm:h-72 md:h-[500px] object-cover" />
+                alt="Trosie Garden" className="w-full h-auto md:h-[500px] md:object-cover" />
             </div>
             <div>
               <span className="section-subtitle">{t('about.storySub')}</span>
@@ -98,7 +98,7 @@ export default function About() {
             </div>
             <div className="img-zoom">
               <img src="/images/coffee/cafe-area/DSCF0211.JPG"
-                alt="Trosie Coffee Farm" className="w-full h-56 sm:h-72 md:h-[500px] object-cover" />
+                alt="Trosie Coffee Farm" className="w-full h-auto md:h-[500px] md:object-cover" />
             </div>
           </div>
         </div>

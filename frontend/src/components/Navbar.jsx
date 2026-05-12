@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLang } from '../context/LangContext';
 
@@ -6,32 +6,21 @@ export default function Navbar() {
   const { lang, toggleLang, t } = useLang();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [mobileExpanded, setMobileExpanded] = useState({});
   const location = useLocation();
   const isHome = location.pathname === '/';
 
   const NAV = [
     { label: t('nav.about'), href: '/gioi-thieu' },
-    {
-      label: t('nav.coffee'), href: '/ca-phe',
-      children: [
-        { label: t('nav.coffeePage'), href: '/ca-phe' },
-        { label: t('nav.coffeeShop'), href: '/ca-phe/shop' },
-      ],
-    },
-    {
-      label: t('nav.stay'), href: '/luu-tru',
-      children: [
-        { label: t('nav.homestay'), href: '/luu-tru/homestay' },
-        { label: t('nav.camping'), href: '/luu-tru/camping' },
-      ],
-    },
+    { label: t('nav.coffee'), href: '/ca-phe' },
+    { label: t('nav.stay'), href: '/luu-tru' },
     { label: t('nav.restaurant'), href: '/nha-hang' },
     { label: t('nav.sup'), href: '/cheo-sup' },
     { label: t('nav.roseGarden'), href: '/vuon-hoa-hong' },
     { label: t('nav.activities'), href: '/hoat-dong' },
     { label: t('nav.blog'), href: '/tin-tuc' },
+    { label: t('nav.menu'), href: '/menu' },
     { label: t('nav.contact'), href: '/lien-he' },
+    { label: t('nav.policy'), href: '/chinh-sach' },
   ];
 
   useEffect(() => {
@@ -40,7 +29,7 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', fn);
   }, []);
 
-  useEffect(() => { setMobileOpen(false); setMobileExpanded({}); }, [location]);
+  useEffect(() => { setMobileOpen(false); }, [location]);
 
   const solid = scrolled || !isHome;
   const tc = solid ? 'text-forest-900 hover:text-gold' : 'text-white/90 hover:text-gold';
@@ -52,44 +41,18 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 lg:h-20">
 
           {/* Logo */}
-          <Link to="/" className={`flex items-center gap-2 font-serif ${solid ? 'text-forest-900' : 'text-white'}`}>
-            <svg className="w-8 h-8 text-gold" viewBox="0 0 40 40" fill="currentColor">
-              <path d="M20 4C10.6 4 3 11.6 3 21c0 6 3.1 11.3 7.8 14.4L20 41l9.2-5.6C33.9 32.3 37 27 37 21 37 11.6 29.4 4 20 4zm0 4c2.8 0 5.4 1 7.4 2.6-1-.4-2.2-.6-3.4-.6-4 0-7.2 2.7-7.2 6 0 2.2 1.3 4.1 3.3 5.2L20 23l-.1-1.8C17.9 20 16.8 18.2 16.8 16c0-3.3-3.2-6-7.2-6-.2 0-.3 0-.5.1C10.6 7.1 15 8 20 8z"/>
-              <circle cx="20" cy="16" r="3" opacity=".4"/>
-            </svg>
-            <div>
-              <div className="text-sm font-bold tracking-widest uppercase leading-none">TROSIE GARDEN</div>
-              <div className="text-[10px] tracking-widest opacity-70 font-sans">KHE SANH</div>
-            </div>
+          <Link to="/" className="flex items-center">
+            <img src="/logo.png" alt="Trosie Garden" className="h-12 lg:h-14 w-auto object-contain" />
           </Link>
 
           {/* Desktop nav */}
           <nav className="hidden xl:flex items-center gap-0">
-            {NAV.map(item =>
-              item.children ? (
-                <div key={item.label} className="relative group">
-                  <Link to={item.href} className={`flex items-center gap-1 px-2.5 py-2 text-[10px] font-semibold tracking-widest uppercase transition-colors ${tc}`}>
-                    {item.label}
-                    <svg className="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </Link>
-                  <div className="absolute top-full left-0 bg-white shadow-xl min-w-44 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pt-1">
-                    {item.children.map(c => (
-                      <Link key={c.href} to={c.href}
-                        className="block px-5 py-3 text-[10px] tracking-widest uppercase text-forest-800 hover:bg-forest-50 hover:text-gold border-b border-gray-50 last:border-0 transition-colors">
-                        {c.label}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <Link key={item.label} to={item.href}
-                  className={`px-2.5 py-2 text-[10px] font-semibold tracking-widest uppercase transition-colors ${tc}`}>
-                  {item.label}
-                </Link>
-              )
-            )}
+            {NAV.map(item => (
+              <Link key={item.href} to={item.href}
+                className={`px-2.5 py-2 text-[10px] font-semibold tracking-widest uppercase transition-colors ${tc}`}>
+                {item.label}
+              </Link>
+            ))}
           </nav>
 
           <div className="flex items-center gap-2">
@@ -134,31 +97,11 @@ export default function Navbar() {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="xl:hidden bg-white shadow-xl border-t border-gray-100 max-h-[85vh] overflow-y-auto overscroll-contain">
-          {NAV.map((item, idx) => (
-            <div key={item.label}>
-              {item.children ? (
-                <>
-                  <button onClick={() => setMobileExpanded(p => ({ ...p, [idx]: !p[idx] }))}
-                    className="w-full flex items-center justify-between px-6 py-4 text-[11px] font-semibold tracking-widest uppercase text-forest-800 hover:bg-forest-50 border-b border-gray-100">
-                    {item.label}
-                    <svg className={`w-3 h-3 transition-transform ${mobileExpanded[idx] ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
-                  {mobileExpanded[idx] && item.children.map(c => (
-                    <Link key={c.href} to={c.href}
-                      className="block pl-10 pr-6 py-3 text-[11px] tracking-widest uppercase text-gray-600 hover:bg-forest-50 hover:text-gold border-b border-gray-50">
-                      — {c.label}
-                    </Link>
-                  ))}
-                </>
-              ) : (
-                <Link to={item.href}
-                  className="block px-6 py-4 text-[11px] font-semibold tracking-widest uppercase text-forest-800 hover:bg-forest-50 hover:text-gold border-b border-gray-100">
-                  {item.label}
-                </Link>
-              )}
-            </div>
+          {NAV.map(item => (
+            <Link key={item.href} to={item.href}
+              className="block px-6 py-4 text-[11px] font-semibold tracking-widest uppercase text-forest-800 hover:bg-forest-50 hover:text-gold border-b border-gray-100">
+              {item.label}
+            </Link>
           ))}
           <div className="p-4 flex flex-col gap-3">
             <button onClick={toggleLang}

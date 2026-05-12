@@ -48,7 +48,7 @@ export default function Activities() {
                     '/images/activities/camping/DSCF8260.JPG',
                     '/images/activities/ve-chai-lo/DSCF1070.JPG',
                     '/images/activities/ep-hoa-kho/DSCF0062.JPG',
-                  ][i]} alt={p.label} className="w-full h-56 object-cover" />
+                  ][i]} alt={p.label} className="w-full aspect-[4/3] object-cover" />
                 </div>
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-2xl">{PROGRAM_ICONS[i]}</span>
@@ -95,7 +95,7 @@ export default function Activities() {
                 '/images/activities/ve-chai-lo/DSCF1080.JPG',
                 '/images/activities/ve-chai-lo/DSCF1084.JPG',
               ].map((img, i) => (
-                <div key={i} className="img-zoom aspect-square overflow-hidden">
+                <div key={i} className="img-zoom aspect-[4/3] overflow-hidden">
                   <img src={img} alt={`Bottle painting ${i + 1}`} className="w-full h-full object-cover" />
                 </div>
               ))}
@@ -111,7 +111,7 @@ export default function Activities() {
                 '/images/activities/ep-hoa-kho/DSCF0089.JPG',
                 '/images/activities/ep-hoa-kho/DSCF0094.JPG',
               ].map((img, i) => (
-                <div key={i} className="img-zoom aspect-square overflow-hidden">
+                <div key={i} className="img-zoom aspect-[4/3] overflow-hidden">
                   <img src={img} alt={`Pressed flower ${i + 1}`} className="w-full h-full object-cover" />
                 </div>
               ))}

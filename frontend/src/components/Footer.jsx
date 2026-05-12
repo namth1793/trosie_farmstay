@@ -1,28 +1,19 @@
-import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useLang } from '../context/LangContext';
 
 export default function Footer() {
   const { t } = useLang();
-  const [openPolicy, setOpenPolicy] = useState(null);
   const links = t('footer.links');
-  const policies = t('footer.policies');
 
   return (
     <footer className="bg-forest-900 text-gray-300">
       <div className="max-w-7xl mx-auto px-4 lg:px-8 py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
 
           {/* Brand */}
           <div>
-            <Link to="/" className="flex items-center gap-2 mb-5 text-white">
-              <svg className="w-8 h-8 text-gold" viewBox="0 0 40 40" fill="currentColor">
-                <path d="M20 4C10.6 4 3 11.6 3 21c0 6 3.1 11.3 7.8 14.4L20 41l9.2-5.6C33.9 32.3 37 27 37 21 37 11.6 29.4 4 20 4zm0 4c2.8 0 5.4 1 7.4 2.6-1-.4-2.2-.6-3.4-.6-4 0-7.2 2.7-7.2 6 0 2.2 1.3 4.1 3.3 5.2L20 23l-.1-1.8C17.9 20 16.8 18.2 16.8 16c0-3.3-3.2-6-7.2-6-.2 0-.3 0-.5.1C10.6 7.1 15 8 20 8z"/>
-              </svg>
-              <div>
-                <div className="font-bold tracking-widest uppercase text-sm font-serif">TROSIE GARDEN</div>
-                <div className="text-[10px] tracking-widest text-gray-400 font-sans">KHE SANH</div>
-              </div>
+            <Link to="/" className="flex items-center mb-5">
+              <img src="/logo.png" alt="Trosie Garden" className="h-16 w-auto object-contain" />
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed mb-5">{t('footer.desc')}</p>
             <div className="flex gap-3">
@@ -94,29 +85,6 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Policies */}
-          <div>
-            <h4 className="text-white text-[11px] font-bold tracking-widest uppercase mb-5">{t('footer.policiesTitle')}</h4>
-            <div className="space-y-2">
-              {Array.isArray(policies) && policies.map((p, i) => (
-                <div key={i} className="border border-forest-700">
-                  <button
-                    onClick={() => setOpenPolicy(openPolicy === i ? null : i)}
-                    className="w-full flex items-center justify-between px-4 py-3 text-xs text-gray-300 hover:text-gold transition-colors text-left">
-                    <span className="font-semibold">{p.title}</span>
-                    <svg className={`w-3 h-3 shrink-0 transition-transform ${openPolicy === i ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
-                  {openPolicy === i && (
-                    <div className="px-4 pb-4 text-xs text-gray-400 leading-relaxed whitespace-pre-line border-t border-forest-700">
-                      {p.content}
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </div>
 
@@ -126,6 +94,7 @@ export default function Footer() {
           <div className="flex gap-5">
             <a href="https://maps.app.goo.gl/ZUgWJvEWemr2TMnh7" target="_blank" rel="noreferrer" className="hover:text-gold">{t('footer.mapLink')}</a>
             <a href="mailto:trosiegardenks@gmail.com" className="hover:text-gold">{t('footer.contactLink')}</a>
+            <Link to="/chinh-sach" className="hover:text-gold">{t('footer.policyLink')}</Link>
           </div>
         </div>
       </div>

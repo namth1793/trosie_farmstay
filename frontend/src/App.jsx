@@ -19,6 +19,8 @@ import Activities from './pages/Activities';
 import Blog from './pages/Blog';
 import BlogDetail from './pages/BlogDetail';
 import Contact from './pages/Contact';
+import ChinhSach from './pages/ChinhSach';
+import Menu from './pages/Menu';
 
 export default function App() {
   return (
@@ -42,6 +44,8 @@ export default function App() {
         <Route path="/tin-tuc" element={<Blog />} />
         <Route path="/tin-tuc/:slug" element={<BlogDetail />} />
         <Route path="/lien-he" element={<Contact />} />
+        <Route path="/chinh-sach" element={<ChinhSach />} />
+        <Route path="/menu" element={<Menu />} />
       </Routes>
       <Footer />
     </BrowserRouter>

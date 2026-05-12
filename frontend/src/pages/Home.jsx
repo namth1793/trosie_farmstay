@@ -71,8 +71,7 @@ export default function Home() {
     <div>
       {/* ── Hero Carousel ── */}
       <section
-        className="hero-carousel relative flex items-center justify-center overflow-hidden"
-        style={{ height: '100dvh', minHeight: '560px' }}
+        className="hero-carousel relative flex items-center justify-center overflow-hidden aspect-[4/3] sm:aspect-auto sm:h-screen sm:min-h-[600px]"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
         onTouchStart={onTouchStart}
@@ -167,30 +166,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Một ngày ở Trosie ── */}
-      <section className="py-12 md:py-20 bg-forest-900">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <span className="section-subtitle">{t('home.daySub')}</span>
-          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-white mb-2">{t('home.dayTitle')}</h2>
-          <p className="text-gray-400 mb-2 italic text-sm">{t('home.dayNote')}</p>
-          <div className="w-12 h-0.5 bg-gold mx-auto mb-8 md:mb-12" />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
-            {Array.isArray(timeline) && timeline.map((item, i) => (
-              <div key={i} className="relative">
-                {i < timeline.length - 1 && (
-                  <div className="hidden md:block absolute top-8 left-1/2 w-full h-0.5 bg-forest-700" />
-                )}
-                <div className="relative bg-forest-800 p-4 md:p-5 text-center">
-                  <div className="text-2xl md:text-3xl mb-2">{TIMELINE_ICONS[i]}</div>
-                  <div className="text-gold text-[9px] md:text-[10px] font-bold tracking-widest uppercase mb-1">{item.time}</div>
-                  <p className="text-gray-300 text-xs md:text-sm leading-relaxed">{item.text}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <p className="text-gray-400 mt-8 md:mt-10 text-xs md:text-sm italic max-w-xl mx-auto">{t('home.dayFooter')}</p>
-        </div>
-      </section>
 
       {/* ── Coffee highlight ── */}
       <section className="py-12 md:py-20 bg-cream">
@@ -198,7 +173,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center">
             <div className="img-zoom">
               <img src="/images/coffee/cafe-area/DSCF0211.JPG"
-                alt="Trosie Coffee" className="w-full h-56 sm:h-72 md:h-[380px] lg:h-[450px] object-cover" />
+                alt="Trosie Coffee" className="w-full h-auto md:h-[380px] lg:h-[450px] md:object-cover" />
             </div>
             <div>
               <span className="section-subtitle">{t('home.coffeeSub')}</span>
@@ -225,7 +200,7 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-1.5 md:gap-2">
             {CHECKIN_IMGS.map((img, i) => (
-              <div key={i} className="img-zoom aspect-square overflow-hidden">
+              <div key={i} className="img-zoom aspect-[4/3] overflow-hidden">
                 <img src={img} alt={`Guest check-in ${i + 1}`} className="w-full h-full object-cover" />
               </div>
             ))}
@@ -271,7 +246,7 @@ export default function Home() {
               {posts.map(p => (
                 <Link key={p.id} to={`/tin-tuc/${p.slug}`} className="group block">
                   <div className="img-zoom mb-3 md:mb-4">
-                    <img src={p.image} alt={p.title} className="w-full h-44 md:h-52 object-cover" />
+                    <img src={p.image} alt={p.title} className="w-full aspect-[4/3] object-cover" />
                   </div>
                   <div className="flex items-center gap-3 mb-2">
                     <span className="text-[10px] bg-forest-100 text-forest-700 px-2 py-0.5 font-semibold uppercase tracking-wider">{p.category}</span>

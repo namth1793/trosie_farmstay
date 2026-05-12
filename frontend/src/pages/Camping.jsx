@@ -112,7 +112,7 @@ export default function Camping() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
             {CAMPING_GALLERY.map((img, i) => (
-              <div key={i} className="img-zoom aspect-square overflow-hidden">
+              <div key={i} className="img-zoom aspect-[4/3] overflow-hidden">
                 <img src={img} alt={`Camping ${i + 1}`} className="w-full h-full object-cover" />
               </div>
             ))}

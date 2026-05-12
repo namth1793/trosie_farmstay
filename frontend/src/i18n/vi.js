@@ -13,6 +13,8 @@ export default {
     activities: 'Hoạt Động',
     blog: 'Blog',
     contact: 'Liên Hệ',
+    policy: 'Chính Sách',
+    menu: 'Menu',
     bookNow: 'Đặt Lịch',
   },
 
@@ -247,11 +249,11 @@ export default {
     introTitleEm: 'Theo Phong Cách Cổ Điển',
     introDesc: 'Năm phòng homestay tại Trosie được thiết kế theo phong cách cổ điển ấm cúng, mỗi phòng mang một tên gọi và màu sắc riêng biệt. Không gian yên tĩnh, view đẹp, đầy đủ tiện nghi – nơi bạn thực sự nghỉ ngơi.',
     rooms: [
-      { name: 'Phòng Cổ Huế', desc: 'Phong cách cổ điển Huế – ấm cúng, trầm mặc. Giường đôi, view vườn xanh.', capacity: '2 người', price: 'Liên hệ báo giá' },
-      { name: 'Phòng Cổ Bạch', desc: 'Tông trắng tinh khiết, nhẹ nhàng. Giường đôi, ánh sáng tự nhiên thoáng đãng.', capacity: '2 người', price: 'Liên hệ báo giá' },
-      { name: 'Phòng Cổ Quế', desc: 'Gam màu ấm nâu quế, gỗ mộc mạc. Không gian thư giãn tuyệt vời sau ngày dài.', capacity: '2 người', price: 'Liên hệ báo giá' },
-      { name: 'Phòng Cổ Vân Khôi', desc: 'Thiết kế sang trọng nhẹ nhàng, hài hòa với thiên nhiên Khe Sanh.', capacity: '2–3 người', price: 'Liên hệ báo giá' },
-      { name: 'Phòng Cổ Đào', desc: 'Gam hồng đào lãng mạn, phù hợp cho cặp đôi muốn trải nghiệm thật khác biệt.', capacity: '2 người', price: 'Liên hệ báo giá' },
+      { name: 'Phòng Cổ Huế', desc: 'Phong cách cổ điển Huế – ấm cúng, trầm mặc. Giường đôi, view vườn xanh.', capacity: '2 người lớn · 2 trẻ em', price: 'Liên hệ báo giá' },
+      { name: 'Phòng Cổ Bạch', desc: 'Tông trắng tinh khiết, nhẹ nhàng. Giường đôi, ánh sáng tự nhiên thoáng đãng.', capacity: '2 người lớn · 2 trẻ em', price: 'Liên hệ báo giá' },
+      { name: 'Phòng Cổ Quế', desc: 'Gam màu ấm nâu quế, gỗ mộc mạc. Không gian thư giãn tuyệt vời sau ngày dài.', capacity: '2 người lớn · 2 trẻ em', price: 'Liên hệ báo giá' },
+      { name: 'Phòng Cổ Vân Khôi', desc: 'Thiết kế sang trọng nhẹ nhàng, hài hòa với thiên nhiên Khe Sanh.', capacity: '2 người lớn · 2 trẻ em', price: 'Liên hệ báo giá' },
+      { name: 'Phòng Cổ Đào', desc: 'Gam hồng đào lãng mạn, phù hợp cho cặp đôi muốn trải nghiệm thật khác biệt.', capacity: '2 người lớn · 2 trẻ em', price: 'Liên hệ báo giá' },
     ],
     amenitiesSub: 'Khu Vực Chung',
     amenitiesTitle: 'Tiện Ích Dùng Chung',
@@ -317,7 +319,7 @@ export default {
     ],
     priceSub: 'Bảng Giá',
     priceTitle: 'Giá Chèo SUP',
-    price: '150.000đ',
+    price: '200.000đ',
     priceUnit: '/ ván / 2 người',
     priceNote: 'Thời gian không giới hạn',
     priceIncludes: ['Ván SUP', 'Mái chèo & phụ kiện', 'Áo phao an toàn', 'Túi chống nước điện thoại', 'Hướng dẫn viên tận tình'],
@@ -433,37 +435,15 @@ export default {
   },
 
   footer: {
-    desc: 'Không ồn ào, không vội vã – chỉ có thiên nhiên và sự bình yên. Trosie Garden tại Khe Sanh, Quảng Trị.',
+    desc: 'Chạm vào thiên nhiên – sống chậm lại một chút.\nTrosie Garden Khe Sanh, nơi tiếng chim, ánh hoàng hôn và những trải nghiệm gần gũi với thiên nhiên trở thành điều đáng nhớ nhất.',
     quickLinks: 'Liên Kết Nhanh',
     links: [['Giới Thiệu', '/gioi-thieu'], ['Cà Phê', '/ca-phe'], ['Shop Sản Phẩm', '/ca-phe/shop'], ['Homestay', '/luu-tru/homestay'], ['Cắm Trại', '/luu-tru/camping'], ['Nhà Hàng', '/nha-hang'], ['Chèo SUP', '/cheo-sup'], ['Vườn Hoa Hồng', '/vuon-hoa-hong'], ['Hoạt Động', '/hoat-dong']],
     contactTitle: 'Thông Tin Liên Hệ',
     address: 'Km số 2, đường Hồ Chí Minh\nXã Khe Sanh, Tỉnh Quảng Trị',
     hours: 'Mở cửa hàng ngày\nHotline / Zalo: 0961 393 370',
-    policiesTitle: 'Chính Sách',
     mapLink: 'Bản Đồ',
     contactLink: 'Liên Hệ',
+    policyLink: 'Chính Sách',
     copyright: '© 2025 Trosie Garden Khe Sanh – Công ty TNHH XNK & TM Trosie. All rights reserved.',
-    policies: [
-      {
-        title: 'Chính Sách Đặt Phòng & Đặt Lịch',
-        content: '• Đặt phòng / đặt lịch qua Hotline hoặc Zalo: 0961 393 370\n• Xác nhận đặt chỗ sau khi thanh toán cọc (50% giá trị)\n• Vui lòng đặt trước ít nhất 1 ngày để đảm bảo chỗ\n• Nhận phòng: 14:00 | Trả phòng: 11:00\n• Nhận lều cắm trại: 15:00 | Trả lều: 10:00\n• Cung cấp đầy đủ thông tin khách (họ tên, số người) khi đặt'
-      },
-      {
-        title: 'Chính Sách Hủy & Hoàn Tiền',
-        content: '• Hủy trước 48 giờ: hoàn 100% tiền cọc\n• Hủy trước 24 giờ: hoàn 50% tiền cọc\n• Hủy trong ngày hoặc không đến: không hoàn tiền cọc\n• Trường hợp thời tiết xấu ảnh hưởng cắm trại: Trosie sẽ chủ động thông báo và hoàn tiền hoặc dời lịch\n• Hoàn tiền xử lý trong vòng 3–5 ngày làm việc qua chuyển khoản'
-      },
-      {
-        title: 'Chính Sách Vận Chuyển & Đổi Trả',
-        content: '1. Vận chuyển\n• Giao hàng toàn quốc qua Giao Hàng Nhanh, Viettel Post, v.v.\n• Thời gian giao: 2–5 ngày làm việc tùy khu vực.\n• Phí vận chuyển hiển thị khi đặt hàng, có thể miễn phí theo chương trình KM.\n\n2. Đổi trả\n• Hỗ trợ đổi trả trong vòng 3 ngày kể từ ngày nhận hàng nếu:\n  - Hư hỏng do vận chuyển\n  - Sai mẫu mã/loại sản phẩm\n  - Lỗi từ nhà sản xuất\n• Sản phẩm phải còn nguyên tem, nhãn, chưa sử dụng.'
-      },
-      {
-        title: 'Chính Sách Thanh Toán',
-        content: '• COD (thanh toán khi nhận hàng)\n• Chuyển khoản ngân hàng: thông tin cung cấp qua Zalo/Email\n• Thanh toán online: thẻ ATM, thẻ tín dụng, ví điện tử\n• Mọi giao dịch đều được bảo mật và tuân thủ pháp luật Việt Nam.'
-      },
-      {
-        title: 'Chính Sách Bảo Mật',
-        content: '• Cam kết bảo mật tuyệt đối thông tin cá nhân khách hàng.\n• Thông tin chỉ dùng cho mục đích giao dịch & chăm sóc khách hàng.\n• Không bán, chia sẻ hay trao đổi thông tin với bên thứ ba.'
-      },
-    ],
   },
 };

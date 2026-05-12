@@ -56,7 +56,7 @@ export default function CoffeeShop() {
               {filtered.map(p => (
                 <Link key={p.id} to={`/ca-phe/shop/${p.slug}`} className="group block">
                   <div className="img-zoom mb-4 relative overflow-hidden">
-                    <img src={p.image} alt={p.name} className="w-full h-56 object-cover" />
+                    <img src={p.image} alt={p.name} className="w-full aspect-[4/3] object-cover" />
                     {p.badge && (
                       <span className="absolute top-2 left-2 bg-gold text-white text-[10px] font-bold tracking-wide px-2.5 py-1 uppercase">
                         {p.badge}

@@ -46,7 +46,7 @@ export default function Restaurant() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="img-zoom">
               <img src="/images/restaurant/gallery/DSCF6050.JPG"
-                alt="Nhà hàng Trosie" className="w-full h-52 sm:h-64 md:h-[400px] object-cover" />
+                alt="Nhà hàng Trosie" className="w-full h-auto md:h-[400px] md:object-cover" />
             </div>
             <div>
               <span className="section-subtitle">{t('restaurant.spaceSub')}</span>
@@ -63,6 +63,13 @@ export default function Restaurant() {
                   </div>
                 ))}
               </div>
+              <Link to="/menu"
+                className="inline-flex items-center gap-2 bg-forest-800 hover:bg-forest-700 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors">
+                <svg className="w-4 h-4 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                Xem menu ngay
+              </Link>
             </div>
           </div>
         </div>
