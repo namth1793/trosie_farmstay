@@ -36,7 +36,7 @@ export default function LuuTru() {
           {/* Homestay card */}
           <div className="group relative overflow-hidden">
             <div className="img-zoom">
-              <img src="/images/rooms/homestay/common/682102137_122270991656137494_8915823433484477129_n.jpg"
+              <img src="/images/rooms/homestay/common/z6415720390997_d948d360d493718fb4b215e79797c0ca.jpg"
                 alt="Homestay" className="w-full h-auto md:h-[420px] md:object-cover transition-transform duration-500 group-hover:scale-105" />
             </div>
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />

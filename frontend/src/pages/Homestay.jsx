@@ -130,7 +130,7 @@ export default function Homestay() {
     <div>
       <div className="page-hero" style={{ height: '420px' }}>
         <div className="page-hero-bg"
-          style={{ backgroundImage: 'url(/images/rooms/homestay/common/682102137_122270991656137494_8915823433484477129_n.jpg)' }} />
+          style={{ backgroundImage: 'url(/images/rooms/homestay/common/z6415720390997_d948d360d493718fb4b215e79797c0ca.jpg)' }} />
         <div className="page-hero-overlay" />
         <div className="relative z-10 text-center px-4">
           <span className="section-subtitle">{t('homestay.heroSub')}</span>
