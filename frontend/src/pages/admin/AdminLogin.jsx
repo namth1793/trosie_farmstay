@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function AdminLogin() {
   const [password, setPassword] = useState('');
@@ -33,7 +33,7 @@ export default function AdminLogin() {
       <div className="bg-white w-full max-w-sm shadow-2xl overflow-hidden">
         {/* Top bar */}
         <div className="bg-forest-800 px-6 py-7 text-center">
-          <img src="/logo.png" alt="Trosie" className="h-12 mx-auto mb-3 brightness-0 invert" />
+          <img src="/logo.png" alt="Trosie" className="h-12 mx-auto mb-3" />
           <p className="text-white/60 text-[11px] tracking-widest uppercase">Trosie Garden · Admin</p>
         </div>
 
