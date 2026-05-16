@@ -19,6 +19,20 @@ function slugify(text) {
     .replace(/\s+/g, '-').replace(/-+/g, '-');
 }
 
+function Field({ label, required, hint, children }) {
+  return (
+    <div>
+      <label className="flex items-center gap-1 text-[11px] font-bold tracking-widest uppercase text-gray-500 mb-1.5">
+        {label} {required && <span className="text-red-400">*</span>}
+      </label>
+      {hint && <p className="text-xs text-gray-400 mb-2">{hint}</p>}
+      {children}
+    </div>
+  );
+}
+
+const inputCls = 'w-full border border-gray-200 px-4 py-3.5 text-base focus:outline-none focus:border-forest-700 transition-colors rounded-sm';
+
 export default function AdminBlog() {
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
@@ -34,8 +48,7 @@ export default function AdminBlog() {
   const fileRef = useRef();
 
   useEffect(() => {
-    const token = localStorage.getItem('admin_token');
-    if (!token) { navigate('/admin/login'); return; }
+    if (!localStorage.getItem('admin_token')) { navigate('/admin/login'); return; }
     fetchPosts();
   }, []);
 
@@ -100,15 +113,11 @@ export default function AdminBlog() {
       const fd = new FormData();
       Object.entries(form).forEach(([k, v]) => fd.append(k, v));
       if (imageFile) fd.append('image', imageFile);
-
+      const headers = { ...authHeaders(), 'Content-Type': 'multipart/form-data' };
       if (editPost) {
-        await axios.put(`/api/admin/blog/${editPost.id}`, fd, {
-          headers: { ...authHeaders(), 'Content-Type': 'multipart/form-data' },
-        });
+        await axios.put(`/api/admin/blog/${editPost.id}`, fd, { headers });
       } else {
-        await axios.post('/api/admin/blog', fd, {
-          headers: { ...authHeaders(), 'Content-Type': 'multipart/form-data' },
-        });
+        await axios.post('/api/admin/blog', fd, { headers });
       }
       await fetchPosts();
       setMode('list');
@@ -135,35 +144,44 @@ export default function AdminBlog() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-forest-900 text-white px-4 md:px-8 py-3.5 flex items-center justify-between sticky top-0 z-40 shadow-lg">
-        <div className="flex items-center gap-3">
+      <header className="bg-forest-900 text-white px-4 py-3 flex items-center justify-between sticky top-0 z-40 shadow-lg">
+        <div className="flex items-center gap-2.5">
           <img src="/logo.png" alt="Trosie" className="h-7 brightness-0 invert" />
-          <span className="text-sm font-semibold tracking-wide">Admin · Blog</span>
+          <span className="text-sm font-semibold">Admin · Blog</span>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <a href="/tin-tuc" target="_blank"
-            className="hidden sm:block text-xs text-gray-300 hover:text-gold transition-colors">
-            Xem trang blog →
+            className="hidden sm:flex items-center gap-1 text-xs text-gray-300 hover:text-gold transition-colors px-3 py-2">
+            Xem blog
+            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
           </a>
           <button onClick={logout}
-            className="text-xs bg-forest-700 hover:bg-red-700 px-4 py-1.5 transition-colors">
-            Đăng xuất
+            className="flex items-center gap-1.5 text-xs bg-forest-700 hover:bg-red-700 px-3 py-2 transition-colors rounded-sm">
+            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+            </svg>
+            <span className="hidden sm:inline">Đăng xuất</span>
           </button>
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto px-4 py-8">
-        {mode === 'list' ? (
+      <main className="max-w-3xl mx-auto px-4 py-6">
+
+        {/* ── LIST MODE ─────────────────────────────── */}
+        {mode === 'list' && (
           <>
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center justify-between mb-5">
               <div>
-                <h1 className="text-xl font-bold text-gray-800">Quản lý bài viết</h1>
-                <p className="text-sm text-gray-400 mt-0.5">{posts.length} bài viết</p>
+                <h1 className="text-lg font-bold text-gray-800">Bài viết</h1>
+                <p className="text-xs text-gray-400 mt-0.5">{posts.length} bài</p>
               </div>
+              {/* Desktop add button */}
               <button onClick={openCreate}
-                className="bg-forest-800 hover:bg-forest-700 text-white text-sm font-semibold px-5 py-2.5 transition-colors flex items-center gap-2 shadow-sm">
+                className="hidden sm:flex items-center gap-2 bg-forest-800 hover:bg-forest-700 text-white text-sm font-semibold px-5 py-2.5 transition-colors shadow-sm">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                 </svg>
@@ -172,217 +190,268 @@ export default function AdminBlog() {
             </div>
 
             {loading ? (
-              <div className="text-center text-gray-400 py-20">Đang tải...</div>
+              <div className="flex flex-col items-center justify-center py-20 gap-3">
+                <svg className="w-6 h-6 animate-spin text-gray-300" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+                </svg>
+                <span className="text-sm text-gray-400">Đang tải...</span>
+              </div>
             ) : posts.length === 0 ? (
-              <div className="text-center py-20 bg-white shadow-sm">
-                <p className="text-gray-400 mb-4">Chưa có bài viết nào</p>
-                <button onClick={openCreate} className="btn-primary text-sm">Tạo bài viết đầu tiên</button>
+              <div className="text-center py-20 bg-white rounded shadow-sm">
+                <svg className="w-12 h-12 text-gray-200 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                <p className="text-gray-400 text-sm mb-4">Chưa có bài viết nào</p>
+                <button onClick={openCreate}
+                  className="bg-forest-800 text-white text-sm font-semibold px-6 py-3 hover:bg-forest-700 transition-colors">
+                  Tạo bài viết đầu tiên
+                </button>
               </div>
             ) : (
-              <div className="bg-white shadow-sm overflow-hidden">
-                <table className="w-full text-sm">
-                  <thead className="bg-gray-50 border-b border-gray-100">
-                    <tr>
-                      <th className="px-4 py-3 text-left text-[11px] font-bold uppercase tracking-wider text-gray-400 w-20">Ảnh</th>
-                      <th className="px-4 py-3 text-left text-[11px] font-bold uppercase tracking-wider text-gray-400">Bài viết</th>
-                      <th className="px-4 py-3 text-left text-[11px] font-bold uppercase tracking-wider text-gray-400 hidden md:table-cell w-28">Danh mục</th>
-                      <th className="px-4 py-3 text-left text-[11px] font-bold uppercase tracking-wider text-gray-400 hidden lg:table-cell w-28">Ngày đăng</th>
-                      <th className="px-4 py-3 w-28"></th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-50">
-                    {posts.map(post => (
-                      <tr key={post.id} className="hover:bg-gray-50/60 transition-colors">
-                        <td className="px-4 py-3">
-                          {post.image ? (
-                            <img src={post.image} alt="" className="w-14 h-11 object-cover rounded" />
-                          ) : (
-                            <div className="w-14 h-11 bg-gray-100 rounded flex items-center justify-center">
-                              <svg className="w-5 h-5 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                              </svg>
-                            </div>
-                          )}
-                        </td>
-                        <td className="px-4 py-3">
-                          <div className="font-medium text-gray-800 line-clamp-1">{post.title}</div>
-                          <div className="text-xs text-gray-400 mt-0.5 font-mono">/tin-tuc/{post.slug}</div>
-                          {post.excerpt && (
-                            <div className="text-xs text-gray-400 mt-0.5 line-clamp-1 hidden sm:block">{post.excerpt}</div>
-                          )}
-                        </td>
-                        <td className="px-4 py-3 hidden md:table-cell">
-                          <span className="text-xs bg-gold/10 text-gold font-semibold px-2 py-0.5 rounded">
-                            {post.category}
-                          </span>
-                        </td>
-                        <td className="px-4 py-3 text-xs text-gray-400 hidden lg:table-cell">
-                          {new Date(post.published_at).toLocaleDateString('vi-VN')}
-                        </td>
-                        <td className="px-4 py-3">
-                          <div className="flex gap-2 justify-end">
-                            <button onClick={() => openEdit(post)}
-                              className="text-xs border border-gray-200 hover:border-forest-700 hover:text-forest-700 px-3 py-1.5 transition-colors">
-                              Sửa
-                            </button>
-                            <button onClick={() => setDeleteId(post.id)}
-                              className="text-xs border border-red-100 hover:bg-red-50 text-red-400 hover:text-red-600 px-3 py-1.5 transition-colors">
-                              Xóa
-                            </button>
+              <>
+                {/* Mobile cards */}
+                <div className="sm:hidden space-y-3">
+                  {posts.map(post => (
+                    <div key={post.id} className="bg-white rounded shadow-sm overflow-hidden">
+                      <div className="flex gap-3 p-3">
+                        {post.image ? (
+                          <img src={post.image} alt="" className="w-20 h-16 object-cover rounded shrink-0" />
+                        ) : (
+                          <div className="w-20 h-16 bg-gray-100 rounded shrink-0 flex items-center justify-center">
+                            <svg className="w-6 h-6 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
                           </div>
-                        </td>
+                        )}
+                        <div className="min-w-0 flex-1">
+                          <p className="font-semibold text-gray-800 text-sm leading-snug line-clamp-2">{post.title}</p>
+                          <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+                            <span className="text-[10px] bg-gold/10 text-gold font-bold px-2 py-0.5 rounded">
+                              {post.category}
+                            </span>
+                            <span className="text-[10px] text-gray-400">
+                              {new Date(post.published_at).toLocaleDateString('vi-VN')}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="border-t border-gray-50 grid grid-cols-2 divide-x divide-gray-50">
+                        <button onClick={() => openEdit(post)}
+                          className="py-3 text-sm font-semibold text-forest-700 hover:bg-gray-50 transition-colors flex items-center justify-center gap-1.5 active:bg-gray-100">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                          </svg>
+                          Chỉnh sửa
+                        </button>
+                        <button onClick={() => setDeleteId(post.id)}
+                          className="py-3 text-sm font-semibold text-red-500 hover:bg-red-50 transition-colors flex items-center justify-center gap-1.5 active:bg-red-100">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          </svg>
+                          Xóa
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Desktop table */}
+                <div className="hidden sm:block bg-white shadow-sm overflow-hidden">
+                  <table className="w-full text-sm">
+                    <thead className="bg-gray-50 border-b border-gray-100">
+                      <tr>
+                        <th className="px-4 py-3 text-left text-[11px] font-bold uppercase tracking-wider text-gray-400 w-20">Ảnh</th>
+                        <th className="px-4 py-3 text-left text-[11px] font-bold uppercase tracking-wider text-gray-400">Bài viết</th>
+                        <th className="px-4 py-3 text-left text-[11px] font-bold uppercase tracking-wider text-gray-400 w-28">Danh mục</th>
+                        <th className="px-4 py-3 text-left text-[11px] font-bold uppercase tracking-wider text-gray-400 hidden lg:table-cell w-28">Ngày đăng</th>
+                        <th className="px-4 py-3 w-32"></th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                    </thead>
+                    <tbody className="divide-y divide-gray-50">
+                      {posts.map(post => (
+                        <tr key={post.id} className="hover:bg-gray-50/60 transition-colors">
+                          <td className="px-4 py-3">
+                            {post.image ? (
+                              <img src={post.image} alt="" className="w-14 h-11 object-cover rounded" />
+                            ) : (
+                              <div className="w-14 h-11 bg-gray-100 rounded" />
+                            )}
+                          </td>
+                          <td className="px-4 py-3">
+                            <div className="font-medium text-gray-800 line-clamp-1">{post.title}</div>
+                            <div className="text-xs text-gray-400 mt-0.5 font-mono">/tin-tuc/{post.slug}</div>
+                          </td>
+                          <td className="px-4 py-3">
+                            <span className="text-xs bg-gold/10 text-gold font-semibold px-2 py-0.5 rounded">
+                              {post.category}
+                            </span>
+                          </td>
+                          <td className="px-4 py-3 text-xs text-gray-400 hidden lg:table-cell">
+                            {new Date(post.published_at).toLocaleDateString('vi-VN')}
+                          </td>
+                          <td className="px-4 py-3">
+                            <div className="flex gap-2 justify-end">
+                              <button onClick={() => openEdit(post)}
+                                className="text-xs border border-gray-200 hover:border-forest-700 hover:text-forest-700 px-3 py-1.5 transition-colors">
+                                Sửa
+                              </button>
+                              <button onClick={() => setDeleteId(post.id)}
+                                className="text-xs border border-red-100 hover:bg-red-50 text-red-400 hover:text-red-600 px-3 py-1.5 transition-colors">
+                                Xóa
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
             )}
+
+            {/* Mobile FAB */}
+            <button onClick={openCreate}
+              className="sm:hidden fixed bottom-6 right-6 w-14 h-14 bg-forest-800 hover:bg-forest-700 text-white rounded-full shadow-xl flex items-center justify-center transition-colors active:scale-95 z-30">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+            </button>
           </>
-        ) : (
-          /* Form */
-          <div className="bg-white shadow-sm">
+        )}
+
+        {/* ── FORM MODE ─────────────────────────────── */}
+        {mode === 'form' && (
+          <div className="bg-white shadow-sm rounded-sm overflow-hidden">
             {/* Form header */}
-            <div className="border-b border-gray-100 px-6 md:px-8 py-4 flex items-center gap-3">
+            <div className="border-b border-gray-100 px-4 py-4 flex items-center gap-3">
               <button onClick={() => setMode('list')}
-                className="text-gray-400 hover:text-gray-700 transition-colors">
+                className="w-9 h-9 flex items-center justify-center text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-full transition-colors active:bg-gray-200">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
               </button>
-              <h2 className="text-lg font-bold text-gray-800">
+              <h2 className="text-base font-bold text-gray-800">
                 {editPost ? 'Chỉnh sửa bài viết' : 'Thêm bài viết mới'}
               </h2>
             </div>
 
-            <form onSubmit={handleSubmit} className="px-6 md:px-8 py-8 space-y-6">
+            <form onSubmit={handleSubmit} className="px-4 py-6 space-y-5">
 
               {/* Image upload */}
-              <div>
-                <label className="block text-[11px] font-bold tracking-widest uppercase text-gray-500 mb-2">
-                  Ảnh bìa {!editPost && <span className="text-red-400">*</span>}
-                </label>
+              <Field label="Ảnh bìa" required={!editPost}>
                 {imagePreview && (
-                  <div className="mb-3 relative inline-block">
-                    <img src={imagePreview} alt="Preview"
-                      className="max-h-52 w-full object-cover rounded border border-gray-100" />
-                  </div>
+                  <img src={imagePreview} alt="Preview"
+                    className="w-full h-44 object-cover rounded mb-3 border border-gray-100" />
                 )}
-                <div className="flex items-center gap-3">
-                  <button type="button" onClick={() => fileRef.current.click()}
-                    className="flex items-center gap-2 text-sm border border-dashed border-gray-300 hover:border-forest-700 hover:text-forest-700 px-5 py-2.5 text-gray-500 transition-colors rounded">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                    </svg>
-                    {imagePreview ? 'Đổi ảnh khác' : 'Chọn ảnh từ máy tính'}
-                  </button>
-                  {imageFile && (
-                    <span className="text-xs text-gray-400 truncate max-w-xs">{imageFile.name}</span>
-                  )}
-                </div>
+                <button type="button" onClick={() => fileRef.current.click()}
+                  className="w-full flex items-center justify-center gap-2 border-2 border-dashed border-gray-200 hover:border-forest-700 active:border-forest-700 py-4 text-sm text-gray-500 hover:text-forest-700 transition-colors rounded-sm">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                  </svg>
+                  {imagePreview ? 'Đổi ảnh khác' : 'Chọn ảnh từ máy / thư viện'}
+                </button>
+                {imageFile && (
+                  <p className="text-xs text-gray-400 mt-1.5 truncate">{imageFile.name}</p>
+                )}
+                <p className="text-xs text-gray-400 mt-1">Tối đa 10MB · Ảnh sẽ lưu lên Cloudinary</p>
                 <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleImageChange} />
-                <p className="text-xs text-gray-400 mt-1.5">Ảnh sẽ được lưu lên Cloudinary. Tối đa 10MB.</p>
-              </div>
+              </Field>
 
               {/* Title */}
-              <div>
-                <label className="block text-[11px] font-bold tracking-widest uppercase text-gray-500 mb-1.5">
-                  Tiêu đề <span className="text-red-400">*</span>
-                </label>
+              <Field label="Tiêu đề" required>
                 <input
                   type="text"
                   value={form.title}
                   onChange={handleTitleChange}
-                  className="w-full border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-forest-700 transition-colors"
+                  className={inputCls}
                   placeholder="Nhập tiêu đề bài viết..."
                   required
                 />
-              </div>
+              </Field>
 
               {/* Slug */}
-              <div>
-                <label className="block text-[11px] font-bold tracking-widest uppercase text-gray-500 mb-1.5">
-                  Đường dẫn URL (slug)
-                </label>
-                <div className="flex items-center border border-gray-200 focus-within:border-forest-700 transition-colors">
-                  <span className="px-3 py-3 text-xs text-gray-400 bg-gray-50 border-r border-gray-200 shrink-0">/tin-tuc/</span>
+              <Field label="Đường dẫn URL">
+                <div className="flex items-stretch border border-gray-200 focus-within:border-forest-700 transition-colors rounded-sm overflow-hidden">
+                  <span className="flex items-center px-3 text-xs text-gray-400 bg-gray-50 border-r border-gray-200 shrink-0 whitespace-nowrap">
+                    /tin-tuc/
+                  </span>
                   <input
                     type="text"
                     value={form.slug}
                     onChange={e => setForm(f => ({ ...f, slug: e.target.value }))}
-                    className="flex-1 px-3 py-3 text-sm font-mono focus:outline-none"
+                    className="flex-1 px-3 py-3.5 text-sm font-mono focus:outline-none min-w-0"
                     placeholder="duong-dan-bai-viet"
                   />
                 </div>
-              </div>
+              </Field>
 
               {/* Excerpt */}
-              <div>
-                <label className="block text-[11px] font-bold tracking-widest uppercase text-gray-500 mb-1.5">
-                  Mô tả ngắn
-                </label>
+              <Field label="Mô tả ngắn">
                 <textarea
-                  rows={2}
+                  rows={3}
                   value={form.excerpt}
                   onChange={e => setForm(f => ({ ...f, excerpt: e.target.value }))}
-                  className="w-full border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-forest-700 transition-colors resize-none"
-                  placeholder="Tóm tắt ngắn gọn về nội dung bài viết (hiển thị ở trang danh sách blog)..."
+                  className={inputCls + ' resize-none'}
+                  placeholder="Tóm tắt hiển thị ở trang danh sách blog..."
                 />
-              </div>
+              </Field>
 
               {/* Content */}
-              <div>
-                <label className="block text-[11px] font-bold tracking-widest uppercase text-gray-500 mb-1.5">
-                  Nội dung bài viết
-                </label>
-                <p className="text-xs text-gray-400 mb-2">
-                  Viết văn bản thuần — xuống dòng bình thường để tạo đoạn mới.
-                </p>
+              <Field label="Nội dung" hint="Viết văn bản thuần — xuống dòng để tạo đoạn mới.">
                 <textarea
-                  rows={16}
+                  rows={12}
                   value={form.content}
                   onChange={e => setForm(f => ({ ...f, content: e.target.value }))}
-                  className="w-full border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-forest-700 transition-colors leading-relaxed"
+                  className={inputCls + ' leading-relaxed'}
                   placeholder="Nhập nội dung bài viết tại đây..."
                 />
-              </div>
+              </Field>
 
               {/* Category + Author */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-[11px] font-bold tracking-widest uppercase text-gray-500 mb-1.5">
-                    Danh mục
-                  </label>
-                  <select
-                    value={form.category}
-                    onChange={e => setForm(f => ({ ...f, category: e.target.value }))}
-                    className="w-full border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-forest-700 transition-colors bg-white appearance-none"
-                  >
-                    {CATEGORIES.map(c => <option key={c}>{c}</option>)}
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-[11px] font-bold tracking-widest uppercase text-gray-500 mb-1.5">
-                    Tác giả
-                  </label>
+                <Field label="Danh mục">
+                  <div className="relative">
+                    <select
+                      value={form.category}
+                      onChange={e => setForm(f => ({ ...f, category: e.target.value }))}
+                      className={inputCls + ' appearance-none pr-10 cursor-pointer'}
+                    >
+                      {CATEGORIES.map(c => <option key={c}>{c}</option>)}
+                    </select>
+                    <svg className="w-4 h-4 text-gray-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </Field>
+                <Field label="Tác giả">
                   <input
                     type="text"
                     value={form.author}
                     onChange={e => setForm(f => ({ ...f, author: e.target.value }))}
-                    className="w-full border border-gray-200 px-4 py-3 text-sm focus:outline-none focus:border-forest-700 transition-colors"
+                    className={inputCls}
                     placeholder="Tên tác giả"
                   />
-                </div>
+                </Field>
               </div>
 
               {error && (
-                <div className="bg-red-50 border border-red-100 px-4 py-3 text-sm text-red-600">
+                <div className="bg-red-50 border border-red-100 px-4 py-3 text-sm text-red-600 rounded-sm flex items-start gap-2">
+                  <svg className="w-4 h-4 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
                   {error}
                 </div>
               )}
 
-              <div className="flex gap-3 pt-2 border-t border-gray-50">
+              {/* Buttons */}
+              <div className="flex flex-col-reverse sm:flex-row gap-3 pt-2 border-t border-gray-50">
+                <button type="button" onClick={() => setMode('list')}
+                  className="w-full sm:w-auto border border-gray-200 hover:border-gray-400 text-gray-600 font-semibold px-6 py-3.5 sm:py-3 text-sm transition-colors rounded-sm active:bg-gray-50">
+                  Hủy
+                </button>
                 <button type="submit" disabled={saving}
-                  className="bg-forest-800 hover:bg-forest-700 text-white font-semibold px-8 py-3 text-sm transition-colors disabled:opacity-50 flex items-center gap-2">
+                  className="w-full sm:w-auto sm:flex-1 bg-forest-800 hover:bg-forest-700 text-white font-semibold px-8 py-3.5 sm:py-3 text-sm transition-colors disabled:opacity-50 flex items-center justify-center gap-2 rounded-sm active:bg-forest-900">
                   {saving && (
                     <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
@@ -391,39 +460,37 @@ export default function AdminBlog() {
                   )}
                   {saving ? 'Đang lưu...' : editPost ? 'Lưu thay đổi' : 'Đăng bài viết'}
                 </button>
-                <button type="button" onClick={() => setMode('list')}
-                  className="border border-gray-200 hover:border-gray-400 text-gray-600 font-semibold px-6 py-3 text-sm transition-colors">
-                  Hủy
-                </button>
               </div>
             </form>
           </div>
         )}
       </main>
 
-      {/* Delete modal */}
+      {/* Delete confirm modal */}
       {deleteId && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
-          <div className="bg-white p-6 max-w-sm w-full shadow-2xl">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center shrink-0">
-                <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
+        <div className="fixed inset-0 bg-black/60 flex items-end sm:items-center justify-center z-50 px-4 pb-4 sm:pb-0">
+          <div className="bg-white w-full max-w-sm shadow-2xl rounded-t-2xl sm:rounded-sm">
+            <div className="px-6 pt-6 pb-2">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center shrink-0">
+                  <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </div>
+                <h3 className="font-bold text-gray-800">Xóa bài viết?</h3>
               </div>
-              <h3 className="font-bold text-gray-800">Xác nhận xóa bài viết</h3>
+              <p className="text-sm text-gray-500 mb-6">
+                Bài viết sẽ bị xóa vĩnh viễn và không thể khôi phục. Bạn có chắc chắn?
+              </p>
             </div>
-            <p className="text-sm text-gray-500 mb-6 pl-13">
-              Bài viết sẽ bị xóa vĩnh viễn và không thể khôi phục. Bạn có chắc chắn?
-            </p>
-            <div className="flex gap-3">
-              <button onClick={handleDelete}
-                className="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-2.5 text-sm transition-colors">
-                Xóa
-              </button>
+            <div className="grid grid-cols-2 gap-0 border-t border-gray-100">
               <button onClick={() => setDeleteId(null)}
-                className="flex-1 border border-gray-200 hover:border-gray-400 text-gray-600 font-semibold py-2.5 text-sm transition-colors">
+                className="py-4 text-sm font-semibold text-gray-600 hover:bg-gray-50 active:bg-gray-100 transition-colors border-r border-gray-100">
                 Hủy
+              </button>
+              <button onClick={handleDelete}
+                className="py-4 text-sm font-bold text-red-600 hover:bg-red-50 active:bg-red-100 transition-colors">
+                Xóa
               </button>
             </div>
           </div>
