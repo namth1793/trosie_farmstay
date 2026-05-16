@@ -55,7 +55,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <div className="text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-1">{t('contact.addrLabel')}</div>
-                    <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">{t('contact.addrVal')}</p>
+                    <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">{t('general.address')}</p>
                   </div>
                 </div>
 
@@ -67,8 +67,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <div className="text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-1">{t('contact.phoneLabel')}</div>
-                    <a href="tel:0345424342" className="block text-sm text-gray-700 hover:text-gold">0345 424 342</a>
-                    <a href="tel:0961393370" className="block text-sm text-gray-700 hover:text-gold">0961 393 370</a>
+                    <a href={`tel:${t('general.phone1').replace(/\s/g,'')}`} className="block text-sm text-gray-700 hover:text-gold">{t('general.phone1')}</a>
+                    <a href={`tel:${t('general.phone2').replace(/\s/g,'')}`} className="block text-sm text-gray-700 hover:text-gold">{t('general.phone2')}</a>
                   </div>
                 </div>
 
@@ -80,7 +80,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <div className="text-[11px] font-bold tracking-widest uppercase text-gray-400 mb-1">{t('contact.emailLabel')}</div>
-                    <a href="mailto:trosiegardenks@gmail.com" className="text-sm text-gray-700 hover:text-gold">trosiegardenks@gmail.com</a>
+                    <a href={`mailto:${t('general.email')}`} className="text-sm text-gray-700 hover:text-gold">{t('general.email')}</a>
                   </div>
                 </div>
 

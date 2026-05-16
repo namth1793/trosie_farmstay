@@ -25,6 +25,14 @@ export function initDB() {
   const db = getDB();
 
   db.exec(`
+    CREATE TABLE IF NOT EXISTS site_content (
+      section TEXT NOT NULL,
+      key     TEXT NOT NULL,
+      lang    TEXT NOT NULL DEFAULT 'vi',
+      value   TEXT NOT NULL,
+      PRIMARY KEY (section, key, lang)
+    );
+
     CREATE TABLE IF NOT EXISTS rooms (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,

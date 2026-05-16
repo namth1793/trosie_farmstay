@@ -1,4 +1,12 @@
 export default {
+  general: {
+    phone1: '0345 424 342',
+    phone2: '0961 393 370',
+    email: 'trosiegardenks@gmail.com',
+    address: 'Km số 2, đường Hồ Chí Minh\nXã Khe Sanh, Tỉnh Quảng Trị, Việt Nam',
+    hours: 'Mở cửa hàng ngày',
+  },
+
   nav: {
     about: 'Giới Thiệu',
     coffee: 'Cà Phê',

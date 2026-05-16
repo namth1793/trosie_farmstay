@@ -8,6 +8,7 @@ import contactsRouter from './routes/contacts.js';
 import blogRouter from './routes/blog.js';
 import productsRouter from './routes/products.js';
 import adminRouter from './routes/admin.js';
+import contentRouter from './routes/content.js';
 
 const app = express();
 const PORT = process.env.PORT || 5023;
@@ -32,6 +33,7 @@ app.use('/api/contacts', contactsRouter);
 app.use('/api/blog', blogRouter);
 app.use('/api/products', productsRouter);
 app.use('/api/admin', adminRouter);
+app.use('/api/content', contentRouter);
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 

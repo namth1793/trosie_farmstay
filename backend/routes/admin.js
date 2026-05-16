@@ -151,4 +151,44 @@ router.delete('/bookings/:id', requireAuth, (req, res) => {
   res.json({ ok: true });
 });
 
+// ── SITE CONTENT ─────────────────────────────────
+
+// GET /api/admin/content?lang=vi
+router.get('/content', requireAuth, (req, res) => {
+  const lang = req.query.lang || 'vi';
+  const rows = getDB().prepare(
+    'SELECT section, key, value FROM site_content WHERE lang=?'
+  ).all(lang);
+  const result = {};
+  for (const { section, key, value } of rows) {
+    if (!result[section]) result[section] = {};
+    result[section][key] = value;
+  }
+  res.json(result);
+});
+
+// PUT /api/admin/content/:section
+router.put('/content/:section', requireAuth, (req, res) => {
+  const db = getDB();
+  const { section } = req.params;
+  const { lang = 'vi', updates } = req.body;
+  if (!updates || typeof updates !== 'object')
+    return res.status(400).json({ error: 'updates required' });
+
+  const upsert = db.prepare(`
+    INSERT INTO site_content (section, key, lang, value) VALUES (?,?,?,?)
+    ON CONFLICT(section,key,lang) DO UPDATE SET value=excluded.value
+  `);
+
+  const runAll = db.transaction(() => {
+    for (const [key, value] of Object.entries(updates)) {
+      if (value === null || value === undefined) continue;
+      const v = typeof value === 'string' ? value : JSON.stringify(value);
+      upsert.run(section, key, lang, v);
+    }
+  });
+  runAll();
+  res.json({ ok: true });
+});
+
 export default router;

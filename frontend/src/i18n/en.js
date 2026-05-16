@@ -1,4 +1,12 @@
 export default {
+  general: {
+    phone1: '0345 424 342',
+    phone2: '0961 393 370',
+    email: 'trosiegardenks@gmail.com',
+    address: 'Km 2, Ho Chi Minh Highway\nKhe Sanh Commune, Quang Tri Province, Vietnam',
+    hours: 'Open daily',
+  },
+
   nav: {
     about: 'About',
     coffee: 'Coffee',
