@@ -63,7 +63,7 @@ export default function Coffee() {
               </div>
             </div>
             <div className="img-zoom">
-              <img src="/images/coffee/cafe-area/z6673902262574_ba371fdf56beb4a954af29a5ed722b0b.jpg"
+              <img src="/images/coffee/products/hat-blend/DSCF8870.jpg"
                 alt="Trosie Coffee" className="w-full h-auto md:h-[450px] md:object-cover" />
             </div>
           </div>

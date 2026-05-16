@@ -15,9 +15,9 @@ const CTA_BG = '/images/activities/camping/DSCF8235.JPG';
 
 const SERVICE_IMGS = [
   '/images/coffee/cafe-area/DSCF0163.JPG',
-  '/images/activities/camping/DSCF0852.JPG',
-  '/images/restaurant/gallery/DSCF6002.JPG',
-  '/images/activities/sup/z6675583185740_e3d20bed681974dca792a6368981c4f7.jpg',
+  '/images/home/overview/z6648874092676_b907a2425612bf5c9cec1b23cf4ebc8e.jpg',
+  '/images/restaurant/gallery/z6673900696283_fc3e0be7817f14064d1c9c40aa43f860.jpg',
+  '/images/activities/sup/z6675583293269_4bcfe18b8fa8d2876ec26f44d26a4b6c.jpg',
   '/images/activities/rose-garden/z6673899322687_4f7481839fba719ad73a5a1e9db0b56d.jpg',
   '/images/activities/ep-hoa-kho/DSCF0062.JPG',
 ];
