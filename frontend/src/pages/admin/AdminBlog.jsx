@@ -794,7 +794,7 @@ export default function AdminBlog() {
       {/* Header */}
       <header className="bg-forest-900 text-white px-4 py-3 flex items-center justify-between sticky top-0 z-40 shadow-lg">
         <div className="flex items-center gap-2.5">
-          <img src="/logo.png" alt="Trosie" className="h-7 brightness-0 invert" />
+          <img src="/logo.png" alt="Trosie" className="h-7" />
           <span className="text-sm font-semibold">Admin</span>
         </div>
         <div className="flex items-center gap-2">
