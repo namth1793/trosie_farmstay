@@ -21,12 +21,12 @@ import BlogDetail from './pages/BlogDetail';
 import Contact from './pages/Contact';
 import ChinhSach from './pages/ChinhSach';
 import Menu from './pages/Menu';
+import AdminLogin from './pages/admin/AdminLogin';
+import AdminBlog from './pages/admin/AdminBlog';
 
-export default function App() {
+function PublicApp() {
   return (
-    <LangProvider>
-    <BrowserRouter>
-      <ScrollToTop />
+    <>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -48,7 +48,21 @@ export default function App() {
         <Route path="/menu" element={<Menu />} />
       </Routes>
       <Footer />
-    </BrowserRouter>
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <LangProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin/blog" element={<AdminBlog />} />
+          <Route path="/*" element={<PublicApp />} />
+        </Routes>
+      </BrowserRouter>
     </LangProvider>
   );
 }

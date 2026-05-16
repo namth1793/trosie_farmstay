@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import { initDB } from './db/init.js';
@@ -6,6 +7,7 @@ import bookingsRouter from './routes/bookings.js';
 import contactsRouter from './routes/contacts.js';
 import blogRouter from './routes/blog.js';
 import productsRouter from './routes/products.js';
+import adminRouter from './routes/admin.js';
 
 const app = express();
 const PORT = process.env.PORT || 5023;
@@ -29,6 +31,7 @@ app.use('/api/bookings', bookingsRouter);
 app.use('/api/contacts', contactsRouter);
 app.use('/api/blog', blogRouter);
 app.use('/api/products', productsRouter);
+app.use('/api/admin', adminRouter);
 
 app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 

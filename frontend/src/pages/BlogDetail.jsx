@@ -54,11 +54,17 @@ export default function BlogDetail() {
         <p className="text-gray-600 text-lg leading-relaxed border-l-4 border-gold pl-5 mb-8 italic">{post.excerpt}</p>
 
         {/* Content */}
-        <div
-          className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-forest-900 prose-a:text-gold prose-li:text-gray-600 prose-p:text-gray-600 prose-p:leading-relaxed"
-          dangerouslySetInnerHTML={{ __html: post.content }}
-          style={{ lineHeight: '1.85' }}
-        />
+        {post.content?.trimStart().startsWith('<') ? (
+          <div
+            className="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-forest-900 prose-a:text-gold prose-li:text-gray-600 prose-p:text-gray-600 prose-p:leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: post.content }}
+            style={{ lineHeight: '1.85' }}
+          />
+        ) : (
+          <div className="text-gray-600 text-base leading-[1.85]" style={{ whiteSpace: 'pre-wrap' }}>
+            {post.content}
+          </div>
+        )}
 
         {/* Share */}
         <div className="mt-12 pt-8 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between gap-4">

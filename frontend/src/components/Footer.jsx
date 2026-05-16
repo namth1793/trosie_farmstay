@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLang } from '../context/LangContext';
 
 export default function Footer() {
   const { t } = useLang();
   const links = t('footer.links');
+  const navigate = useNavigate();
 
   return (
     <footer className="bg-forest-900 text-gray-300">
@@ -91,10 +92,19 @@ export default function Footer() {
       <div className="border-t border-forest-800">
         <div className="max-w-7xl mx-auto px-4 lg:px-8 py-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-gray-500">
           <p>{t('footer.copyright')}</p>
-          <div className="flex gap-5">
+          <div className="flex items-center gap-5">
             <a href="https://maps.app.goo.gl/ZUgWJvEWemr2TMnh7" target="_blank" rel="noreferrer" className="hover:text-gold">{t('footer.mapLink')}</a>
             <a href="mailto:trosiegardenks@gmail.com" className="hover:text-gold">{t('footer.contactLink')}</a>
             <Link to="/chinh-sach" className="hover:text-gold">{t('footer.policyLink')}</Link>
+            <button
+              onClick={() => navigate('/admin/login')}
+              className="text-gray-700 hover:text-gold transition-colors"
+              title="Admin"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
