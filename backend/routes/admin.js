@@ -110,4 +110,45 @@ router.delete('/blog/:id', requireAuth, (req, res) => {
   res.json({ ok: true });
 });
 
+// ── CONTACTS ─────────────────────────────────────────
+
+// GET /api/admin/contacts
+router.get('/contacts', requireAuth, (req, res) => {
+  res.json(getDB().prepare('SELECT * FROM contacts ORDER BY is_read ASC, created_at DESC').all());
+});
+
+// PATCH /api/admin/contacts/:id/read
+router.patch('/contacts/:id/read', requireAuth, (req, res) => {
+  getDB().prepare('UPDATE contacts SET is_read=1 WHERE id=?').run(req.params.id);
+  res.json({ ok: true });
+});
+
+// DELETE /api/admin/contacts/:id
+router.delete('/contacts/:id', requireAuth, (req, res) => {
+  getDB().prepare('DELETE FROM contacts WHERE id=?').run(req.params.id);
+  res.json({ ok: true });
+});
+
+// ── BOOKINGS ─────────────────────────────────────────
+
+// GET /api/admin/bookings
+router.get('/bookings', requireAuth, (req, res) => {
+  res.json(getDB().prepare('SELECT * FROM bookings ORDER BY created_at DESC').all());
+});
+
+// PATCH /api/admin/bookings/:id/status
+router.patch('/bookings/:id/status', requireAuth, (req, res) => {
+  const { status } = req.body;
+  if (!['pending', 'confirmed', 'cancelled'].includes(status))
+    return res.status(400).json({ error: 'Trạng thái không hợp lệ' });
+  getDB().prepare('UPDATE bookings SET status=? WHERE id=?').run(status, req.params.id);
+  res.json({ ok: true });
+});
+
+// DELETE /api/admin/bookings/:id
+router.delete('/bookings/:id', requireAuth, (req, res) => {
+  getDB().prepare('DELETE FROM bookings WHERE id=?').run(req.params.id);
+  res.json({ ok: true });
+});
+
 export default router;

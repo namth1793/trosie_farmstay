@@ -5,13 +5,16 @@ import { mkdirSync } from 'fs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const DB_PATH = join(__dirname, '../data/farmstay.db');
+
+// Locally: backend/data/farmstay.db
+// On Railway: set DATABASE_PATH=/data/farmstay.db and mount Volume at /data
+const DB_PATH = process.env.DATABASE_PATH || join(__dirname, '../data/farmstay.db');
 
 let db;
 
 export function getDB() {
   if (!db) {
-    mkdirSync(join(__dirname, '../data'), { recursive: true });
+    mkdirSync(dirname(DB_PATH), { recursive: true });
     db = new Database(DB_PATH);
     db.pragma('journal_mode = WAL');
   }
@@ -101,6 +104,9 @@ export function initDB() {
 
   const prodCount = db.prepare('SELECT COUNT(*) as c FROM products').get();
   if (prodCount.c === 0) seedProducts(db);
+
+  // Migration: add is_read to contacts (safe to run on existing DB)
+  try { db.exec('ALTER TABLE contacts ADD COLUMN is_read INTEGER DEFAULT 0'); } catch {}
 
   console.log('Database ready');
 }

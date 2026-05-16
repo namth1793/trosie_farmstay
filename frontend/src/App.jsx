@@ -59,6 +59,7 @@ export default function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<AdminBlog />} />
           <Route path="/admin/blog" element={<AdminBlog />} />
           <Route path="/*" element={<PublicApp />} />
         </Routes>

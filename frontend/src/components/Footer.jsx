@@ -97,7 +97,7 @@ export default function Footer() {
             <a href="mailto:trosiegardenks@gmail.com" className="hover:text-gold">{t('footer.contactLink')}</a>
             <Link to="/chinh-sach" className="hover:text-gold">{t('footer.policyLink')}</Link>
             <button
-              onClick={() => navigate('/admin/login')}
+              onClick={() => navigate(localStorage.getItem('admin_token') ? '/admin' : '/admin/login')}
               className="text-gray-700 hover:text-gold transition-colors"
               title="Admin"
             >
